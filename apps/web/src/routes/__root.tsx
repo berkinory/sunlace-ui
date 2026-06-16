@@ -7,7 +7,7 @@ import {
 import { Agentation } from "agentation";
 import { useEffect } from "react";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/showcase/theme-provider";
 
 import "../index.css";
 
@@ -39,8 +39,9 @@ const RootComponent = () => (
     <HeadContent />
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="system"
       disableTransitionOnChange
+      enableSystem
       storageKey="vite-ui-theme"
     >
       <RybbitAnalytics />

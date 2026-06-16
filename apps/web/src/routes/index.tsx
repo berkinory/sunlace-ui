@@ -13,13 +13,13 @@ function HomeComponent() {
     <main className="flex min-h-screen items-center justify-center px-6">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="space-y-2">
-          <p className="text-sm text-muted-foreground">component library</p>
+          <p className="text-sm text-muted-foreground">Component Library</p>
           <h1 className="text-3xl font-semibold tracking-tight">sunlace</h1>
         </div>
 
         <div className="mt-6 flex items-center justify-between rounded-xl border border-border bg-muted/40 px-4 py-3">
-          <span className="text-sm text-muted-foreground">workspace</span>
-          <span className="font-medium">ready</span>
+          <span className="text-sm text-muted-foreground">Workspace</span>
+          <span className="font-medium">Ready</span>
         </div>
 
         <div className="mt-6 flex gap-2">
@@ -28,9 +28,9 @@ function HomeComponent() {
               <Link to="/ui/$component" params={{ component: "accordion" }} />
             }
           >
-            components
+            Components
           </Button>
-          <Button variant="outline">outline</Button>
+          <Button variant="outline">Outline</Button>
         </div>
       </div>
     </main>
