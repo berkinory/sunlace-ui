@@ -16,7 +16,9 @@ type ShowcaseHeaderProps = {
   activeSlug?: ComponentSlug;
 };
 
-function ShowcaseHeader({ activeSlug = defaultComponentSlug }: ShowcaseHeaderProps) {
+function ShowcaseHeader({
+  activeSlug = defaultComponentSlug,
+}: ShowcaseHeaderProps) {
   const { pathname, hash } = useRouterState({
     select: (state) => state.location,
   });
