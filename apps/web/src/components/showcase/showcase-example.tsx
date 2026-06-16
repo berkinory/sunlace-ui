@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 type ShowcaseExampleProps = {
   code: string;
   preview: React.ReactNode;
+  resetKey: string;
 };
 
 const tokenClassByType = {
@@ -29,7 +30,7 @@ function highlightLine(line: string) {
   const parts: React.ReactNode[] = [];
   let cursor = 0;
 
-  tokens.forEach((token, index) => {
+  tokens.forEach((token) => {
     const start = line.indexOf(token, cursor);
 
     if (start === -1) {
@@ -52,7 +53,7 @@ function highlightLine(line: string) {
               : "punctuation";
 
     parts.push(
-      <span className={tokenClassByType[type]} key={`${token}-${index}`}>
+      <span className={tokenClassByType[type]} key={start}>
         {token}
       </span>
     );
@@ -86,10 +87,7 @@ function CodeBlock({ code, expanded }: { code: string; expanded: boolean }) {
       >
         <code>
           {lines.map((line, index) => (
-            <span
-              className="grid grid-cols-[2rem_1fr]"
-              key={`${line}-${index}`}
-            >
+            <span className="grid grid-cols-[2rem_1fr]" key={index}>
               <span className="select-none text-right text-foreground/35">
                 {index + 1}
               </span>
@@ -104,12 +102,16 @@ function CodeBlock({ code, expanded }: { code: string; expanded: boolean }) {
   );
 }
 
-export function ShowcaseExample({ code, preview }: ShowcaseExampleProps) {
+export function ShowcaseExample({
+  code,
+  preview,
+  resetKey,
+}: ShowcaseExampleProps) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     setExpanded(false);
-  }, [code]);
+  }, [resetKey]);
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card/20">

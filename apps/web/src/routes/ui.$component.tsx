@@ -1,8 +1,10 @@
-import { Button } from "@sunlace/ui";
+import { Button, Switch } from "@sunlace/ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import {
   ComponentPreview,
+  type ComponentSettings,
   componentBySlug,
   getComponentExampleCode,
   isComponentSlug,
@@ -27,6 +29,11 @@ export const Route = createFileRoute("/ui/$component")({
 
 function UiComponent() {
   const { component } = Route.useParams();
+  const [accordionSettings, setAccordionSettings] = useState({
+    borders: false,
+    multiple: false,
+    showArrow: true,
+  });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
     : componentBySlug.get("accordion");
@@ -36,6 +43,17 @@ function UiComponent() {
   }
 
   const title = activeComponent.label;
+  const settings: ComponentSettings = {
+    accordion: accordionSettings,
+  };
+
+  useEffect(() => {
+    setAccordionSettings({
+      borders: false,
+      multiple: false,
+      showArrow: true,
+    });
+  }, [activeComponent.slug]);
 
   return (
     <ShowcaseLayout activeSlug={activeComponent.slug}>
@@ -51,8 +69,8 @@ function UiComponent() {
           </h1>
           <p className="max-w-3xl text-lg text-muted-foreground">
             {activeComponent.slug === "accordion"
-              ? "Displays A Simple Disclosure Stack With Accessible Keyboard Behavior."
-              : "Temporary Component Preview While The Docs System Is Shaped."}
+              ? "A vertically stacked set of interactive headings that each reveal a section of content."
+              : "Temporary component preview while the docs system is shaped."}
           </p>
           <div className="flex gap-2">
             <Button variant="outline">Docs</Button>
@@ -60,10 +78,59 @@ function UiComponent() {
           </div>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-12 space-y-3">
+          {activeComponent.slug === "accordion" ? (
+            <div className="flex flex-wrap items-center gap-5 text-sm">
+              <label className="flex items-center gap-2 text-muted-foreground">
+                <Switch
+                  checked={accordionSettings.showArrow}
+                  onCheckedChange={(checked) => {
+                    setAccordionSettings((current) => ({
+                      ...current,
+                      showArrow: checked,
+                    }));
+                  }}
+                  size="sm"
+                />
+                Show Arrow
+              </label>
+              <label className="flex items-center gap-2 text-muted-foreground">
+                <Switch
+                  checked={accordionSettings.multiple}
+                  onCheckedChange={(checked) => {
+                    setAccordionSettings((current) => ({
+                      ...current,
+                      multiple: checked,
+                    }));
+                  }}
+                  size="sm"
+                />
+                Multiple
+              </label>
+              <label className="flex items-center gap-2 text-muted-foreground">
+                <Switch
+                  checked={accordionSettings.borders}
+                  onCheckedChange={(checked) => {
+                    setAccordionSettings((current) => ({
+                      ...current,
+                      borders: checked,
+                    }));
+                  }}
+                  size="sm"
+                />
+                Borders
+              </label>
+            </div>
+          ) : null}
           <ShowcaseExample
-            code={getComponentExampleCode(activeComponent.slug)}
-            preview={<ComponentPreview component={activeComponent.slug} />}
+            code={getComponentExampleCode(activeComponent.slug, settings)}
+            preview={
+              <ComponentPreview
+                component={activeComponent.slug}
+                settings={settings}
+              />
+            }
+            resetKey={activeComponent.slug}
           />
         </div>
 

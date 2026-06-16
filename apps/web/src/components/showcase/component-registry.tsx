@@ -110,6 +110,14 @@ export const componentItems = [
 
 export type ComponentSlug = (typeof componentItems)[number]["slug"];
 
+export type ComponentSettings = {
+  accordion?: {
+    borders: boolean;
+    multiple: boolean;
+    showArrow: boolean;
+  };
+};
+
 export const defaultComponentSlug = componentItems[0].slug;
 
 export const componentBySlug = new Map<
@@ -128,17 +136,26 @@ export function toPascalCase(value: string) {
     .join("");
 }
 
-export function ComponentPreview({ component }: { component: ComponentSlug }) {
-  const preview = previews[component] ?? (
+export function ComponentPreview({
+  component,
+  settings,
+}: {
+  component: ComponentSlug;
+  settings?: ComponentSettings;
+}) {
+  const preview = previews[component]?.(settings) ?? (
     <PreviewShell>{component.replaceAll("-", " ")}</PreviewShell>
   );
 
   return preview;
 }
 
-export function getComponentExampleCode(component: ComponentSlug) {
+export function getComponentExampleCode(
+  component: ComponentSlug,
+  settings?: ComponentSettings
+) {
   return (
-    exampleCode[component] ??
+    exampleCode[component]?.(settings) ??
     `import { ${toPascalCase(component.replaceAll("-", " "))} } from "@/components/ui/${component}";
 
 export function ${toPascalCase(component.replaceAll("-", " "))}Demo() {
@@ -152,36 +169,52 @@ function PreviewShell({ children }: { children: ReactNode }) {
     <div className="text-center">
       <p className="text-sm font-medium capitalize">{children}</p>
       <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-        Temporary Preview.
+        Temporary preview.
       </p>
     </div>
   );
 }
 
-const previews: Partial<Record<ComponentSlug, ReactNode>> = {
-  accordion: (
-    <Accordion className="w-full max-w-xl" defaultValue={["item-1"]}>
+const previews: Partial<
+  Record<ComponentSlug, (settings?: ComponentSettings) => ReactNode>
+> = {
+  accordion: (settings) => (
+    <Accordion
+      className={
+        settings?.accordion?.borders
+          ? "w-full max-w-xl rounded-lg border px-3"
+          : "w-full max-w-xl"
+      }
+      defaultValue={["item-1"]}
+      multiple={settings?.accordion?.multiple}
+    >
       <AccordionItem value="item-1">
-        <AccordionTrigger>Is It Accessible?</AccordionTrigger>
+        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+          Is it accessible?
+        </AccordionTrigger>
         <AccordionContent>
-          Yes. It Uses Base UI Primitives And Keeps Keyboard Behavior Intact.
+          Yes. It uses Base UI primitives and keeps keyboard behavior intact.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Is It Customizable?</AccordionTrigger>
+        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+          Is it customizable?
+        </AccordionTrigger>
         <AccordionContent>
-          Yes. Source Files Live In The Repo And Are Meant To Be Edited.
+          Yes. Source files live in the repo and are meant to be edited.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger>Can It Be Animated?</AccordionTrigger>
+        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+          Can it be animated?
+        </AccordionTrigger>
         <AccordionContent>
-          Yes. Motion Stays CSS Based Through Tailwind Utilities.
+          Yes. Motion stays CSS based through Tailwind utilities.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   ),
-  avatar: (
+  avatar: () => (
     <div className="flex items-center gap-3">
       <Avatar>
         <AvatarFallback>SL</AvatarFallback>
@@ -191,14 +224,14 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </Avatar>
     </div>
   ),
-  badge: (
+  badge: () => (
     <div className="flex gap-2">
       <Badge>Default</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="outline">Outline</Badge>
     </div>
   ),
-  button: (
+  button: () => (
     <div className="flex flex-wrap justify-center gap-2">
       <Button>Default</Button>
       <Button variant="secondary">Secondary</Button>
@@ -206,26 +239,26 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       <Button variant="ghost">Ghost</Button>
     </div>
   ),
-  calendar: <Calendar />,
-  card: (
+  calendar: () => <Calendar />,
+  card: () => (
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle>Component Card</CardTitle>
-        <CardDescription>Temporary Showcase Preview.</CardDescription>
+        <CardDescription>Temporary showcase preview.</CardDescription>
       </CardHeader>
       <CardContent>
         <Button className="w-full">Continue</Button>
       </CardContent>
     </Card>
   ),
-  checkbox: (
+  checkbox: () => (
     <label className="flex items-center gap-3 text-sm">
-      <Checkbox defaultChecked /> Accept Terms
+      <Checkbox defaultChecked /> Accept terms
     </label>
   ),
-  combobox: (
+  combobox: () => (
     <Combobox>
-      <ComboboxInput placeholder="Search Component" />
+      <ComboboxInput placeholder="Search component" />
       <ComboboxContent>
         <ComboboxList>
           <ComboboxItem value="accordion">Accordion</ComboboxItem>
@@ -235,10 +268,10 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </ComboboxContent>
     </Combobox>
   ),
-  "context-menu": (
+  "context-menu": () => (
     <ContextMenu>
       <ContextMenuTrigger className="rounded-lg border border-border px-8 py-6 text-sm text-muted-foreground">
-        Right Click Area
+        Right click area
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem>Copy</ContextMenuItem>
@@ -246,59 +279,59 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-  dialog: (
+  dialog: () => (
     <Dialog>
-      <DialogTrigger render={<Button />}>Open Dialog</DialogTrigger>
+      <DialogTrigger render={<Button />}>Open dialog</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Dialog</DialogTitle>
-          <DialogDescription>Temporary Component Preview.</DialogDescription>
+          <DialogDescription>Temporary component preview.</DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
   ),
-  drawer: (
+  drawer: () => (
     <Drawer>
       <DrawerTrigger className="inline-flex h-8 items-center justify-center rounded-lg border border-transparent bg-primary px-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80">
-        Open Drawer
+        Open drawer
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Drawer</DrawerTitle>
-          <DrawerDescription>Temporary Component Preview.</DrawerDescription>
+          <DrawerDescription>Temporary component preview.</DrawerDescription>
         </DrawerHeader>
       </DrawerContent>
     </Drawer>
   ),
-  "dropdown-menu": (
+  "dropdown-menu": () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button />}>Open Menu</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button />}>Open menu</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuItem>Settings</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-  input: <Input className="max-w-sm" placeholder="email@example.com" />,
-  kbd: (
+  input: () => <Input className="max-w-sm" placeholder="email@example.com" />,
+  kbd: () => (
     <div className="flex gap-1">
       <Kbd>⌘</Kbd>
       <Kbd>K</Kbd>
     </div>
   ),
-  popover: (
+  popover: () => (
     <Popover>
-      <PopoverTrigger render={<Button />}>Open Popover</PopoverTrigger>
+      <PopoverTrigger render={<Button />}>Open popover</PopoverTrigger>
       <PopoverContent>
         <PopoverHeader>
           <PopoverTitle>Popover</PopoverTitle>
-          <PopoverDescription>Temporary Component Preview.</PopoverDescription>
+          <PopoverDescription>Temporary component preview.</PopoverDescription>
         </PopoverHeader>
       </PopoverContent>
     </Popover>
   ),
-  progress: <Progress className="w-full max-w-sm" value={64} />,
-  "radio-group": (
+  progress: () => <Progress className="w-full max-w-sm" value={64} />,
+  "radio-group": () => (
     <RadioGroup className="max-w-sm" defaultValue="comfortable">
       <label className="flex items-center gap-3 text-sm">
         <RadioGroupItem value="default" /> Default
@@ -308,7 +341,7 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </label>
     </RadioGroup>
   ),
-  "scroll-area": (
+  "scroll-area": () => (
     <ScrollArea className="h-40 w-full max-w-sm rounded-lg border border-border p-4">
       <div className="space-y-3 text-sm">
         {Array.from({ length: 8 }, (_, index) => (
@@ -317,10 +350,10 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </div>
     </ScrollArea>
   ),
-  select: (
+  select: () => (
     <Select defaultValue="design">
       <SelectTrigger>
-        <SelectValue placeholder="Select A Role" />
+        <SelectValue placeholder="Select a role" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="design">Design</SelectItem>
@@ -328,49 +361,49 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </SelectContent>
     </Select>
   ),
-  separator: (
+  separator: () => (
     <div className="w-full max-w-sm space-y-4">
       <div>
         <p className="text-sm font-medium">sunlace</p>
-        <p className="text-sm text-muted-foreground">Component System</p>
+        <p className="text-sm text-muted-foreground">Component system</p>
       </div>
       <Separator />
-      <p className="text-sm text-muted-foreground">Separated Content</p>
+      <p className="text-sm text-muted-foreground">Separated content</p>
     </div>
   ),
-  skeleton: (
+  skeleton: () => (
     <div className="w-full max-w-sm space-y-3">
       <Skeleton className="h-4 w-40" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-2/3" />
     </div>
   ),
-  slider: <Slider className="w-full max-w-sm" defaultValue={[44]} />,
-  sonner: (
+  slider: () => <Slider className="w-full max-w-sm" defaultValue={[44]} />,
+  sonner: () => (
     <div className="flex flex-col items-center gap-4">
       <Button onClick={() => toast("sunlace toast")}>Toast Preview</Button>
       <Toaster />
     </div>
   ),
-  spinner: <Spinner className="size-6" />,
-  switch: (
+  spinner: () => <Spinner className="size-6" />,
+  switch: () => (
     <label className="flex items-center gap-3 text-sm">
       <Switch defaultChecked /> Enable
     </label>
   ),
-  tabs: (
+  tabs: () => (
     <Tabs className="w-full max-w-sm" defaultValue="preview">
       <TabsList>
         <TabsTrigger value="preview">Preview</TabsTrigger>
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
-      <TabsContent value="preview">Component Preview</TabsContent>
-      <TabsContent value="code">Import From @sunlace/ui</TabsContent>
+      <TabsContent value="preview">Component preview</TabsContent>
+      <TabsContent value="code">Import from @sunlace/ui</TabsContent>
     </Tabs>
   ),
-  textarea: <Textarea className="max-w-sm" placeholder="Write A Note" />,
-  toggle: <Toggle defaultPressed>Toggle</Toggle>,
-  tooltip: (
+  textarea: () => <Textarea className="max-w-sm" placeholder="Write a note" />,
+  toggle: () => <Toggle defaultPressed>Toggle</Toggle>,
+  tooltip: () => (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger render={<Button />}>Hover Me</TooltipTrigger>
@@ -380,8 +413,10 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
   ),
 };
 
-const exampleCode: Partial<Record<ComponentSlug, string>> = {
-  accordion: `import {
+const exampleCode: Partial<
+  Record<ComponentSlug, (settings?: ComponentSettings) => string>
+> = {
+  accordion: (settings) => `import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -390,23 +425,23 @@ const exampleCode: Partial<Record<ComponentSlug, string>> = {
 
 export function AccordionDemo() {
   return (
-    <Accordion defaultValue={["item-1"]}>
+    <Accordion${settings?.accordion?.borders ? ' className="rounded-lg border px-3"' : ""} defaultValue={["item-1"]}${settings?.accordion?.multiple ? " multiple" : ""}>
       <AccordionItem value="item-1">
-        <AccordionTrigger>Is It Accessible?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Is it accessible?</AccordionTrigger>
         <AccordionContent>
-          Yes. It Uses Base UI Primitives And Keeps Keyboard Behavior Intact.
+          Yes. It uses Base UI primitives and keeps keyboard behavior intact.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Is It Customizable?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Is it customizable?</AccordionTrigger>
         <AccordionContent>
-          Yes. Source Files Live In The Repo And Are Meant To Be Edited.
+          Yes. Source files live in the repo and are meant to be edited.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger>Can It Be Animated?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Can it be animated?</AccordionTrigger>
         <AccordionContent>
-          Yes. Motion Stays CSS Based Through Tailwind Utilities.
+          Yes. Motion stays CSS based through Tailwind utilities.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
