@@ -1,6 +1,14 @@
 import { Settings03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Button, Switch } from "@sunlace/ui";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+  Switch,
+} from "@sunlace/ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
@@ -64,16 +72,87 @@ const accordionProps = [
   },
 ];
 
-const propGroups = [
+const avatarProps = [
   {
-    title: "Accordion",
-    props: accordionProps.filter((prop) => prop.target === "Accordion"),
+    name: "shape",
+    target: "Avatar",
+    type: '"circle" | "rounded" | "square"',
+    defaultValue: '"circle"',
+    description: "Controls the avatar corner treatment.",
   },
   {
-    title: "AccordionTrigger",
-    props: accordionProps.filter((prop) => prop.target === "AccordionTrigger"),
+    name: "size",
+    target: "Avatar",
+    type: '"sm" | "default" | "lg"',
+    defaultValue: '"default"',
+    description: "Controls the avatar dimensions.",
   },
 ];
+
+const ditherAvatarProps = [
+  {
+    name: "hash",
+    target: "DitherAvatar",
+    type: "string",
+    defaultValue: "-",
+    description: "Seed string used to generate the deterministic dither image.",
+  },
+  {
+    name: "shape",
+    target: "DitherAvatar",
+    type: '"circle" | "rounded" | "square"',
+    defaultValue: '"circle"',
+    description: "Controls the avatar corner treatment.",
+  },
+  {
+    name: "size",
+    target: "DitherAvatar",
+    type: '"sm" | "default" | "lg"',
+    defaultValue: '"default"',
+    description: "Controls the avatar dimensions.",
+  },
+  {
+    name: "dotScale",
+    target: "DitherAvatar",
+    type: "number",
+    defaultValue: "1",
+    description: "Controls the dither cell size.",
+  },
+  {
+    name: "tones",
+    target: "DitherAvatar",
+    type: "HashvatarOptions['tones']",
+    defaultValue: "-",
+    description: "Restricts generated colors to selected tone families.",
+  },
+];
+
+const componentPropGroups = {
+  accordion: [
+    {
+      title: "Accordion",
+      props: accordionProps.filter((prop) => prop.target === "Accordion"),
+    },
+    {
+      title: "AccordionTrigger",
+      props: accordionProps.filter(
+        (prop) => prop.target === "AccordionTrigger"
+      ),
+    },
+  ],
+  avatar: [
+    {
+      title: "Avatar",
+      props: avatarProps.filter((prop) => prop.target === "Avatar"),
+    },
+  ],
+  "dither-avatar": [
+    {
+      title: "DitherAvatar",
+      props: ditherAvatarProps.filter((prop) => prop.target === "DitherAvatar"),
+    },
+  ],
+};
 
 function UiComponent() {
   const { component } = Route.useParams();
@@ -82,6 +161,17 @@ function UiComponent() {
     multiple: false,
     showArrow: true,
     underline: true,
+  });
+  const [avatarSettings, setAvatarSettings] = useState<
+    NonNullable<ComponentSettings["avatar"]>
+  >({
+    shape: "circle",
+  });
+  const [ditherAvatarSettings, setDitherAvatarSettings] = useState<
+    NonNullable<ComponentSettings["ditherAvatar"]>
+  >({
+    dotScale: 1,
+    shape: "circle",
   });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
@@ -100,7 +190,18 @@ function UiComponent() {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";`
-      : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
+      : activeComponent.slug === "avatar"
+        ? `import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "@/components/ui/avatar";`
+        : activeComponent.slug === "dither-avatar"
+          ? `import { DitherAvatar } from "@/components/ui/dither-avatar";`
+          : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
   const usageCode =
     activeComponent.slug === "accordion"
       ? `<Accordion defaultValue={["item-1"]}>
@@ -111,10 +212,33 @@ function UiComponent() {
     </AccordionContent>
   </AccordionItem>
 </Accordion>`
-      : `<${toPascalCase(title)} />`;
+      : activeComponent.slug === "avatar"
+        ? `<AvatarGroup>
+  <Avatar>
+    <AvatarImage alt="Ava" src="/avatars/ava.jpg" />
+    <AvatarFallback>AV</AvatarFallback>
+    <AvatarBadge />
+  </Avatar>
+  <Avatar>
+    <AvatarFallback>SL</AvatarFallback>
+  </Avatar>
+  <AvatarGroupCount>+4</AvatarGroupCount>
+</AvatarGroup>`
+        : activeComponent.slug === "dither-avatar"
+          ? `<div className="flex items-center gap-3">
+  <DitherAvatar hash="sunlace" />
+  <DitherAvatar hash="ui" />
+</div>`
+          : `<${toPascalCase(title)} />`;
   const settings: ComponentSettings = {
     accordion: accordionSettings,
+    avatar: avatarSettings,
+    ditherAvatar: ditherAvatarSettings,
   };
+  const propGroups =
+    componentPropGroups[
+      activeComponent.slug as keyof typeof componentPropGroups
+    ] ?? [];
   const tocItems = useMemo(
     () => [
       { id: "showcase", label: "Showcase" },
@@ -131,6 +255,13 @@ function UiComponent() {
       multiple: false,
       showArrow: true,
       underline: true,
+    });
+    setAvatarSettings({
+      shape: "circle",
+    });
+    setDitherAvatarSettings({
+      dotScale: 1,
+      shape: "circle",
     });
   }, [activeComponent.slug]);
 
@@ -213,6 +344,113 @@ function UiComponent() {
           </div>
         </div>
       </div>
+    ) : activeComponent.slug === "avatar" ||
+      activeComponent.slug === "dither-avatar" ? (
+      <div className="space-y-4 text-xs">
+        <div className="flex items-center gap-2 border-border border-b pb-3 font-medium text-foreground">
+          <HugeiconsIcon
+            aria-hidden
+            icon={Settings03Icon}
+            size={14}
+            strokeWidth={2}
+          />
+          Settings
+        </div>
+
+        <div className="space-y-2">
+          <p className="font-medium text-foreground">{title}</p>
+          <div className="rounded-md bg-muted/40 p-2.5">
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Shape
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  className="min-w-24 justify-between"
+                  render={<Button size="sm" variant="outline" />}
+                >
+                  {(activeComponent.slug === "avatar"
+                    ? avatarSettings.shape
+                    : ditherAvatarSettings.shape
+                  )
+                    .charAt(0)
+                    .toUpperCase() +
+                    (activeComponent.slug === "avatar"
+                      ? avatarSettings.shape
+                      : ditherAvatarSettings.shape
+                    ).slice(1)}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup
+                    value={
+                      activeComponent.slug === "avatar"
+                        ? avatarSettings.shape
+                        : ditherAvatarSettings.shape
+                    }
+                    onValueChange={(shape) => {
+                      if (activeComponent.slug === "avatar") {
+                        setAvatarSettings({
+                          shape: shape as NonNullable<
+                            ComponentSettings["avatar"]
+                          >["shape"],
+                        });
+                        return;
+                      }
+
+                      setDitherAvatarSettings((current) => ({
+                        ...current,
+                        shape: shape as NonNullable<
+                          ComponentSettings["ditherAvatar"]
+                        >["shape"],
+                      }));
+                    }}
+                  >
+                    <DropdownMenuRadioItem value="circle">
+                      Circle
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="rounded">
+                      Rounded
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="square">
+                      Square
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </label>
+            {activeComponent.slug === "dither-avatar" ? (
+              <label className="mt-1.5 flex items-center justify-between gap-3 text-muted-foreground">
+                Dots
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    className="min-w-24 justify-between"
+                    render={<Button size="sm" variant="outline" />}
+                  >
+                    {ditherAvatarSettings.dotScale}
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuRadioGroup
+                      value={String(ditherAvatarSettings.dotScale)}
+                      onValueChange={(dotScale) => {
+                        setDitherAvatarSettings((current) => ({
+                          ...current,
+                          dotScale: Number(dotScale) as NonNullable<
+                            ComponentSettings["ditherAvatar"]
+                          >["dotScale"],
+                        }));
+                      }}
+                    >
+                      <DropdownMenuRadioItem value="1">1</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="2">2</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="3">3</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="4">4</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="5">5</DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </label>
+            ) : null}
+          </div>
+        </div>
+      </div>
     ) : null;
 
   return (
@@ -230,7 +468,11 @@ function UiComponent() {
           <p className="max-w-3xl text-lg text-muted-foreground">
             {activeComponent.slug === "accordion"
               ? "A vertically stacked set of interactive headings that each reveal a section of content."
-              : "Temporary component preview while the docs system is shaped."}
+              : activeComponent.slug === "avatar"
+                ? "A compact identity surface for people, teams, status, and stacked presence."
+                : activeComponent.slug === "dither-avatar"
+                  ? "A deterministic dithered identity surface generated from any string."
+                  : "Temporary component preview while the docs system is shaped."}
           </p>
           <div className="flex gap-2">
             <Button variant="outline">Docs</Button>
@@ -280,7 +522,7 @@ function UiComponent() {
             Props
           </h2>
           <div className="mt-6 space-y-8">
-            {activeComponent.slug === "accordion" ? (
+            {propGroups.length > 0 ? (
               propGroups.map((group) => (
                 <div className="space-y-3" key={group.title}>
                   <h3 className="text-base font-medium text-foreground">
@@ -324,18 +566,20 @@ function UiComponent() {
               </div>
             )}
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Also supports Base UI accordion primitive props. See{" "}
-            <a
-              className="underline underline-offset-3 hover:text-foreground"
-              href="https://base-ui.com/react/components/accordion"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Base UI Accordion
-            </a>
-            .
-          </p>
+          {activeComponent.slug === "accordion" ? (
+            <p className="mt-3 text-sm text-muted-foreground">
+              Also supports Base UI {title.toLowerCase()} primitive props. See{" "}
+              <a
+                className="underline underline-offset-3 hover:text-foreground"
+                href={`https://base-ui.com/react/components/${activeComponent.slug}`}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Base UI {title}
+              </a>
+              .
+            </p>
+          ) : null}
         </section>
       </article>
     </ShowcaseLayout>

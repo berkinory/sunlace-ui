@@ -4,7 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
   Avatar,
+  AvatarBadge,
   AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
   Badge,
   Button,
   Calendar,
@@ -29,6 +33,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DitherAvatar,
   Drawer,
   DrawerContent,
   DrawerDescription,
@@ -87,6 +92,7 @@ export const componentItems = [
   { slug: "combobox", label: "Combobox" },
   { slug: "context-menu", label: "Context Menu" },
   { slug: "dialog", label: "Dialog" },
+  { slug: "dither-avatar", label: "Dither Avatar" },
   { slug: "drawer", label: "Drawer" },
   { slug: "dropdown-menu", label: "Dropdown Menu" },
   { slug: "input", label: "Input" },
@@ -116,6 +122,13 @@ export type ComponentSettings = {
     multiple: boolean;
     showArrow: boolean;
     underline: boolean;
+  };
+  avatar?: {
+    shape: "circle" | "rounded" | "square";
+  };
+  ditherAvatar?: {
+    dotScale: 1 | 2 | 3 | 4 | 5;
+    shape: "circle" | "rounded" | "square";
   };
 };
 
@@ -224,14 +237,33 @@ const previews: Partial<
       </AccordionItem>
     </Accordion>
   ),
-  avatar: () => (
-    <div className="flex items-center gap-3">
-      <Avatar>
-        <AvatarFallback>SL</AvatarFallback>
-      </Avatar>
-      <Avatar size="lg">
-        <AvatarFallback>UI</AvatarFallback>
-      </Avatar>
+  avatar: (settings) => (
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex items-end gap-4">
+        <Avatar className="size-14" shape={settings?.avatar?.shape}>
+          <AvatarImage
+            alt="Ava"
+            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=160&q=85"
+          />
+          <AvatarFallback>AV</AvatarFallback>
+          <AvatarBadge />
+        </Avatar>
+        <Avatar className="size-14" shape={settings?.avatar?.shape}>
+          <AvatarFallback>UI</AvatarFallback>
+        </Avatar>
+      </div>
+      <AvatarGroup>
+        <Avatar className="size-10" shape={settings?.avatar?.shape}>
+          <AvatarFallback>BK</AvatarFallback>
+        </Avatar>
+        <Avatar className="size-10" shape={settings?.avatar?.shape}>
+          <AvatarFallback>AR</AvatarFallback>
+        </Avatar>
+        <Avatar className="size-10" shape={settings?.avatar?.shape}>
+          <AvatarFallback>DS</AvatarFallback>
+        </Avatar>
+        <AvatarGroupCount className="size-10">+4</AvatarGroupCount>
+      </AvatarGroup>
     </div>
   ),
   badge: () => (
@@ -299,6 +331,50 @@ const previews: Partial<
         </DialogHeader>
       </DialogContent>
     </Dialog>
+  ),
+  "dither-avatar": (settings) => (
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex items-end gap-4">
+        <DitherAvatar
+          className="size-14"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="sunlace"
+          shape={settings?.ditherAvatar?.shape}
+        />
+        <DitherAvatar
+          className="size-14"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="ui"
+          shape={settings?.ditherAvatar?.shape}
+        />
+      </div>
+      <div className="flex gap-3">
+        <DitherAvatar
+          className="size-10"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="medhy.eth"
+          shape={settings?.ditherAvatar?.shape}
+        />
+        <DitherAvatar
+          className="size-10"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="0x742…44e"
+          shape={settings?.ditherAvatar?.shape}
+        />
+        <DitherAvatar
+          className="size-10"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="satoshi"
+          shape={settings?.ditherAvatar?.shape}
+        />
+        <DitherAvatar
+          className="size-10"
+          dotScale={settings?.ditherAvatar?.dotScale}
+          hash="saira"
+          shape={settings?.ditherAvatar?.shape}
+        />
+      </div>
+    </div>
   ),
   drawer: () => (
     <Drawer>
@@ -455,6 +531,42 @@ export function AccordionDemo() {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
+  );
+}`,
+  avatar: (settings) => `import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "@/components/ui/avatar";
+
+export function AvatarDemo() {
+  return (
+    <AvatarGroup>
+      <Avatar${settings?.avatar?.shape && settings.avatar.shape !== "circle" ? ` shape="${settings.avatar.shape}"` : ""}>
+        <AvatarImage alt="Ava" src="/avatars/ava.jpg" />
+        <AvatarFallback>AV</AvatarFallback>
+        <AvatarBadge />
+      </Avatar>
+      <Avatar${settings?.avatar?.shape && settings.avatar.shape !== "circle" ? ` shape="${settings.avatar.shape}"` : ""}>
+        <AvatarFallback>SL</AvatarFallback>
+      </Avatar>
+      <AvatarGroupCount>+4</AvatarGroupCount>
+    </AvatarGroup>
+  );
+}`,
+  "dither-avatar": (
+    settings
+  ) => `import { DitherAvatar } from "@/components/ui/dither-avatar";
+
+export function DitherAvatarDemo() {
+  return (
+    <div className="flex items-center gap-3">
+      <DitherAvatar${settings?.ditherAvatar?.shape && settings.ditherAvatar.shape !== "circle" ? ` shape="${settings.ditherAvatar.shape}"` : ""}${settings?.ditherAvatar?.dotScale && settings.ditherAvatar.dotScale !== 1 ? ` dotScale={${settings.ditherAvatar.dotScale}}` : ""} hash="sunlace" />
+      <DitherAvatar${settings?.ditherAvatar?.shape && settings.ditherAvatar.shape !== "circle" ? ` shape="${settings.ditherAvatar.shape}"` : ""}${settings?.ditherAvatar?.dotScale && settings.ditherAvatar.dotScale !== 1 ? ` dotScale={${settings.ditherAvatar.dotScale}}` : ""} hash="ui" />
+    </div>
   );
 }`,
 };

@@ -8,6 +8,7 @@ export * from "./checkbox";
 export * from "./combobox";
 export * from "./context-menu";
 export * from "./dialog";
+export * from "./dither-avatar";
 export * from "./drawer";
 export * from "./dropdown-menu";
 export * from "./input";
