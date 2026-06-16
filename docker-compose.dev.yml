@@ -1,0 +1,44 @@
+name: sunlace-dev
+
+x-bun-service: &bun-service
+  build:
+    context: .
+    dockerfile: infrastructure/docker/dev.Dockerfile
+  working_dir: /app
+  volumes:
+    - .:/app
+    - sunlace-node-modules:/app/node_modules
+    - sunlace-bun-cache:/root/.bun/install/cache
+  networks:
+    - sunlace-private
+
+services:
+  deps:
+    <<: *bun-service
+    command: sh -lc "bun install --frozen-lockfile --ignore-scripts"
+
+  web:
+    <<: *bun-service
+    command: sh -lc "bun run --cwd apps/web dev --host 0.0.0.0"
+    environment:
+      NODE_ENV: development
+      VITE_RYBBIT_SITE_ID: ${VITE_RYBBIT_SITE_ID:-}
+    ports:
+      - "4002:4002"
+    volumes:
+      - .:/app
+      - sunlace-node-modules:/app/node_modules
+      - sunlace-bun-cache:/root/.bun/install/cache
+      - sunlace-web-node-modules:/app/apps/web/node_modules
+    depends_on:
+      deps:
+        condition: service_completed_successfully
+
+networks:
+  sunlace-private:
+    driver: bridge
+
+volumes:
+  sunlace-node-modules:
+  sunlace-bun-cache:
+  sunlace-web-node-modules:

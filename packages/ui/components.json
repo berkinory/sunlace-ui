@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "../../apps/web/src/index.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "hugeicons",
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "aliases": {
+    "components": "@/src/components",
+    "utils": "@sunlace/ui/lib/utils",
+    "ui": "@/src/components",
+    "lib": "@/src/lib",
+    "hooks": "@/src/hooks"
+  },
+  "registries": {
+    "@blocks": "https://blocks.so/r/{name}.json"
+  }
+}

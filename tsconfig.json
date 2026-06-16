@@ -1,0 +1,8 @@
+{
+  "extends": "@sunlace/config/tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

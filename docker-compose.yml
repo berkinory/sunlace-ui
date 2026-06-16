@@ -1,0 +1,21 @@
+name: sunlace
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+      args:
+        VITE_RYBBIT_SITE_ID: ${VITE_RYBBIT_SITE_ID:-}
+    container_name: sunlace-web
+    ports:
+      - "4002:4002"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - dokploy-network
+    restart: unless-stopped
+
+networks:
+  dokploy-network:
+    external: true
