@@ -68,20 +68,28 @@ function highlightLine(line: string) {
   return parts;
 }
 
-function CodeBlock({ code, expanded }: { code: string; expanded: boolean }) {
+export function CodeBlock({
+  code,
+  collapsed = false,
+  expanded = true,
+}: {
+  code: string;
+  collapsed?: boolean;
+  expanded?: boolean;
+}) {
   const lines = code.trim().split("\n");
 
   return (
     <div
       className={
-        expanded
+        expanded && !collapsed
           ? "max-h-[16rem] overflow-auto transition-[max-height] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]"
           : "pointer-events-none max-h-[5.625rem] overflow-hidden transition-[max-height] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]"
       }
     >
       <pre
         className={
-          expanded
+          expanded && !collapsed
             ? "min-w-max px-4 py-3 font-mono text-sm leading-6"
             : "min-w-max select-none px-4 py-3 font-mono text-sm leading-6 [mask-image:linear-gradient(to_bottom,black_0%,black_68%,rgb(0_0_0/.72)_100%)]"
         }

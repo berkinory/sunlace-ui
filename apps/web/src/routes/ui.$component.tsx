@@ -10,8 +10,12 @@ import {
   componentBySlug,
   getComponentExampleCode,
   isComponentSlug,
+  toPascalCase,
 } from "@/components/showcase/component-registry";
-import { ShowcaseExample } from "@/components/showcase/showcase-example";
+import {
+  CodeBlock,
+  ShowcaseExample,
+} from "@/components/showcase/showcase-example";
 import { ShowcaseLayout } from "@/components/showcase/showcase-layout";
 
 export const Route = createFileRoute("/ui/$component")({
@@ -28,6 +32,48 @@ export const Route = createFileRoute("/ui/$component")({
     meta: [{ title: `${params.component} - sunlace` }],
   }),
 });
+
+const accordionProps = [
+  {
+    name: "borders",
+    target: "Accordion",
+    type: "boolean",
+    defaultValue: "false",
+    description: "Wraps the accordion in a connected border treatment.",
+  },
+  {
+    name: "multiple",
+    target: "Accordion",
+    type: "boolean",
+    defaultValue: "false",
+    description: "Allows more than one item to stay open at the same time.",
+  },
+  {
+    name: "showArrow",
+    target: "AccordionTrigger",
+    type: "boolean",
+    defaultValue: "true",
+    description: "Shows or hides the trigger arrow icon.",
+  },
+  {
+    name: "underline",
+    target: "AccordionTrigger",
+    type: "boolean",
+    defaultValue: "true",
+    description: "Controls the trigger underline on hover.",
+  },
+];
+
+const propGroups = [
+  {
+    title: "Accordion",
+    props: accordionProps.filter((prop) => prop.target === "Accordion"),
+  },
+  {
+    title: "AccordionTrigger",
+    props: accordionProps.filter((prop) => prop.target === "AccordionTrigger"),
+  },
+];
 
 function UiComponent() {
   const { component } = Route.useParams();
@@ -46,6 +92,26 @@ function UiComponent() {
   }
 
   const title = activeComponent.label;
+  const importCode =
+    activeComponent.slug === "accordion"
+      ? `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";`
+      : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
+  const usageCode =
+    activeComponent.slug === "accordion"
+      ? `<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It follows accessible disclosure behavior.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`
+      : `<${toPascalCase(title)} />`;
   const settings: ComponentSettings = {
     accordion: accordionSettings,
   };
@@ -184,6 +250,83 @@ function UiComponent() {
           <pre className="mt-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
             <code>{`bunx --bun shadcn@latest add ${activeComponent.slug} --cwd packages/ui`}</code>
           </pre>
+        </section>
+
+        <section className="mt-12" id="usage">
+          <h2 className="border-b border-border pb-4 text-2xl font-semibold">
+            Usage
+          </h2>
+          <div className="mt-6 grid gap-4">
+            <div className="overflow-hidden rounded-lg border border-border bg-muted/30">
+              <CodeBlock code={importCode} />
+            </div>
+            <div className="overflow-hidden rounded-lg border border-border bg-muted/30">
+              <CodeBlock code={usageCode} />
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-12" id="props">
+          <h2 className="border-b border-border pb-4 text-2xl font-semibold">
+            Props
+          </h2>
+          <div className="mt-6 space-y-8">
+            {activeComponent.slug === "accordion" ? (
+              propGroups.map((group) => (
+                <div className="space-y-3" key={group.title}>
+                  <h3 className="text-base font-medium text-foreground">
+                    {group.title}
+                  </h3>
+                  <div className="showcase-scrollbar overflow-x-auto rounded-lg border border-border">
+                    <table className="w-full min-w-[720px] text-left text-sm">
+                      <thead className="bg-muted/30 text-muted-foreground">
+                        <tr>
+                          <th className="px-4 py-3 font-medium">Prop</th>
+                          <th className="px-4 py-3 font-medium">Type</th>
+                          <th className="px-4 py-3 font-medium">Default</th>
+                          <th className="px-4 py-3 font-medium">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        {group.props.map((prop) => (
+                          <tr key={prop.name}>
+                            <td className="px-4 py-3 font-mono text-foreground">
+                              {prop.name}
+                            </td>
+                            <td className="px-4 py-3 font-mono text-muted-foreground">
+                              {prop.type}
+                            </td>
+                            <td className="px-4 py-3 font-mono text-muted-foreground">
+                              {prop.defaultValue}
+                            </td>
+                            <td className="px-4 py-3 text-muted-foreground">
+                              {prop.description}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="rounded-lg border border-border px-4 py-3 text-sm text-muted-foreground">
+                No custom props documented yet.
+              </div>
+            )}
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Also supports Base UI accordion primitive props. See{" "}
+            <a
+              className="underline underline-offset-3 hover:text-foreground"
+              href="https://base-ui.com/react/components/accordion"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Base UI Accordion
+            </a>
+            .
+          </p>
         </section>
       </article>
     </ShowcaseLayout>

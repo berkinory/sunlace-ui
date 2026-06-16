@@ -28,11 +28,17 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
 
             <aside className="hidden px-4 py-16 xl:block">
               <div className="sticky top-24 space-y-3 text-sm">
-                <a className="block font-medium text-foreground" href="#usage">
+                <a
+                  className="block font-medium text-foreground"
+                  href="#installation"
+                >
+                  Installation
+                </a>
+                <a className="block text-muted-foreground" href="#usage">
                   Usage
                 </a>
-                <a className="block text-muted-foreground" href="#installation">
-                  Installation
+                <a className="block text-muted-foreground" href="#props">
+                  Props
                 </a>
               </div>
             </aside>
