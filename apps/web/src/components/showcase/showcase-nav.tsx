@@ -1,3 +1,5 @@
+import { BookOpen01Icon, Layers01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { DrawerClose } from "@sunlace/ui/components";
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react";
@@ -14,8 +16,8 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
     ? "block rounded-md px-2 py-1.5 text-sm capitalize text-foreground/90 transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:font-medium data-active:text-foreground"
     : "-ml-2 block w-[calc(100%+0.5rem)] rounded-md px-2 py-1.5 text-sm capitalize text-foreground/90 transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:font-medium data-active:text-foreground";
   const sectionLabelClass = mobile
-    ? "px-2 text-xs font-medium tracking-wide text-muted-foreground"
-    : "text-xs font-medium tracking-wide text-muted-foreground";
+    ? "flex items-center gap-2 px-2 text-xs font-medium tracking-wide text-muted-foreground"
+    : "flex items-center gap-2 text-xs font-medium tracking-wide text-muted-foreground";
 
   function renderNavLink({
     children,
@@ -57,7 +59,15 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
     >
       <div className={mobile ? "space-y-6" : "space-y-10"}>
         <div className="space-y-2">
-          <p className={sectionLabelClass}>Get Started</p>
+          <p className={sectionLabelClass}>
+            <HugeiconsIcon
+              aria-hidden
+              icon={BookOpen01Icon}
+              size={14}
+              strokeWidth={2}
+            />
+            Get Started
+          </p>
           <div className="space-y-1">
             {renderNavLink({ hash: "installation", children: "Installation" })}
             {renderNavLink({ hash: "cli", children: "CLI" })}
@@ -65,7 +75,15 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
         </div>
 
         <div className="space-y-2">
-          <p className={sectionLabelClass}>Components</p>
+          <p className={sectionLabelClass}>
+            <HugeiconsIcon
+              aria-hidden
+              icon={Layers01Icon}
+              size={14}
+              strokeWidth={2}
+            />
+            Components
+          </p>
           <div className="space-y-1">
             {componentItems.map((item) => (
               <Fragment key={item.slug}>
