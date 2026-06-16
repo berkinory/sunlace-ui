@@ -334,7 +334,7 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       <Skeleton className="h-4 w-2/3" />
     </div>
   ),
-  slider: <Slider className="max-w-sm" defaultValue={[44]} />,
+  slider: <Slider className="w-full max-w-sm" defaultValue={[44]} />,
   sonner: (
     <div className="flex flex-col items-center gap-4">
       <Button onClick={() => toast("sunlace toast")}>Toast Preview</Button>
