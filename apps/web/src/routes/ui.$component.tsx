@@ -44,7 +44,7 @@ function UiComponent() {
           <span className="text-foreground">{title}</span>
         </div>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 space-y-4">
           <h1 className="text-4xl font-semibold tracking-normal capitalize">
             {title}
           </h1>
