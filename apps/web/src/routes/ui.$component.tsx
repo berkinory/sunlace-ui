@@ -4,9 +4,11 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import {
   ComponentPreview,
   componentBySlug,
+  getComponentExampleCode,
   isComponentSlug,
   toPascalCase,
 } from "@/components/showcase/component-registry";
+import { ShowcaseExample } from "@/components/showcase/showcase-example";
 import { ShowcaseLayout } from "@/components/showcase/showcase-layout";
 
 export const Route = createFileRoute("/ui/$component")({
@@ -60,19 +62,10 @@ function UiComponent() {
         </div>
 
         <div className="mt-12">
-          <div className="sticky top-0 z-20 flex items-center justify-between bg-background/95 pb-3 text-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
-            <div className="flex gap-5">
-              <span className="font-medium">Preview</span>
-              <span className="text-muted-foreground">Code</span>
-            </div>
-            <button className="text-muted-foreground hover:text-foreground">
-              Copy Code
-            </button>
-          </div>
-
-          <div className="flex min-h-[420px] items-center justify-center rounded-lg border border-border bg-card/20 p-8">
-            <ComponentPreview component={activeComponent.slug} />
-          </div>
+          <ShowcaseExample
+            code={getComponentExampleCode(activeComponent.slug)}
+            preview={<ComponentPreview component={activeComponent.slug} />}
+          />
         </div>
 
         <section className="mt-12" id="usage">

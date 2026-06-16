@@ -31,8 +31,8 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
   const [indicatorTop, setIndicatorTop] = useState<number | null>(null);
 
   const linkClass = mobile
-    ? "relative -ml-2 block w-[calc(100%+0.5rem)] rounded-md py-1.5 pr-2 pl-2 text-sm capitalize text-foreground/65 transition-colors before:absolute before:top-1/2 before:left-0 before:h-[1em] before:w-px before:-translate-y-1/2 before:rounded-full before:bg-transparent hover:text-foreground data-active:text-foreground data-active:before:bg-foreground"
-    : "relative -ml-2 block w-[calc(100%+0.5rem)] rounded-md py-2 pr-2 pl-2 text-sm capitalize text-foreground/65 transition-colors hover:text-foreground data-active:text-foreground";
+    ? "relative -ml-2 block w-[calc(100%+0.5rem)] rounded-md py-1.5 pr-2 pl-2 text-sm capitalize text-foreground/65 transition-colors before:absolute before:top-1/2 before:left-0 before:h-[1em] before:w-px before:-translate-y-1/2 before:rounded-full before:bg-transparent hover:text-foreground data-active:text-primary data-active:before:bg-primary"
+    : "relative -ml-2 block w-[calc(100%+0.5rem)] rounded-md py-2 pr-2 pl-2 text-sm capitalize text-foreground/65 transition-colors hover:text-foreground data-active:text-primary";
   const linkContentClass = mobile
     ? undefined
     : "block transition-transform duration-150 ease-out group-hover:translate-x-1 group-data-active:translate-x-1";
@@ -131,7 +131,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
       {!mobile && indicatorTop !== null ? (
         <div
           aria-hidden
-          className="absolute left-3 w-px rounded-full bg-foreground transition-transform duration-200 ease-out"
+          className="absolute left-3 w-px rounded-full bg-primary transition-transform duration-200 ease-out"
           style={{
             height: indicatorHeight,
             transform: `translateY(${indicatorTop}px)`,

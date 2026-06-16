@@ -136,6 +136,17 @@ export function ComponentPreview({ component }: { component: ComponentSlug }) {
   return preview;
 }
 
+export function getComponentExampleCode(component: ComponentSlug) {
+  return (
+    exampleCode[component] ??
+    `import { ${toPascalCase(component.replaceAll("-", " "))} } from "@sunlace/ui";
+
+export function ${toPascalCase(component.replaceAll("-", " "))}Demo() {
+  return <${toPascalCase(component.replaceAll("-", " "))} />;
+}`
+  );
+}
+
 function PreviewShell({ children }: { children: ReactNode }) {
   return (
     <div className="text-center">
@@ -367,4 +378,38 @@ const previews: Partial<Record<ComponentSlug, ReactNode>> = {
       </Tooltip>
     </TooltipProvider>
   ),
+};
+
+const exampleCode: Partial<Record<ComponentSlug, string>> = {
+  accordion: `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@sunlace/ui";
+
+export function AccordionDemo() {
+  return (
+    <Accordion defaultValue={["item-1"]}>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is It Accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It Uses Base UI Primitives And Keeps Keyboard Behavior Intact.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is It Customizable?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Source Files Live In The Repo And Are Meant To Be Edited.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Can It Be Animated?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Motion Stays CSS Based Through Tailwind Utilities.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}`,
 };
