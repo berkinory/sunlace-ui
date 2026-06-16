@@ -115,6 +115,7 @@ export type ComponentSettings = {
     borders: boolean;
     multiple: boolean;
     showArrow: boolean;
+    underline: boolean;
   };
 };
 
@@ -189,7 +190,10 @@ const previews: Partial<
       multiple={settings?.accordion?.multiple}
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+        <AccordionTrigger
+          showArrow={settings?.accordion?.showArrow}
+          underline={settings?.accordion?.underline}
+        >
           Is it accessible?
         </AccordionTrigger>
         <AccordionContent>
@@ -197,7 +201,10 @@ const previews: Partial<
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+        <AccordionTrigger
+          showArrow={settings?.accordion?.showArrow}
+          underline={settings?.accordion?.underline}
+        >
           Is it customizable?
         </AccordionTrigger>
         <AccordionContent>
@@ -205,7 +212,10 @@ const previews: Partial<
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger showArrow={settings?.accordion?.showArrow}>
+        <AccordionTrigger
+          showArrow={settings?.accordion?.showArrow}
+          underline={settings?.accordion?.underline}
+        >
           Can it be animated?
         </AccordionTrigger>
         <AccordionContent>
@@ -427,19 +437,19 @@ export function AccordionDemo() {
   return (
     <Accordion${settings?.accordion?.borders ? ' className="rounded-lg border px-3"' : ""} defaultValue={["item-1"]}${settings?.accordion?.multiple ? " multiple" : ""}>
       <AccordionItem value="item-1">
-        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Is it accessible?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}${settings?.accordion?.underline === false ? " underline={false}" : ""}>Is it accessible?</AccordionTrigger>
         <AccordionContent>
           Yes. It uses Base UI primitives and keeps keyboard behavior intact.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Is it customizable?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}${settings?.accordion?.underline === false ? " underline={false}" : ""}>Is it customizable?</AccordionTrigger>
         <AccordionContent>
           Yes. Source files live in the repo and are meant to be edited.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}>Can it be animated?</AccordionTrigger>
+        <AccordionTrigger${settings?.accordion?.showArrow === false ? " showArrow={false}" : ""}${settings?.accordion?.underline === false ? " underline={false}" : ""}>Can it be animated?</AccordionTrigger>
         <AccordionContent>
           Yes. Motion stays CSS based through Tailwind utilities.
         </AccordionContent>

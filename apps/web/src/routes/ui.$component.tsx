@@ -1,3 +1,5 @@
+import { Settings03Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Button, Switch } from "@sunlace/ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -33,6 +35,7 @@ function UiComponent() {
     borders: false,
     multiple: false,
     showArrow: true,
+    underline: true,
   });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
@@ -52,12 +55,94 @@ function UiComponent() {
       borders: false,
       multiple: false,
       showArrow: true,
+      underline: true,
     });
   }, [activeComponent.slug]);
 
+  const controls =
+    activeComponent.slug === "accordion" ? (
+      <div className="space-y-4 text-xs">
+        <div className="flex items-center gap-2 border-border border-b pb-3 font-medium text-foreground">
+          <HugeiconsIcon
+            aria-hidden
+            icon={Settings03Icon}
+            size={14}
+            strokeWidth={2}
+          />
+          Settings
+        </div>
+
+        <div className="space-y-2">
+          <p className="font-medium text-foreground">Accordion</p>
+          <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Multiple
+              <Switch
+                checked={accordionSettings.multiple}
+                onCheckedChange={(checked) => {
+                  setAccordionSettings((current) => ({
+                    ...current,
+                    multiple: checked,
+                  }));
+                }}
+                size="sm"
+              />
+            </label>
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Borders
+              <Switch
+                checked={accordionSettings.borders}
+                onCheckedChange={(checked) => {
+                  setAccordionSettings((current) => ({
+                    ...current,
+                    borders: checked,
+                  }));
+                }}
+                size="sm"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="font-medium text-foreground">AccordionTrigger</p>
+          <div className="rounded-md bg-muted/40 p-2.5">
+            <div className="space-y-1.5">
+              <label className="flex items-center justify-between gap-3 text-muted-foreground">
+                Show Arrow
+                <Switch
+                  checked={accordionSettings.showArrow}
+                  onCheckedChange={(checked) => {
+                    setAccordionSettings((current) => ({
+                      ...current,
+                      showArrow: checked,
+                    }));
+                  }}
+                  size="sm"
+                />
+              </label>
+              <label className="flex items-center justify-between gap-3 text-muted-foreground">
+                Underline
+                <Switch
+                  checked={accordionSettings.underline}
+                  onCheckedChange={(checked) => {
+                    setAccordionSettings((current) => ({
+                      ...current,
+                      underline: checked,
+                    }));
+                  }}
+                  size="sm"
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : null;
+
   return (
     <ShowcaseLayout activeSlug={activeComponent.slug}>
-      <article className="pt-7 pb-10 lg:px-20">
+      <article className="pt-7 pb-10 lg:px-16">
         <div className="text-sm font-medium text-muted-foreground">
           Components <span className="px-2">›</span>
           <span className="text-foreground">{title}</span>
@@ -78,52 +163,10 @@ function UiComponent() {
           </div>
         </div>
 
-        <div className="mt-12 space-y-3">
-          {activeComponent.slug === "accordion" ? (
-            <div className="flex flex-wrap items-center gap-5 text-sm">
-              <label className="flex items-center gap-2 text-muted-foreground">
-                <Switch
-                  checked={accordionSettings.showArrow}
-                  onCheckedChange={(checked) => {
-                    setAccordionSettings((current) => ({
-                      ...current,
-                      showArrow: checked,
-                    }));
-                  }}
-                  size="sm"
-                />
-                Show Arrow
-              </label>
-              <label className="flex items-center gap-2 text-muted-foreground">
-                <Switch
-                  checked={accordionSettings.multiple}
-                  onCheckedChange={(checked) => {
-                    setAccordionSettings((current) => ({
-                      ...current,
-                      multiple: checked,
-                    }));
-                  }}
-                  size="sm"
-                />
-                Multiple
-              </label>
-              <label className="flex items-center gap-2 text-muted-foreground">
-                <Switch
-                  checked={accordionSettings.borders}
-                  onCheckedChange={(checked) => {
-                    setAccordionSettings((current) => ({
-                      ...current,
-                      borders: checked,
-                    }));
-                  }}
-                  size="sm"
-                />
-                Borders
-              </label>
-            </div>
-          ) : null}
+        <div className="mt-12">
           <ShowcaseExample
             code={getComponentExampleCode(activeComponent.slug, settings)}
+            controls={controls}
             preview={
               <ComponentPreview
                 component={activeComponent.slug}

@@ -1,11 +1,12 @@
 import { Copy01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Button } from "@sunlace/ui";
+import { Button, Tabs, TabsList, TabsTrigger } from "@sunlace/ui";
 import { useEffect, useState } from "react";
 
 type ShowcaseExampleProps = {
   code: string;
   preview: React.ReactNode;
+  controls?: React.ReactNode;
   resetKey: string;
 };
 
@@ -104,49 +105,94 @@ function CodeBlock({ code, expanded }: { code: string; expanded: boolean }) {
 
 export function ShowcaseExample({
   code,
+  controls,
   preview,
   resetKey,
 }: ShowcaseExampleProps) {
   const [expanded, setExpanded] = useState(false);
+  const [mobileTab, setMobileTab] = useState("preview");
 
   useEffect(() => {
     setExpanded(false);
+    setMobileTab("preview");
   }, [resetKey]);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-card/20">
-      <div className="flex min-h-[300px] items-center justify-center p-8">
-        {preview}
-      </div>
+    <div>
+      {controls ? (
+        <Tabs
+          className="mb-3 md:hidden"
+          onValueChange={setMobileTab}
+          value={mobileTab}
+        >
+          <TabsList>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      ) : null}
+      <div className="overflow-hidden rounded-lg border border-border bg-card/20">
+        <div
+          className={
+            controls
+              ? "grid min-h-[300px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_200px]"
+              : "flex min-h-[300px] items-center justify-center p-8"
+          }
+        >
+          {controls && mobileTab === "settings" ? (
+            <div className="showcase-scrollbar max-h-[300px] overflow-y-auto bg-muted/25 p-4 md:hidden">
+              {controls}
+            </div>
+          ) : controls ? (
+            <div className="flex min-h-[300px] items-center justify-center p-8 md:hidden">
+              {preview}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center p-8">
+              {preview}
+            </div>
+          )}
+          {controls ? (
+            <div className="hidden items-center justify-center p-8 md:flex">
+              {preview}
+            </div>
+          ) : null}
+          {controls ? (
+            <aside className="showcase-scrollbar hidden max-h-[300px] overflow-y-auto border-border border-l bg-muted/25 p-4 md:block">
+              {controls}
+            </aside>
+          ) : null}
+        </div>
 
-      <div className="relative border-t border-border bg-muted/25">
-        <CodeBlock code={code} expanded={expanded} />
+        <div className="relative border-t border-border bg-muted/25">
+          <CodeBlock code={code} expanded={expanded} />
 
-        {!expanded ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-muted/16 backdrop-blur-[0.4px]">
+          {!expanded ? (
+            <div className="absolute inset-0 flex items-center justify-center bg-muted/16 backdrop-blur-[0.4px]">
+              <Button
+                className="relative z-10 shadow-sm"
+                onClick={() => {
+                  setExpanded(true);
+                }}
+                variant="outline"
+              >
+                View Code
+              </Button>
+            </div>
+          ) : (
             <Button
-              className="relative z-10 shadow-sm"
+              className="absolute top-4 right-4 size-8 bg-muted/80"
               onClick={() => {
-                setExpanded(true);
+                void navigator.clipboard.writeText(code);
               }}
-              variant="outline"
+              size="icon"
+              variant="ghost"
             >
-              View Code
+              <span className="sr-only">Copy Code</span>
+              <HugeiconsIcon icon={Copy01Icon} size={16} strokeWidth={2} />
             </Button>
-          </div>
-        ) : (
-          <Button
-            className="absolute top-4 right-4 size-8 bg-muted/80"
-            onClick={() => {
-              void navigator.clipboard.writeText(code);
-            }}
-            size="icon"
-            variant="ghost"
-          >
-            <span className="sr-only">Copy Code</span>
-            <HugeiconsIcon icon={Copy01Icon} size={16} strokeWidth={2} />
-          </Button>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
