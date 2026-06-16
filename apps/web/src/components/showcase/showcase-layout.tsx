@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import type { ComponentSlug } from "./component-registry";
 import { SiteHeaderRow } from "./showcase-header";
@@ -7,9 +7,114 @@ import { ShowcaseNav } from "./showcase-nav";
 type ShowcaseLayoutProps = {
   activeSlug: ComponentSlug;
   children: ReactNode;
+  tocItems?: {
+    id: string;
+    label: string;
+  }[];
 };
 
-export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
+export function ShowcaseLayout({
+  activeSlug,
+  children,
+  tocItems = [],
+}: ShowcaseLayoutProps) {
+  const scrollLockRef = useRef(0);
+  const scrollLockIdRef = useRef("");
+  const scrollUnlockTimerRef = useRef<number | null>(null);
+  const scrollTargetRef = useRef<number | null>(null);
+  const [activeTocId, setActiveTocId] = useState(tocItems[0]?.id ?? "");
+  const activeTocIndex = Math.max(
+    0,
+    tocItems.findIndex((item) => item.id === activeTocId)
+  );
+
+  useEffect(() => {
+    if (tocItems.length === 0) {
+      setActiveTocId("");
+      return;
+    }
+
+    const scrollRoot = document.querySelector("[data-showcase-content]");
+    const sections = tocItems
+      .map((item) => document.getElementById(item.id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (!(scrollRoot instanceof HTMLElement) || sections.length === 0) {
+      setActiveTocId("");
+      return;
+    }
+
+    let frame = 0;
+
+    const updateVisibleSections = () => {
+      frame = 0;
+
+      if (Date.now() < scrollLockRef.current) {
+        if (scrollLockIdRef.current) {
+          setActiveTocId(scrollLockIdRef.current);
+        }
+
+        if (scrollUnlockTimerRef.current !== null) {
+          window.clearTimeout(scrollUnlockTimerRef.current);
+        }
+
+        scrollUnlockTimerRef.current = window.setTimeout(() => {
+          scrollTargetRef.current = null;
+          scrollLockIdRef.current = "";
+          scrollLockRef.current = 0;
+        }, 180);
+
+        return;
+      }
+
+      const isAtBottom =
+        scrollRoot.scrollTop + scrollRoot.clientHeight >=
+        scrollRoot.scrollHeight - 2;
+      const lastSection = sections.at(-1);
+
+      if (isAtBottom && lastSection) {
+        setActiveTocId(lastSection.id);
+        return;
+      }
+
+      const rootRect = scrollRoot.getBoundingClientRect();
+      const activationTop = rootRect.top + 32;
+      const nextSection =
+        sections
+          .filter(
+            (section) => section.getBoundingClientRect().top <= activationTop
+          )
+          .at(-1) ?? sections[0];
+
+      if (nextSection) {
+        setActiveTocId(nextSection.id);
+      }
+    };
+
+    const scheduleUpdate = () => {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(updateVisibleSections);
+      }
+    };
+
+    updateVisibleSections();
+    scrollRoot.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      scrollRoot.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      if (scrollUnlockTimerRef.current !== null) {
+        window.clearTimeout(scrollUnlockTimerRef.current);
+      }
+    };
+  }, [tocItems]);
+
   return (
     <main className="min-h-screen bg-background text-foreground lg:h-dvh lg:overflow-hidden lg:pt-16">
       <SiteHeaderRow activeSlug={activeSlug} dotsVisible />
@@ -23,25 +128,110 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
             <ShowcaseNav activeSlug={activeSlug} />
           </aside>
 
-          <section className="showcase-scrollbar grid min-h-0 grid-cols-1 overflow-y-auto xl:grid-cols-[minmax(0,1fr)_160px]">
+          <section
+            className="showcase-scrollbar grid min-h-0 scroll-smooth grid-cols-1 overflow-y-auto xl:grid-cols-[minmax(0,1fr)_160px]"
+            data-showcase-content
+          >
             {children}
 
-            <aside className="hidden px-4 py-16 xl:block">
-              <div className="sticky top-24 space-y-3 text-sm">
-                <a
-                  className="block font-medium text-foreground"
-                  href="#installation"
+            {tocItems.length > 0 ? (
+              <aside className="hidden px-4 pt-7 pb-10 xl:block">
+                <nav
+                  aria-label="On this page"
+                  className="relative sticky top-7 text-sm"
                 >
-                  Installation
-                </a>
-                <a className="block text-muted-foreground" href="#usage">
-                  Usage
-                </a>
-                <a className="block text-muted-foreground" href="#props">
-                  Props
-                </a>
-              </div>
-            </aside>
+                  <span
+                    aria-hidden
+                    className="absolute top-2 left-0 w-px bg-border"
+                    style={{
+                      height: `${tocItems.length * 32 - 16}px`,
+                    }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute left-0 h-4 w-px bg-foreground transition-transform duration-300 ease-out"
+                    style={{
+                      transform: `translateY(${activeTocIndex * 32 + 8}px)`,
+                    }}
+                  />
+                  {tocItems.map((item) => {
+                    const isActive = item.id === activeTocId;
+
+                    return (
+                      <button
+                        className={[
+                          "flex h-8 w-full cursor-pointer items-center pl-4 text-left transition-colors",
+                          isActive
+                            ? "font-medium text-foreground"
+                            : "text-muted-foreground hover:text-foreground",
+                        ].join(" ")}
+                        key={item.id}
+                        onClick={(event) => {
+                          event.preventDefault();
+
+                          const scrollRoot = document.querySelector(
+                            "[data-showcase-content]"
+                          );
+                          const section = document.getElementById(item.id);
+
+                          if (
+                            !(scrollRoot instanceof HTMLElement) ||
+                            !section
+                          ) {
+                            return;
+                          }
+
+                          const scrollRootTop =
+                            scrollRoot.getBoundingClientRect().top;
+                          const sectionTop =
+                            section.getBoundingClientRect().top;
+                          const sectionScrollTop =
+                            scrollRoot.scrollTop + sectionTop - scrollRootTop;
+                          const maxScrollTop =
+                            scrollRoot.scrollHeight - scrollRoot.clientHeight;
+                          const itemIndex = tocItems.findIndex(
+                            (tocItem) => tocItem.id === item.id
+                          );
+                          const nextItem = tocItems[itemIndex + 1];
+                          const nextSection = nextItem
+                            ? document.getElementById(nextItem.id)
+                            : null;
+                          const nextSectionScrollTop =
+                            nextSection instanceof HTMLElement
+                              ? scrollRoot.scrollTop +
+                                nextSection.getBoundingClientRect().top -
+                                scrollRootTop
+                              : null;
+                          const nextScrollTop =
+                            nextSectionScrollTop === null
+                              ? sectionScrollTop
+                              : Math.min(
+                                  sectionScrollTop,
+                                  nextSectionScrollTop - 40
+                                );
+                          const targetScrollTop = Math.min(
+                            Math.max(nextScrollTop, 0),
+                            maxScrollTop
+                          );
+
+                          setActiveTocId(item.id);
+                          scrollLockIdRef.current = item.id;
+                          scrollTargetRef.current = targetScrollTop;
+                          scrollLockRef.current = Date.now() + 1200;
+                          scrollRoot.scrollTo({
+                            behavior: "smooth",
+                            top: targetScrollTop,
+                          });
+                        }}
+                        type="button"
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </aside>
+            ) : null}
           </section>
         </div>
         <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-repeat-y lg:block" />

@@ -2,7 +2,7 @@ import { Settings03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Button, Switch } from "@sunlace/ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   ComponentPreview,
@@ -115,6 +115,15 @@ function UiComponent() {
   const settings: ComponentSettings = {
     accordion: accordionSettings,
   };
+  const tocItems = useMemo(
+    () => [
+      { id: "showcase", label: "Showcase" },
+      { id: "installation", label: "Installation" },
+      { id: "usage", label: "Usage" },
+      { id: "props", label: "Props" },
+    ],
+    []
+  );
 
   useEffect(() => {
     setAccordionSettings({
@@ -207,8 +216,8 @@ function UiComponent() {
     ) : null;
 
   return (
-    <ShowcaseLayout activeSlug={activeComponent.slug}>
-      <article className="pt-7 pb-10 lg:px-16">
+    <ShowcaseLayout activeSlug={activeComponent.slug} tocItems={tocItems}>
+      <article className="scroll-mt-7 pt-7 pb-10 lg:px-16" id="showcase">
         <div className="text-sm font-medium text-muted-foreground">
           Components <span className="px-2">›</span>
           <span className="text-foreground">{title}</span>
@@ -243,7 +252,7 @@ function UiComponent() {
           />
         </div>
 
-        <section className="mt-12" id="installation">
+        <section className="mt-12 scroll-mt-7" id="installation">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">
             Installation
           </h2>
@@ -252,7 +261,7 @@ function UiComponent() {
           </pre>
         </section>
 
-        <section className="mt-12" id="usage">
+        <section className="mt-12 scroll-mt-7" id="usage">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">
             Usage
           </h2>
@@ -266,7 +275,7 @@ function UiComponent() {
           </div>
         </section>
 
-        <section className="mt-12" id="props">
+        <section className="mt-12 scroll-mt-7" id="props">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">
             Props
           </h2>
