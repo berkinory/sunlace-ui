@@ -2,10 +2,14 @@
 node_modules
 .pnp
 .pnp.js
+.bun-install
 
 # Build outputs
 dist
 build
+.output
+.next
+.vercel
 *.tsbuildinfo
 
 # Environment variables
@@ -32,6 +36,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+bun-debug.log*
 
 # Turbo
 .turbo
@@ -46,7 +51,9 @@ coverage
 # Misc
 *.tgz
 .cache
+.vite
 tmp
 temp
 node-compile-cache
 *.sw.js
+AGENTS.md

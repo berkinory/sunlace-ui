@@ -203,3 +203,40 @@
     overscroll-behavior: none;
   }
 }
+
+@layer utilities {
+  .showcase-scrollbar {
+    scrollbar-color: color-mix(in oklch, var(--foreground) 20%, transparent)
+      transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .showcase-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .showcase-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .showcase-scrollbar::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklch,
+      var(--foreground) 18%,
+      transparent
+    );
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 999px;
+  }
+
+  .showcase-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: color-mix(
+      in oklch,
+      var(--foreground) 30%,
+      transparent
+    );
+  }
+}
