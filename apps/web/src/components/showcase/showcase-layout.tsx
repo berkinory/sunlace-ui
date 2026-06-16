@@ -1,4 +1,4 @@
-import { Menu10Icon } from "@hugeicons/core-free-icons";
+import { Menu11Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Button,
@@ -21,8 +21,8 @@ type ShowcaseLayoutProps = {
 export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto grid max-w-[1624px] grid-cols-1 px-4 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[8vw]">
-        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_5px] bg-repeat-y lg:block" />
+      <div className="mx-auto grid max-w-[1624px] grid-cols-1 px-6 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[8vw]">
+        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-repeat-y lg:block" />
         <header className="flex h-16 items-center justify-between lg:px-5">
           <Link to="/" className="text-xl font-semibold tracking-tight">
             sunlace
@@ -44,7 +44,7 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
               <DrawerTrigger asChild>
                 <Button size="icon" variant="ghost">
                   <span className="sr-only">Open Navigation</span>
-                  <HugeiconsIcon icon={Menu10Icon} size={18} strokeWidth={2} />
+                  <HugeiconsIcon icon={Menu11Icon} size={18} strokeWidth={2} />
                 </Button>
               </DrawerTrigger>
               <DrawerContent className="w-[min(20rem,calc(100vw-1rem))] border-border/80 bg-background p-0 shadow-xl">
@@ -53,15 +53,15 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
             </Drawer>
           </div>
         </header>
-        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_5px] bg-repeat-y lg:block" />
+        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-repeat-y lg:block" />
       </div>
 
-      <div className="hidden h-[3px] bg-[image:var(--dot-x)] bg-[length:5px_3px] bg-repeat-x lg:block" />
+      <div className="hidden h-[3px] bg-[image:var(--dot-x)] bg-[length:4px_3px] bg-repeat-x lg:block" />
 
-      <div className="mx-auto grid max-w-[1624px] grid-cols-1 px-4 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[8vw]">
-        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_5px] bg-repeat-y lg:block" />
+      <div className="mx-auto grid max-w-[1624px] grid-cols-1 px-6 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[8vw]">
+        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-repeat-y lg:block" />
         <div className="grid lg:grid-cols-[220px_minmax(0,1fr)]">
-          <aside className="hidden min-h-[calc(100vh-66px)] bg-[image:var(--dot-y)] bg-[length:3px_5px] bg-[position:right_top] bg-repeat-y py-10 lg:block">
+          <aside className="hidden min-h-[calc(100vh-66px)] bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-[position:right_top] bg-repeat-y pt-7 pb-10 lg:block">
             <ShowcaseNav activeSlug={activeSlug} />
           </aside>
 
@@ -80,7 +80,7 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
             </aside>
           </section>
         </div>
-        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_5px] bg-repeat-y lg:block" />
+        <div className="hidden bg-[image:var(--dot-y)] bg-[length:3px_4px] bg-repeat-y lg:block" />
       </div>
     </main>
   );
@@ -111,7 +111,7 @@ function ShowcaseNav({
     <nav
       className={
         mobile
-          ? "max-h-[calc(100vh-3.25rem)] space-y-6 overflow-y-auto px-3 py-4"
+          ? "max-h-[calc(100vh-3.25rem)] space-y-6 overflow-y-auto px-3 pt-2 pb-4"
           : "w-full space-y-6 pr-2 pl-5"
       }
     >

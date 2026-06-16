@@ -38,7 +38,7 @@ function UiComponent() {
 
   return (
     <ShowcaseLayout activeSlug={activeComponent.slug}>
-      <article className="px-6 py-10 lg:px-16">
+      <article className="pt-7 pb-10 lg:px-16">
         <div className="text-sm font-medium text-muted-foreground">
           Components <span className="px-2">›</span>
           <span className="text-foreground">{title}</span>
@@ -59,7 +59,7 @@ function UiComponent() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-20 mt-24 flex items-center justify-between border-b border-border bg-background/95 pb-4 text-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <div className="sticky top-0 z-20 mt-24 flex items-center justify-between bg-background/95 pb-4 text-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
           <div className="flex gap-5">
             <span className="font-medium">Preview</span>
             <span className="text-muted-foreground">Code</span>
