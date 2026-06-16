@@ -110,6 +110,8 @@ export const componentItems = [
 
 export type ComponentSlug = (typeof componentItems)[number]["slug"];
 
+export const defaultComponentSlug = componentItems[0].slug;
+
 export const componentBySlug = new Map<
   ComponentSlug,
   (typeof componentItems)[number]
