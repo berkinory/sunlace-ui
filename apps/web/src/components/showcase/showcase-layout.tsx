@@ -8,7 +8,7 @@ import {
   DrawerTrigger,
 } from "@sunlace/ui/components";
 import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 import { componentItems, type ComponentSlug } from "./component-registry";
 import { ThemeToggle } from "./theme-toggle";
@@ -47,7 +47,7 @@ export function ShowcaseLayout({ activeSlug, children }: ShowcaseLayoutProps) {
                   <HugeiconsIcon icon={Menu11Icon} size={18} strokeWidth={2} />
                 </Button>
               </DrawerTrigger>
-              <DrawerContent className="w-[min(20rem,calc(100vw-1rem))] border-border/80 bg-background p-0 shadow-xl">
+              <DrawerContent className="flex h-full w-[min(20rem,calc(100vw-1rem))] flex-col border-border/80 bg-sidebar p-0 shadow-xl">
                 <ShowcaseNav activeSlug={activeSlug} mobile />
               </DrawerContent>
             </Drawer>
@@ -94,76 +94,72 @@ function ShowcaseNav({
   mobile?: boolean;
 }) {
   const linkClass = mobile
-    ? "block rounded-md px-2 py-1.5 text-sm capitalize text-muted-foreground transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:text-foreground"
-    : "-ml-2 block w-[calc(100%+0.5rem)] rounded-md px-2 py-1.5 text-sm capitalize text-muted-foreground transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:text-foreground";
-  const installationLink = (
-    <Link
-      className={linkClass}
-      hash="installation"
-      params={{ component: activeSlug }}
-      to="/ui/$component"
-    >
-      Installation
-    </Link>
-  );
+    ? "block rounded-md px-2 py-1.5 text-sm capitalize text-foreground/90 transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:font-medium data-active:text-foreground"
+    : "-ml-2 block w-[calc(100%+0.5rem)] rounded-md px-2 py-1.5 text-sm capitalize text-foreground/90 transition-colors hover:bg-muted hover:text-foreground data-active:bg-muted data-active:font-medium data-active:text-foreground";
+  const sectionLabelClass = mobile
+    ? "px-2 text-xs font-medium tracking-wide text-muted-foreground"
+    : "text-xs font-medium tracking-wide text-muted-foreground";
+
+  function renderNavLink({
+    children,
+    component = activeSlug,
+    hash,
+    isActive = false,
+  }: {
+    children: React.ReactNode;
+    component?: ComponentSlug;
+    hash?: string;
+    isActive?: boolean;
+  }) {
+    const link = (
+      <Link
+        className={linkClass}
+        data-active={isActive ? true : undefined}
+        hash={hash}
+        params={{ component }}
+        to="/ui/$component"
+      >
+        {children}
+      </Link>
+    );
+
+    if (mobile) {
+      return <DrawerClose asChild>{link}</DrawerClose>;
+    }
+
+    return link;
+  }
 
   return (
     <nav
       className={
         mobile
-          ? "max-h-[calc(100vh-3.25rem)] space-y-6 overflow-y-auto px-3 pt-2 pb-4"
-          : "w-full space-y-6 pr-2 pl-5"
+          ? "flex h-full min-h-0 flex-col overflow-y-auto px-3 pt-5 pb-10"
+          : "w-full pr-2 pl-5"
       }
     >
-      <div className="space-y-2">
-        <p
-          className={
-            mobile
-              ? "px-2 text-xs font-medium text-muted-foreground"
-              : "text-sm text-muted-foreground"
-          }
-        >
-          Get Started
-        </p>
-        {mobile ? (
-          <DrawerClose asChild>{installationLink}</DrawerClose>
-        ) : (
-          installationLink
-        )}
-      </div>
+      <div className={mobile ? "space-y-6" : "space-y-10"}>
+        <div className="space-y-2">
+          <p className={sectionLabelClass}>Get Started</p>
+          <div className="space-y-1">
+            {renderNavLink({ hash: "installation", children: "Installation" })}
+            {renderNavLink({ hash: "cli", children: "CLI" })}
+          </div>
+        </div>
 
-      <div>
-        <p
-          className={
-            mobile
-              ? "mb-3 px-2 text-xs font-medium text-muted-foreground"
-              : "mb-3 text-sm text-muted-foreground"
-          }
-        >
-          Components
-        </p>
-        <div className="space-y-1">
-          {componentItems.map((item) => {
-            const link = (
-              <Link
-                className={linkClass}
-                data-active={item.slug === activeSlug ? true : undefined}
-                key={item.slug}
-                params={{ component: item.slug }}
-                to="/ui/$component"
-              >
-                {item.label}
-              </Link>
-            );
-
-            return mobile ? (
-              <DrawerClose asChild key={item.slug}>
-                {link}
-              </DrawerClose>
-            ) : (
-              link
-            );
-          })}
+        <div className="space-y-2">
+          <p className={sectionLabelClass}>Components</p>
+          <div className="space-y-1">
+            {componentItems.map((item) => (
+              <Fragment key={item.slug}>
+                {renderNavLink({
+                  children: item.label,
+                  component: item.slug,
+                  isActive: item.slug === activeSlug,
+                })}
+              </Fragment>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

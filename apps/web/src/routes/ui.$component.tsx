@@ -59,34 +59,36 @@ function UiComponent() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-20 mt-24 flex items-center justify-between bg-background/95 pb-4 text-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
-          <div className="flex gap-5">
-            <span className="font-medium">Preview</span>
-            <span className="text-muted-foreground">Code</span>
+        <div className="mt-12">
+          <div className="sticky top-0 z-20 flex items-center justify-between bg-background/95 pb-3 text-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
+            <div className="flex gap-5">
+              <span className="font-medium">Preview</span>
+              <span className="text-muted-foreground">Code</span>
+            </div>
+            <button className="text-muted-foreground hover:text-foreground">
+              Copy Code
+            </button>
           </div>
-          <button className="text-muted-foreground hover:text-foreground">
-            Copy Code
-          </button>
+
+          <div className="flex min-h-[420px] items-center justify-center rounded-lg border border-border bg-card/20 p-8">
+            <ComponentPreview component={activeComponent.slug} />
+          </div>
         </div>
 
-        <div className="flex min-h-[420px] items-center justify-center rounded-lg border border-border bg-card/20 p-8">
-          <ComponentPreview component={activeComponent.slug} />
-        </div>
-
-        <section className="mt-24" id="usage">
+        <section className="mt-12" id="usage">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">
             Usage
           </h2>
-          <pre className="mt-8 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
+          <pre className="mt-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
             <code>{`import { ${toPascalCase(title)} } from "@sunlace/ui"`}</code>
           </pre>
         </section>
 
-        <section className="mt-16" id="installation">
+        <section className="mt-12" id="installation">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">
             Installation
           </h2>
-          <pre className="mt-8 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
+          <pre className="mt-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
             <code>{`bunx --bun shadcn@latest add ${activeComponent.slug} --cwd packages/ui`}</code>
           </pre>
         </section>
