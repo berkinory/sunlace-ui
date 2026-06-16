@@ -28,7 +28,7 @@ function ShowcaseHeader({ activeSlug = defaultComponentSlug }: ShowcaseHeaderPro
   const navLinkClass = (active: boolean) =>
     active
       ? "font-medium text-foreground"
-      : "text-muted-foreground transition-colors hover:text-foreground";
+      : "font-medium text-muted-foreground transition-colors hover:text-foreground";
 
   return (
     <header className="flex h-16 items-center justify-between lg:px-5">
