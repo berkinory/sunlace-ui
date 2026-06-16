@@ -6,7 +6,6 @@ import {
   componentBySlug,
   getComponentExampleCode,
   isComponentSlug,
-  toPascalCase,
 } from "@/components/showcase/component-registry";
 import { ShowcaseExample } from "@/components/showcase/showcase-example";
 import { ShowcaseLayout } from "@/components/showcase/showcase-layout";
@@ -40,7 +39,7 @@ function UiComponent() {
 
   return (
     <ShowcaseLayout activeSlug={activeComponent.slug}>
-      <article className="pt-7 pb-10 lg:px-16">
+      <article className="pt-7 pb-10 lg:px-20">
         <div className="text-sm font-medium text-muted-foreground">
           Components <span className="px-2">›</span>
           <span className="text-foreground">{title}</span>
@@ -67,15 +66,6 @@ function UiComponent() {
             preview={<ComponentPreview component={activeComponent.slug} />}
           />
         </div>
-
-        <section className="mt-12" id="usage">
-          <h2 className="border-b border-border pb-4 text-2xl font-semibold">
-            Usage
-          </h2>
-          <pre className="mt-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
-            <code>{`import { ${toPascalCase(title)} } from "@sunlace/ui"`}</code>
-          </pre>
-        </section>
 
         <section className="mt-12" id="installation">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">

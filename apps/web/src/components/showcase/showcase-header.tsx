@@ -87,7 +87,7 @@ export function SiteHeaderRow({
   dotsVisible = false,
 }: SiteHeaderRowProps) {
   return (
-    <div className="mx-auto grid max-w-[1624px] grid-cols-1 bg-background px-6 lg:fixed lg:inset-x-0 lg:top-0 lg:z-50 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[8vw]">
+    <div className="mx-auto grid max-w-[1624px] grid-cols-1 bg-background px-6 lg:fixed lg:inset-x-0 lg:top-0 lg:z-50 lg:grid-cols-[3px_minmax(0,1fr)_3px] lg:px-[10vw]">
       <div
         aria-hidden
         className={dotsVisible ? dotColumnClass : "hidden lg:block"}

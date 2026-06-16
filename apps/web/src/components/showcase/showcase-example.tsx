@@ -74,10 +74,16 @@ function CodeBlock({ code, expanded }: { code: string; expanded: boolean }) {
       className={
         expanded
           ? "max-h-[16rem] overflow-auto transition-[max-height] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]"
-          : "pointer-events-none max-h-[5.25rem] overflow-hidden transition-[max-height] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]"
+          : "pointer-events-none max-h-[5.625rem] overflow-hidden transition-[max-height] duration-250 ease-[cubic-bezier(0.32,0.72,0,1)]"
       }
     >
-      <pre className="min-w-max px-4 py-3 font-mono text-sm leading-6">
+      <pre
+        className={
+          expanded
+            ? "min-w-max px-4 py-3 font-mono text-sm leading-6"
+            : "min-w-max select-none px-4 py-3 font-mono text-sm leading-6 [mask-image:linear-gradient(to_bottom,black_0%,black_68%,rgb(0_0_0/.72)_100%)]"
+        }
+      >
         <code>
           {lines.map((line, index) => (
             <span
@@ -107,7 +113,7 @@ export function ShowcaseExample({ code, preview }: ShowcaseExampleProps) {
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card/20">
-      <div className="flex min-h-[420px] items-center justify-center p-8">
+      <div className="flex min-h-[300px] items-center justify-center p-8">
         {preview}
       </div>
 
@@ -115,7 +121,7 @@ export function ShowcaseExample({ code, preview }: ShowcaseExampleProps) {
         <CodeBlock code={code} expanded={expanded} />
 
         {!expanded ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-muted/10 backdrop-blur-[0.25px]">
+          <div className="absolute inset-0 flex items-center justify-center bg-muted/16 backdrop-blur-[0.4px]">
             <Button
               className="relative z-10 shadow-sm"
               onClick={() => {

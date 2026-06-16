@@ -139,7 +139,7 @@ export function ComponentPreview({ component }: { component: ComponentSlug }) {
 export function getComponentExampleCode(component: ComponentSlug) {
   return (
     exampleCode[component] ??
-    `import { ${toPascalCase(component.replaceAll("-", " "))} } from "@sunlace/ui";
+    `import { ${toPascalCase(component.replaceAll("-", " "))} } from "@/components/ui/${component}";
 
 export function ${toPascalCase(component.replaceAll("-", " "))}Demo() {
   return <${toPascalCase(component.replaceAll("-", " "))} />;
@@ -386,7 +386,7 @@ const exampleCode: Partial<Record<ComponentSlug, string>> = {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@sunlace/ui";
+} from "@/components/ui/accordion";
 
 export function AccordionDemo() {
   return (
