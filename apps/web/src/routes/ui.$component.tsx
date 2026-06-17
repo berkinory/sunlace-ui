@@ -11,6 +11,7 @@ import {
   AvatarGroup,
   AvatarGroupCount,
   AvatarImage,
+  Badge,
   Button,
   Card,
   CardAction,
@@ -315,6 +316,78 @@ function AccordionCardExample() {
         </Accordion>
       </CardContent>
     </Card>
+  );
+}
+
+const badgeStatusExampleCode = `import { Badge } from "@/components/ui/badge";
+
+export function BadgeStatusDemo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="success">Synced</Badge>
+      <Badge variant="warning">Pending</Badge>
+      <Badge variant="destructive">Failed</Badge>
+      <Badge variant="outline">Draft</Badge>
+    </div>
+  );
+}`;
+
+function BadgeStatusExample() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Badge variant="success">Synced</Badge>
+      <Badge variant="warning">Pending</Badge>
+      <Badge variant="destructive">Failed</Badge>
+      <Badge variant="outline">Draft</Badge>
+    </div>
+  );
+}
+
+const buttonVariantExampleCode = `import { Button } from "@/components/ui/button";
+
+export function ButtonVariantDemo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button>Save Changes</Button>
+      <Button variant="secondary">Preview</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button variant="ghost">Dismiss</Button>
+    </div>
+  );
+}`;
+
+function ButtonVariantExample() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button>Save Changes</Button>
+      <Button variant="secondary">Preview</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button variant="ghost">Dismiss</Button>
+    </div>
+  );
+}
+
+const buttonIntentExampleCode = `import { Button } from "@/components/ui/button";
+
+export function ButtonIntentDemo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button variant="success">Approve</Button>
+      <Button variant="warning">Review</Button>
+      <Button variant="destructive">Delete</Button>
+      <Button variant="shine">Upgrade</Button>
+    </div>
+  );
+}`;
+
+function ButtonIntentExample() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button variant="success">Approve</Button>
+      <Button variant="warning">Review</Button>
+      <Button variant="destructive">Delete</Button>
+      <Button variant="shine">Upgrade</Button>
+    </div>
   );
 }
 
@@ -863,6 +936,9 @@ function UiComponent() {
     if (
       activeComponent.slug === "accordion" ||
       activeComponent.slug === "avatar" ||
+      activeComponent.slug === "badge" ||
+      activeComponent.slug === "button" ||
+      activeComponent.slug === "card" ||
       activeComponent.slug === "dither-avatar"
     ) {
       items.push({ id: "examples", label: "Examples" });
@@ -1173,13 +1249,15 @@ function UiComponent() {
               ? "A vertically stacked set of interactive headings that each reveal a section of content."
               : activeComponent.slug === "avatar"
                 ? "A compact identity surface for people, teams, status, and stacked presence."
-                : activeComponent.slug === "button"
-                  ? "A clickable action control with variants for hierarchy, semantics, sizing, and icon-only usage."
-                  : activeComponent.slug === "card"
-                    ? "A bordered surface for grouped content, header actions, body detail, and footer controls."
-                    : activeComponent.slug === "dither-avatar"
-                      ? "A deterministic dithered identity surface generated from any string."
-                      : "Temporary component preview while the docs system is shaped."}
+                : activeComponent.slug === "badge"
+                  ? "A compact label for status, metadata, and low-friction emphasis."
+                  : activeComponent.slug === "button"
+                    ? "A clickable action control with variants for hierarchy, semantics, sizing, and icon-only usage."
+                    : activeComponent.slug === "card"
+                      ? "A bordered surface for grouped content, header actions, body detail, and footer controls."
+                      : activeComponent.slug === "dither-avatar"
+                        ? "A deterministic dithered identity surface generated from any string."
+                        : "Temporary component preview while the docs system is shaped."}
           </p>
           <div className="flex gap-2">
             <Button variant="outline">Docs</Button>
@@ -1226,6 +1304,8 @@ function UiComponent() {
 
         {activeComponent.slug === "accordion" ||
         activeComponent.slug === "avatar" ||
+        activeComponent.slug === "badge" ||
+        activeComponent.slug === "button" ||
         activeComponent.slug === "card" ||
         activeComponent.slug === "dither-avatar" ? (
           <section className="mt-12 scroll-mt-7" id="examples">
@@ -1277,6 +1357,40 @@ function UiComponent() {
                     code={avatarProfileCardExampleCode}
                     preview={<AvatarProfileCardExample />}
                     resetKey="avatar-profile-card-example"
+                  />
+                </div>
+              </div>
+            ) : activeComponent.slug === "badge" ? (
+              <div className="mt-6">
+                <p className="mb-3 text-base font-medium text-foreground">
+                  Status Badges
+                </p>
+                <ShowcaseExample
+                  code={badgeStatusExampleCode}
+                  preview={<BadgeStatusExample />}
+                  resetKey="badge-status-example"
+                />
+              </div>
+            ) : activeComponent.slug === "button" ? (
+              <div className="mt-6 space-y-8">
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Action Variants
+                  </p>
+                  <ShowcaseExample
+                    code={buttonVariantExampleCode}
+                    preview={<ButtonVariantExample />}
+                    resetKey="button-variant-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Intent Variants
+                  </p>
+                  <ShowcaseExample
+                    code={buttonIntentExampleCode}
+                    preview={<ButtonIntentExample />}
+                    resetKey="button-intent-example"
                   />
                 </div>
               </div>
@@ -1389,8 +1503,31 @@ function UiComponent() {
               </div>
             )}
           </div>
-          {activeComponent.slug === "accordion" ||
-          activeComponent.slug === "button" ? (
+          {activeComponent.slug === "badge" ? (
+            <p className="mt-3 text-sm text-muted-foreground">
+              Also supports{" "}
+              <a
+                className="underline underline-offset-3 hover:text-foreground"
+                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span"
+                rel="noreferrer"
+                target="_blank"
+              >
+                native span props
+              </a>{" "}
+              through the{" "}
+              <a
+                className="underline underline-offset-3 hover:text-foreground"
+                href="https://base-ui.com/react/overview/composition"
+                rel="noreferrer"
+                target="_blank"
+              >
+                render API
+              </a>
+              .
+            </p>
+          ) : activeComponent.slug === "accordion" ||
+            activeComponent.slug === "avatar" ||
+            activeComponent.slug === "button" ? (
             <p className="mt-3 text-sm text-muted-foreground">
               Also supports Base UI {title.toLowerCase()} primitive props. See{" "}
               <a
