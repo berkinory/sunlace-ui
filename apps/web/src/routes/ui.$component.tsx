@@ -13,8 +13,10 @@ import {
   AvatarImage,
   Button,
   Card,
+  CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   DitherAvatar,
@@ -311,6 +313,181 @@ function AccordionCardExample() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+      </CardContent>
+    </Card>
+  );
+}
+
+const cardMetricExampleCode = `import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function CardMetricDemo() {
+  return (
+    <Card className="w-80">
+      <CardHeader>
+        <CardTitle>Revenue</CardTitle>
+        <CardDescription>Last 30 days</CardDescription>
+        <CardAction>
+          <span className="rounded-full bg-[oklch(0.93_0.07_145)] px-2 py-1 text-xs font-medium text-[oklch(0.43_0.13_145)] dark:bg-[oklch(0.34_0.06_145)] dark:text-[oklch(0.74_0.16_145)]">
+            +12.8%
+          </span>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <p className="text-3xl font-semibold tracking-tight">$42,804</p>
+        <p className="mt-2 text-muted-foreground">
+          Pipeline health is trending above the quarterly baseline.
+        </p>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+function CardMetricExample() {
+  return (
+    <Card className="w-80">
+      <CardHeader>
+        <CardTitle>Revenue</CardTitle>
+        <CardDescription>Last 30 days</CardDescription>
+        <CardAction>
+          <span className="rounded-full bg-[oklch(0.93_0.07_145)] px-2 py-1 text-xs font-medium text-[oklch(0.43_0.13_145)] dark:bg-[oklch(0.34_0.06_145)] dark:text-[oklch(0.74_0.16_145)]">
+            +12.8%
+          </span>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <p className="text-3xl font-semibold tracking-tight">$42,804</p>
+        <p className="mt-2 text-muted-foreground">
+          Pipeline health is trending above the quarterly baseline.
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
+const cardBillingExampleCode = `import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function CardBillingDemo() {
+  return (
+    <Card className="w-80">
+      <CardHeader>
+        <CardTitle>Pro Workspace</CardTitle>
+        <CardDescription>Renewing on July 17</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-end gap-1">
+          <span className="text-3xl font-semibold">$29</span>
+          <span className="pb-1 text-muted-foreground">/ month</span>
+        </div>
+        <div className="mt-4 grid gap-2 text-muted-foreground">
+          <p>Unlimited projects</p>
+          <p>Team permissions</p>
+          <p>Priority component reviews</p>
+        </div>
+      </CardContent>
+      <CardFooter className="justify-end gap-2">
+        <Button variant="outline">Manage</Button>
+        <Button>Upgrade</Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
+function CardBillingExample() {
+  return (
+    <Card className="w-80">
+      <CardHeader>
+        <CardTitle>Pro Workspace</CardTitle>
+        <CardDescription>Renewing on July 17</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-end gap-1">
+          <span className="text-3xl font-semibold">$29</span>
+          <span className="pb-1 text-muted-foreground">/ month</span>
+        </div>
+        <div className="mt-4 grid gap-2 text-muted-foreground">
+          <p>Unlimited projects</p>
+          <p>Team permissions</p>
+          <p>Priority component reviews</p>
+        </div>
+      </CardContent>
+      <CardFooter className="justify-end gap-2">
+        <Button variant="outline">Manage</Button>
+        <Button>Upgrade</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+const cardActivityExampleCode = `import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const activity = [
+  ["10:42", "Button variants approved"],
+  ["11:08", "Badge warning state tuned"],
+  ["11:31", "Card examples published"],
+];
+
+export function CardActivityDemo() {
+  return (
+    <Card className="w-80" size="sm">
+      <CardHeader>
+        <CardTitle>Activity</CardTitle>
+        <CardDescription>Today</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-3">
+        {activity.map(([time, label]) => (
+          <div className="grid grid-cols-[3rem_1fr] gap-3" key={label}>
+            <span className="font-mono text-muted-foreground text-xs">{time}</span>
+            <span>{label}</span>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}`;
+
+const activity = [
+  ["10:42", "Button variants approved"],
+  ["11:08", "Badge warning state tuned"],
+  ["11:31", "Card examples published"],
+];
+
+function CardActivityExample() {
+  return (
+    <Card className="w-80" size="sm">
+      <CardHeader>
+        <CardTitle>Activity</CardTitle>
+        <CardDescription>Today</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-3">
+        {activity.map(([time, label]) => (
+          <div className="grid grid-cols-[3rem_1fr] gap-3" key={label}>
+            <span className="font-mono text-muted-foreground text-xs">
+              {time}
+            </span>
+            <span>{label}</span>
+          </div>
+        ))}
       </CardContent>
     </Card>
   );
@@ -1049,6 +1226,7 @@ function UiComponent() {
 
         {activeComponent.slug === "accordion" ||
         activeComponent.slug === "avatar" ||
+        activeComponent.slug === "card" ||
         activeComponent.slug === "dither-avatar" ? (
           <section className="mt-12 scroll-mt-7" id="examples">
             <h2 className="border-b border-border pb-4 text-2xl font-semibold">
@@ -1099,6 +1277,39 @@ function UiComponent() {
                     code={avatarProfileCardExampleCode}
                     preview={<AvatarProfileCardExample />}
                     resetKey="avatar-profile-card-example"
+                  />
+                </div>
+              </div>
+            ) : activeComponent.slug === "card" ? (
+              <div className="mt-6 space-y-8">
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Metric Card
+                  </p>
+                  <ShowcaseExample
+                    code={cardMetricExampleCode}
+                    preview={<CardMetricExample />}
+                    resetKey="card-metric-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Billing Card
+                  </p>
+                  <ShowcaseExample
+                    code={cardBillingExampleCode}
+                    preview={<CardBillingExample />}
+                    resetKey="card-billing-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Activity Card
+                  </p>
+                  <ShowcaseExample
+                    code={cardActivityExampleCode}
+                    preview={<CardActivityExample />}
+                    resetKey="card-activity-example"
                   />
                 </div>
               </div>

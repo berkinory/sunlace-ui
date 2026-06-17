@@ -178,7 +178,7 @@ export function ShowcaseExample({
           {!expanded ? (
             <div className="absolute inset-0 flex items-center justify-center bg-background/32 backdrop-blur-[1px] dark:bg-muted/18">
               <Button
-                className="relative z-10 shadow-sm"
+                className="relative z-10"
                 onClick={() => {
                   setExpanded(true);
                 }}
