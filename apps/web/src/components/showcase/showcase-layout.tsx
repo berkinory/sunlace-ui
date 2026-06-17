@@ -1,3 +1,5 @@
+import { Menu05Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import type { ComponentSlug } from "./component-registry";
@@ -146,97 +148,109 @@ export function ShowcaseLayout({
               <aside className="hidden px-4 pt-7 pb-10 xl:block">
                 <nav
                   aria-label="On this page"
-                  className="relative sticky top-7 text-sm"
+                  className="sticky top-7 text-sm"
                 >
-                  <span
-                    aria-hidden
-                    className="absolute top-2 left-0 w-px bg-border"
-                    style={{
-                      height: `${tocItems.length * 32 - 16}px`,
-                    }}
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute left-0 h-4 w-px bg-foreground transition-transform duration-300 ease-out"
-                    style={{
-                      transform: `translateY(${activeTocIndex * 32 + 8}px)`,
-                    }}
-                  />
-                  {tocItems.map((item) => {
-                    const isActive = item.id === activeTocId;
+                  <div className="relative flex h-8 items-center pl-4 text-xs font-medium text-muted-foreground">
+                    <HugeiconsIcon
+                      aria-hidden
+                      className="absolute left-px -translate-x-1/2 bg-background"
+                      icon={Menu05Icon}
+                      size={14}
+                      strokeWidth={2}
+                    />
+                    On this page
+                  </div>
+                  <div className="relative mt-1">
+                    <span
+                      aria-hidden
+                      className="absolute top-1.5 left-0 w-px bg-border"
+                      style={{
+                        height: `${tocItems.length * 32 - 12}px`,
+                      }}
+                    />
+                    <span
+                      aria-hidden
+                      className="absolute top-0 left-0 h-4 w-px bg-foreground transition-transform duration-300 ease-out"
+                      style={{
+                        transform: `translateY(${activeTocIndex * 32 + 8}px)`,
+                      }}
+                    />
+                    {tocItems.map((item) => {
+                      const isActive = item.id === activeTocId;
 
-                    return (
-                      <button
-                        className={[
-                          "flex h-8 w-full cursor-pointer items-center pl-4 text-left transition-colors",
-                          isActive
-                            ? "font-medium text-foreground"
-                            : "text-muted-foreground hover:text-foreground",
-                        ].join(" ")}
-                        key={item.id}
-                        onClick={(event) => {
-                          event.preventDefault();
+                      return (
+                        <button
+                          className={[
+                            "flex h-8 w-full cursor-pointer items-center pl-4 text-left transition-colors",
+                            isActive
+                              ? "font-medium text-foreground"
+                              : "text-muted-foreground hover:text-foreground",
+                          ].join(" ")}
+                          key={item.id}
+                          onClick={(event) => {
+                            event.preventDefault();
 
-                          const scrollRoot = document.querySelector(
-                            "[data-showcase-content]"
-                          );
-                          const section = document.getElementById(item.id);
+                            const scrollRoot = document.querySelector(
+                              "[data-showcase-content]"
+                            );
+                            const section = document.getElementById(item.id);
 
-                          if (
-                            !(scrollRoot instanceof HTMLElement) ||
-                            !section
-                          ) {
-                            return;
-                          }
+                            if (
+                              !(scrollRoot instanceof HTMLElement) ||
+                              !section
+                            ) {
+                              return;
+                            }
 
-                          const scrollRootTop =
-                            scrollRoot.getBoundingClientRect().top;
-                          const sectionTop =
-                            section.getBoundingClientRect().top;
-                          const sectionScrollTop =
-                            scrollRoot.scrollTop + sectionTop - scrollRootTop;
-                          const maxScrollTop =
-                            scrollRoot.scrollHeight - scrollRoot.clientHeight;
-                          const itemIndex = tocItems.findIndex(
-                            (tocItem) => tocItem.id === item.id
-                          );
-                          const nextItem = tocItems[itemIndex + 1];
-                          const nextSection = nextItem
-                            ? document.getElementById(nextItem.id)
-                            : null;
-                          const nextSectionScrollTop =
-                            nextSection instanceof HTMLElement
-                              ? scrollRoot.scrollTop +
-                                nextSection.getBoundingClientRect().top -
-                                scrollRootTop
+                            const scrollRootTop =
+                              scrollRoot.getBoundingClientRect().top;
+                            const sectionTop =
+                              section.getBoundingClientRect().top;
+                            const sectionScrollTop =
+                              scrollRoot.scrollTop + sectionTop - scrollRootTop;
+                            const maxScrollTop =
+                              scrollRoot.scrollHeight - scrollRoot.clientHeight;
+                            const itemIndex = tocItems.findIndex(
+                              (tocItem) => tocItem.id === item.id
+                            );
+                            const nextItem = tocItems[itemIndex + 1];
+                            const nextSection = nextItem
+                              ? document.getElementById(nextItem.id)
                               : null;
-                          const nextScrollTop =
-                            nextSectionScrollTop === null
-                              ? sectionScrollTop
-                              : Math.min(
-                                  sectionScrollTop,
-                                  nextSectionScrollTop - 40
-                                );
-                          const targetScrollTop = Math.min(
-                            Math.max(nextScrollTop, 0),
-                            maxScrollTop
-                          );
+                            const nextSectionScrollTop =
+                              nextSection instanceof HTMLElement
+                                ? scrollRoot.scrollTop +
+                                  nextSection.getBoundingClientRect().top -
+                                  scrollRootTop
+                                : null;
+                            const nextScrollTop =
+                              nextSectionScrollTop === null
+                                ? sectionScrollTop
+                                : Math.min(
+                                    sectionScrollTop,
+                                    nextSectionScrollTop - 40
+                                  );
+                            const targetScrollTop = Math.min(
+                              Math.max(nextScrollTop, 0),
+                              maxScrollTop
+                            );
 
-                          setActiveTocId(item.id);
-                          scrollLockIdRef.current = item.id;
-                          scrollTargetRef.current = targetScrollTop;
-                          scrollLockRef.current = Date.now() + 1200;
-                          scrollRoot.scrollTo({
-                            behavior: "smooth",
-                            top: targetScrollTop,
-                          });
-                        }}
-                        type="button"
-                      >
-                        {item.label}
-                      </button>
-                    );
-                  })}
+                            setActiveTocId(item.id);
+                            scrollLockIdRef.current = item.id;
+                            scrollTargetRef.current = targetScrollTop;
+                            scrollLockRef.current = Date.now() + 1200;
+                            scrollRoot.scrollTo({
+                              behavior: "smooth",
+                              top: targetScrollTop,
+                            });
+                          }}
+                          type="button"
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </nav>
               </aside>
             ) : null}
