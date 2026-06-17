@@ -1,7 +1,23 @@
 import { Settings03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
   Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  DitherAvatar,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
@@ -200,6 +216,320 @@ const componentPropGroups = {
   ],
 };
 
+const accordionCardExampleCode = `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function AccordionCardDemo() {
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>Release Checklist</CardTitle>
+        <CardDescription>
+          Track the final passes before publishing a component update.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Accordion defaultValue={["design"]}>
+          <AccordionItem value="design">
+            <AccordionTrigger>Design Review</AccordionTrigger>
+            <AccordionContent>
+              Validate spacing, color tokens, focus states, and dark mode.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="qa">
+            <AccordionTrigger>QA Pass</AccordionTrigger>
+            <AccordionContent>
+              Test keyboard navigation across desktop and mobile viewports.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="docs">
+            <AccordionTrigger>Docs Update</AccordionTrigger>
+            <AccordionContent>
+              Keep the usage snippet aligned with the shipped component API.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+function AccordionCardExample() {
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>Release Checklist</CardTitle>
+        <CardDescription>
+          Track the final passes before publishing a component update.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Accordion defaultValue={["design"]}>
+          <AccordionItem value="design">
+            <AccordionTrigger>Design Review</AccordionTrigger>
+            <AccordionContent>
+              Validate spacing, color tokens, focus states, and dark mode.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="qa">
+            <AccordionTrigger>QA Pass</AccordionTrigger>
+            <AccordionContent>
+              Test keyboard navigation across desktop and mobile viewports.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="docs">
+            <AccordionTrigger>Docs Update</AccordionTrigger>
+            <AccordionContent>
+              Keep the usage snippet aligned with the shipped component API.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </CardContent>
+    </Card>
+  );
+}
+
+const avatarGroupExampleCode = `import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "@/components/ui/avatar";
+
+export function AvatarGroupDemo() {
+  return (
+    <AvatarGroup>
+      <Avatar>
+        <AvatarImage alt="Ava" src="https://avatars.githubusercontent.com/u/61243523?v=4" />
+        <AvatarFallback>AV</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>BK</AvatarFallback>
+      </Avatar>
+      <Avatar>
+        <AvatarFallback>DS</AvatarFallback>
+      </Avatar>
+      <AvatarGroupCount>+4</AvatarGroupCount>
+    </AvatarGroup>
+  );
+}`;
+
+function AvatarGroupExample() {
+  return (
+    <AvatarGroup>
+      <Avatar className="size-12">
+        <AvatarImage
+          alt="Ava"
+          src="https://avatars.githubusercontent.com/u/61243523?v=4"
+        />
+        <AvatarFallback>AV</AvatarFallback>
+      </Avatar>
+      <Avatar className="size-12">
+        <AvatarFallback>BK</AvatarFallback>
+      </Avatar>
+      <Avatar className="size-12">
+        <AvatarFallback>DS</AvatarFallback>
+      </Avatar>
+      <AvatarGroupCount className="size-12">+4</AvatarGroupCount>
+    </AvatarGroup>
+  );
+}
+
+const avatarBadgeExampleCode = `import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+
+export function AvatarBadgeDemo() {
+  return (
+    <Avatar shape="rounded">
+      <AvatarImage alt="Ava" src="https://avatars.githubusercontent.com/u/61243523?v=4" />
+      <AvatarFallback>AV</AvatarFallback>
+      <AvatarBadge />
+    </Avatar>
+  );
+}`;
+
+function AvatarBadgeExample() {
+  return (
+    <Avatar className="size-16" shape="rounded">
+      <AvatarImage
+        alt="Ava"
+        src="https://avatars.githubusercontent.com/u/61243523?v=4"
+      />
+      <AvatarFallback>AV</AvatarFallback>
+      <AvatarBadge />
+    </Avatar>
+  );
+}
+
+const avatarProfileCardExampleCode = `import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+
+export function AvatarProfileCardDemo() {
+  return (
+    <Card className="w-80">
+      <CardContent className="flex items-center gap-3">
+        <Avatar>
+          <AvatarImage alt="Ava" src="https://avatars.githubusercontent.com/u/61243523?v=4" />
+          <AvatarFallback>AV</AvatarFallback>
+        </Avatar>
+        <div>
+          <p className="font-medium">Ava Brooks</p>
+          <p className="text-muted-foreground">Design Systems</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+function AvatarProfileCardExample() {
+  return (
+    <Card className="w-80">
+      <CardContent className="flex items-center gap-3">
+        <Avatar className="size-12">
+          <AvatarImage
+            alt="Ava"
+            src="https://avatars.githubusercontent.com/u/61243523?v=4"
+          />
+          <AvatarFallback>AV</AvatarFallback>
+        </Avatar>
+        <div>
+          <p className="font-medium">Ava Brooks</p>
+          <p className="text-muted-foreground">Design Systems</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+const ditherIdentityGridExampleCode = `import { DitherAvatar } from "@/components/ui/dither-avatar";
+
+const identities = [
+  { hash: "sunlace", dotScale: 1 },
+  { hash: "interface", dotScale: 2 },
+  { hash: "system", dotScale: 3 },
+  { hash: "token", dotScale: 1 },
+  { hash: "motion", dotScale: 2 },
+  { hash: "craft", dotScale: 3 },
+];
+
+export function DitherIdentityGridDemo() {
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {identities.map((identity) => (
+        <div className="flex flex-col items-center gap-2" key={identity.hash}>
+          <DitherAvatar
+            className="size-12"
+            dotScale={identity.dotScale}
+            hash={identity.hash}
+          />
+          <span className="text-xs text-muted-foreground">{identity.hash}</span>
+        </div>
+      ))}
+    </div>
+  );
+}`;
+
+function DitherIdentityGridExample() {
+  const identities = [
+    { hash: "sunlace", dotScale: 1 },
+    { hash: "interface", dotScale: 2 },
+    { hash: "system", dotScale: 3 },
+    { hash: "token", dotScale: 1 },
+    { hash: "motion", dotScale: 2 },
+    { hash: "craft", dotScale: 3 },
+  ];
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {identities.map((identity) => (
+        <div className="flex flex-col items-center gap-2" key={identity.hash}>
+          <DitherAvatar
+            className="size-12"
+            dotScale={identity.dotScale}
+            hash={identity.hash}
+          />
+          <span className="text-xs text-muted-foreground">{identity.hash}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const ditherWalletListExampleCode = `import { DitherAvatar } from "@/components/ui/dither-avatar";
+
+const wallets = [
+  { hash: "medhy.eth", label: "medhy.eth", dotScale: 1 },
+  { hash: "0x742d35cc6634c0532925a3b844bc454e4438f44e", label: "0x742...44e", dotScale: 2 },
+  { hash: "vitalik.eth", label: "vitalik.eth", dotScale: 3 },
+];
+
+export function DitherWalletListDemo() {
+  return (
+    <div className="w-80 space-y-3">
+      {wallets.map((wallet) => (
+        <div className="flex items-center gap-3" key={wallet.hash}>
+          <DitherAvatar
+            className="size-10"
+            dotScale={wallet.dotScale}
+            hash={wallet.hash}
+          />
+          <span className="font-mono text-sm">{wallet.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}`;
+
+function DitherWalletListExample() {
+  const wallets = [
+    { hash: "medhy.eth", label: "medhy.eth", dotScale: 1 },
+    {
+      hash: "0x742d35cc6634c0532925a3b844bc454e4438f44e",
+      label: "0x742...44e",
+      dotScale: 2,
+    },
+    { hash: "vitalik.eth", label: "vitalik.eth", dotScale: 3 },
+  ];
+
+  return (
+    <div className="w-80 space-y-3">
+      {wallets.map((wallet) => (
+        <div className="flex items-center gap-3" key={wallet.hash}>
+          <DitherAvatar
+            className="size-10"
+            dotScale={wallet.dotScale}
+            hash={wallet.hash}
+          />
+          <span className="font-mono text-sm">{wallet.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function UiComponent() {
   const { component } = Route.useParams();
   const [accordionSettings, setAccordionSettings] = useState({
@@ -285,7 +615,7 @@ function UiComponent() {
       : activeComponent.slug === "avatar"
         ? `<AvatarGroup>
   <Avatar>
-    <AvatarImage alt="Ava" src="/avatars/ava.jpg" />
+    <AvatarImage alt="Ava" src="https://avatars.githubusercontent.com/u/61243523?v=4" />
     <AvatarFallback>AV</AvatarFallback>
     <AvatarBadge />
   </Avatar>
@@ -328,15 +658,25 @@ function UiComponent() {
     componentPropGroups[
       activeComponent.slug as keyof typeof componentPropGroups
     ] ?? [];
-  const tocItems = useMemo(
-    () => [
+  const tocItems = useMemo(() => {
+    const items = [
       { id: "showcase", label: "Showcase" },
       { id: "installation", label: "Installation" },
       { id: "usage", label: "Usage" },
-      { id: "props", label: "Props" },
-    ],
-    []
-  );
+    ];
+
+    if (
+      activeComponent.slug === "accordion" ||
+      activeComponent.slug === "avatar" ||
+      activeComponent.slug === "dither-avatar"
+    ) {
+      items.push({ id: "examples", label: "Examples" });
+    }
+
+    items.push({ id: "props", label: "Props" });
+
+    return items;
+  }, [activeComponent.slug]);
 
   useEffect(() => {
     setAccordionSettings({
@@ -755,6 +1095,88 @@ function UiComponent() {
             </div>
           </div>
         </section>
+
+        {activeComponent.slug === "accordion" ||
+        activeComponent.slug === "avatar" ||
+        activeComponent.slug === "dither-avatar" ? (
+          <section className="mt-12 scroll-mt-7" id="examples">
+            <h2 className="border-b border-border pb-4 text-2xl font-semibold">
+              Examples
+            </h2>
+            {activeComponent.slug === "accordion" ? (
+              <div className="mt-6">
+                <p className="mb-3 text-base font-medium text-foreground">
+                  Card Wrapped Accordion
+                </p>
+                <ShowcaseExample
+                  code={accordionCardExampleCode}
+                  preview={
+                    <div className="w-[28rem] max-w-full">
+                      <AccordionCardExample />
+                    </div>
+                  }
+                  resetKey="accordion-card-example"
+                />
+              </div>
+            ) : activeComponent.slug === "avatar" ? (
+              <div className="mt-6 space-y-8">
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Avatar Group
+                  </p>
+                  <ShowcaseExample
+                    code={avatarGroupExampleCode}
+                    preview={<AvatarGroupExample />}
+                    resetKey="avatar-group-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Avatar Badge
+                  </p>
+                  <ShowcaseExample
+                    code={avatarBadgeExampleCode}
+                    preview={<AvatarBadgeExample />}
+                    resetKey="avatar-badge-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Profile Card
+                  </p>
+                  <ShowcaseExample
+                    code={avatarProfileCardExampleCode}
+                    preview={<AvatarProfileCardExample />}
+                    resetKey="avatar-profile-card-example"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="mt-6 space-y-8">
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Identity Grid
+                  </p>
+                  <ShowcaseExample
+                    code={ditherIdentityGridExampleCode}
+                    preview={<DitherIdentityGridExample />}
+                    resetKey="dither-identity-grid-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
+                    Wallet List
+                  </p>
+                  <ShowcaseExample
+                    code={ditherWalletListExampleCode}
+                    preview={<DitherWalletListExample />}
+                    resetKey="dither-wallet-list-example"
+                  />
+                </div>
+              </div>
+            )}
+          </section>
+        ) : null}
 
         <section className="mt-12 scroll-mt-7" id="props">
           <h2 className="border-b border-border pb-4 text-2xl font-semibold">

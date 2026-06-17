@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
   Avatar,
-  AvatarBadge,
   AvatarFallback,
   AvatarGroup,
   AvatarGroupCount,
@@ -254,10 +253,9 @@ const previews: Partial<
         <Avatar className="size-14" shape={settings?.avatar?.shape}>
           <AvatarImage
             alt="Ava"
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=160&q=85"
+            src="https://avatars.githubusercontent.com/u/61243523?v=4"
           />
           <AvatarFallback>AV</AvatarFallback>
-          <AvatarBadge />
         </Avatar>
         <Avatar className="size-14" shape={settings?.avatar?.shape}>
           <AvatarFallback>UI</AvatarFallback>
@@ -620,7 +618,7 @@ export function AvatarDemo() {
   return (
     <AvatarGroup>
       <Avatar${settings?.avatar?.shape && settings.avatar.shape !== "circle" ? ` shape="${settings.avatar.shape}"` : ""}>
-        <AvatarImage alt="Ava" src="/avatars/ava.jpg" />
+        <AvatarImage alt="Ava" src="https://avatars.githubusercontent.com/u/61243523?v=4" />
         <AvatarFallback>AV</AvatarFallback>
         <AvatarBadge />
       </Avatar>

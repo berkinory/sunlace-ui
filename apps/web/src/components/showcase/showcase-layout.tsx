@@ -29,6 +29,14 @@ export function ShowcaseLayout({
   );
 
   useEffect(() => {
+    const scrollRoot = document.querySelector("[data-showcase-content]");
+
+    if (scrollRoot instanceof HTMLElement) {
+      scrollRoot.scrollTop = 0;
+    }
+  }, [activeSlug]);
+
+  useEffect(() => {
     if (tocItems.length === 0) {
       setActiveTocId("");
       return;
