@@ -135,6 +135,7 @@ export type ComponentSettings = {
     showAction: boolean;
     showFooter: boolean;
     size: "default" | "sm";
+    variant: "default" | "shine" | "animated-border";
   };
 };
 
@@ -316,11 +317,12 @@ const previews: Partial<
   calendar: () => <Calendar />,
   card: (settings) => {
     const size = settings?.card?.size ?? "default";
+    const variant = settings?.card?.variant ?? "default";
     const showFooter = settings?.card?.showFooter ?? true;
     const showAction = settings?.card?.showAction ?? false;
 
     return (
-      <Card className="w-full max-w-sm" size={size}>
+      <Card className="w-full max-w-sm" size={size} variant={variant}>
         <CardHeader>
           <CardTitle>Workspace</CardTitle>
           <CardDescription>
@@ -675,6 +677,8 @@ export function ButtonDemo() {
   card: (settings) => {
     const size = settings?.card?.size ?? "default";
     const sizeAttr = size !== "default" ? ` size="${size}"` : "";
+    const variant = settings?.card?.variant ?? "default";
+    const variantAttr = variant !== "default" ? ` variant="${variant}"` : "";
     const showFooter = settings?.card?.showFooter ?? true;
     const showAction = settings?.card?.showAction ?? false;
 
@@ -691,7 +695,7 @@ import {
 
 export function CardDemo() {
   return (
-    <Card className="w-full max-w-sm"${sizeAttr}>
+    <Card className="w-full max-w-sm"${sizeAttr}${variantAttr}>
       <CardHeader>
         <CardTitle>Workspace</CardTitle>
         <CardDescription>

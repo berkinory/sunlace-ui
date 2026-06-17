@@ -144,6 +144,13 @@ const badgeProps = [
 
 const cardProps = [
   {
+    name: "variant",
+    target: "Card",
+    type: '"default" | "shine" | "animated-border"',
+    defaultValue: '"default"',
+    description: "Controls the card surface treatment.",
+  },
+  {
     name: "size",
     target: "Card",
     type: '"default" | "sm"',
@@ -151,6 +158,12 @@ const cardProps = [
     description: "Controls card padding and title scale.",
   },
 ];
+
+const cardVariantLabels = {
+  default: "Default",
+  shine: "Shine",
+  "animated-border": "Animated",
+} as const;
 
 const ditherAvatarProps = [
   {
@@ -520,7 +533,7 @@ function CardBillingExample() {
   );
 }
 
-const cardActivityExampleCode = `import {
+const cardSurfaceExampleCode = `import {
   Card,
   CardContent,
   CardDescription,
@@ -528,55 +541,53 @@ const cardActivityExampleCode = `import {
   CardTitle,
 } from "@/components/ui/card";
 
-const activity = [
-  ["10:42", "Button variants approved"],
-  ["11:08", "Badge warning state tuned"],
-  ["11:31", "Card examples published"],
-];
-
-export function CardActivityDemo() {
+export function CardSurfaceDemo() {
   return (
-    <Card className="w-80" size="sm">
-      <CardHeader>
-        <CardTitle>Activity</CardTitle>
-        <CardDescription>Today</CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-3">
-        {activity.map(([time, label]) => (
-          <div className="grid grid-cols-[3rem_1fr] gap-3" key={label}>
-            <span className="font-mono text-muted-foreground text-xs">{time}</span>
-            <span>{label}</span>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Card className="w-72" variant="shine">
+        <CardHeader>
+          <CardTitle>Release Window</CardTitle>
+          <CardDescription>Production deploy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          The shine surface gives important grouped content a stronger frame.
+        </CardContent>
+      </Card>
+      <Card className="w-72" variant="animated-border">
+        <CardHeader>
+          <CardTitle>Sync Status</CardTitle>
+          <CardDescription>Queue is healthy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          The border animation keeps attention on a quiet operational card.
+        </CardContent>
+      </Card>
+    </div>
   );
 }`;
 
-const activity = [
-  ["10:42", "Button variants approved"],
-  ["11:08", "Badge warning state tuned"],
-  ["11:31", "Card examples published"],
-];
-
-function CardActivityExample() {
+function CardSurfaceExample() {
   return (
-    <Card className="w-80" size="sm">
-      <CardHeader>
-        <CardTitle>Activity</CardTitle>
-        <CardDescription>Today</CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-3">
-        {activity.map(([time, label]) => (
-          <div className="grid grid-cols-[3rem_1fr] gap-3" key={label}>
-            <span className="font-mono text-muted-foreground text-xs">
-              {time}
-            </span>
-            <span>{label}</span>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Card className="w-72" variant="shine">
+        <CardHeader>
+          <CardTitle>Release Window</CardTitle>
+          <CardDescription>Production deploy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          The shine surface gives important grouped content a stronger frame.
+        </CardContent>
+      </Card>
+      <Card className="w-72" variant="animated-border">
+        <CardHeader>
+          <CardTitle>Sync Status</CardTitle>
+          <CardDescription>Queue is healthy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          The border animation keeps attention on a quiet operational card.
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
@@ -835,6 +846,7 @@ function UiComponent() {
     showAction: false,
     showFooter: true,
     size: "default",
+    variant: "default",
   });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
@@ -981,6 +993,7 @@ function UiComponent() {
       showAction: false,
       showFooter: true,
       size: "default",
+      variant: "default",
     });
   }, [activeComponent.slug]);
 
@@ -1185,6 +1198,40 @@ function UiComponent() {
         <div className="space-y-2">
           <p className="font-medium text-foreground">Card</p>
           <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Variant
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  className="w-24 min-w-0 justify-between"
+                  render={<Button size="sm" variant="outline" />}
+                >
+                  {cardVariantLabels[cardSettings.variant]}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup
+                    value={cardSettings.variant}
+                    onValueChange={(variant) => {
+                      setCardSettings((current) => ({
+                        ...current,
+                        variant: variant as NonNullable<
+                          ComponentSettings["card"]
+                        >["variant"],
+                      }));
+                    }}
+                  >
+                    <DropdownMenuRadioItem value="default">
+                      Default
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="shine">
+                      Shine
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="animated-border">
+                      Animated
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </label>
             <label className="flex items-center justify-between gap-3 text-muted-foreground">
               Size
               <DropdownMenu>
@@ -1412,6 +1459,16 @@ function UiComponent() {
               <div className="mt-6 space-y-8">
                 <div>
                   <p className="mb-3 text-base font-medium text-foreground">
+                    Surface Variants
+                  </p>
+                  <ShowcaseExample
+                    code={cardSurfaceExampleCode}
+                    preview={<CardSurfaceExample />}
+                    resetKey="card-surface-example"
+                  />
+                </div>
+                <div>
+                  <p className="mb-3 text-base font-medium text-foreground">
                     Metric Card
                   </p>
                   <ShowcaseExample
@@ -1428,16 +1485,6 @@ function UiComponent() {
                     code={cardBillingExampleCode}
                     preview={<CardBillingExample />}
                     resetKey="card-billing-example"
-                  />
-                </div>
-                <div>
-                  <p className="mb-3 text-base font-medium text-foreground">
-                    Activity Card
-                  </p>
-                  <ShowcaseExample
-                    code={cardActivityExampleCode}
-                    preview={<CardActivityExample />}
-                    resetKey="card-activity-example"
                   />
                 </div>
               </div>
