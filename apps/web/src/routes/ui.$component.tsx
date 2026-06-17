@@ -112,7 +112,7 @@ const buttonProps = [
   {
     name: "variant",
     target: "Button",
-    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "warning" | "destructive" | "shine" | "link"',
+    type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "destructive" | "shine" | "animated-border" | "rotate-border"',
     defaultValue: '"default"',
     description: "Controls the visual style and emphasis of the button.",
   },
@@ -136,7 +136,7 @@ const badgeProps = [
   {
     name: "variant",
     target: "Badge",
-    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "warning" | "destructive" | "shine" | "link"',
+    type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "destructive" | "shine" | "animated-border" | "rotate-border"',
     defaultValue: '"default"',
     description: "Controls the visual style and emphasis of the badge.",
   },
@@ -352,6 +352,7 @@ export function ButtonVariantDemo() {
       <Button variant="secondary">Preview</Button>
       <Button variant="outline">Cancel</Button>
       <Button variant="ghost">Dismiss</Button>
+      <Button variant="link">View Logs</Button>
     </div>
   );
 }`;
@@ -363,6 +364,7 @@ function ButtonVariantExample() {
       <Button variant="secondary">Preview</Button>
       <Button variant="outline">Cancel</Button>
       <Button variant="ghost">Dismiss</Button>
+      <Button variant="link">View Logs</Button>
     </div>
   );
 }
@@ -371,22 +373,34 @@ const buttonIntentExampleCode = `import { Button } from "@/components/ui/button"
 
 export function ButtonIntentDemo() {
   return (
-    <div className="flex flex-wrap gap-2">
-      <Button variant="success">Approve</Button>
-      <Button variant="warning">Review</Button>
-      <Button variant="destructive">Delete</Button>
-      <Button variant="shine">Upgrade</Button>
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap gap-2">
+        <Button variant="success">Approve</Button>
+        <Button variant="warning">Review</Button>
+        <Button variant="destructive">Delete</Button>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Button variant="shine">Upgrade</Button>
+        <Button variant="animated-border">Sync</Button>
+        <Button variant="rotate-border">Deploy</Button>
+      </div>
     </div>
   );
 }`;
 
 function ButtonIntentExample() {
   return (
-    <div className="flex flex-wrap gap-2">
-      <Button variant="success">Approve</Button>
-      <Button variant="warning">Review</Button>
-      <Button variant="destructive">Delete</Button>
-      <Button variant="shine">Upgrade</Button>
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap gap-2">
+        <Button variant="success">Approve</Button>
+        <Button variant="warning">Review</Button>
+        <Button variant="destructive">Delete</Button>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Button variant="shine">Upgrade</Button>
+        <Button variant="animated-border">Sync</Button>
+        <Button variant="rotate-border">Deploy</Button>
+      </div>
     </div>
   );
 }

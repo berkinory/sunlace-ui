@@ -278,13 +278,17 @@ const previews: Partial<
         <Badge variant="secondary">Secondary</Badge>
         <Badge variant="outline">Outline</Badge>
         <Badge variant="ghost">Ghost</Badge>
+        <Badge variant="link">Link</Badge>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="success">Success</Badge>
         <Badge variant="warning">Warning</Badge>
         <Badge variant="destructive">Destructive</Badge>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="shine">Shine</Badge>
-        <Badge variant="link">Link</Badge>
+        <Badge variant="animated-border">Animated Border</Badge>
+        <Badge variant="rotate-border">Rotate Border</Badge>
       </div>
     </div>
   ),
@@ -295,13 +299,17 @@ const previews: Partial<
         <Button variant="secondary">Secondary</Button>
         <Button variant="outline">Outline</Button>
         <Button variant="ghost">Ghost</Button>
+        <Button variant="link">Link</Button>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="success">Success</Button>
         <Button variant="warning">Warning</Button>
         <Button variant="destructive">Destructive</Button>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="shine">Shine</Button>
-        <Button variant="link">Link</Button>
+        <Button variant="animated-border">Animated Border</Button>
+        <Button variant="rotate-border">Rotate Border</Button>
       </div>
     </div>
   ),
@@ -624,13 +632,17 @@ export function BadgeDemo() {
         <Badge variant="secondary">Secondary</Badge>
         <Badge variant="outline">Outline</Badge>
         <Badge variant="ghost">Ghost</Badge>
+        <Badge variant="link">Link</Badge>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="success">Success</Badge>
         <Badge variant="warning">Warning</Badge>
         <Badge variant="destructive">Destructive</Badge>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="shine">Shine</Badge>
-        <Badge variant="link">Link</Badge>
+        <Badge variant="animated-border">Animated Border</Badge>
+        <Badge variant="rotate-border">Rotate Border</Badge>
       </div>
     </div>
   );
@@ -645,13 +657,17 @@ export function ButtonDemo() {
         <Button variant="secondary">Secondary</Button>
         <Button variant="outline">Outline</Button>
         <Button variant="ghost">Ghost</Button>
+        <Button variant="link">Link</Button>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="success">Success</Button>
         <Button variant="warning">Warning</Button>
         <Button variant="destructive">Destructive</Button>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="shine">Shine</Button>
-        <Button variant="link">Link</Button>
+        <Button variant="animated-border">Animated Border</Button>
+        <Button variant="rotate-border">Rotate Border</Button>
       </div>
     </div>
   );

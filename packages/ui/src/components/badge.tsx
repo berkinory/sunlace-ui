@@ -16,6 +16,7 @@ const badgeVariants = cva(
           "bg-secondary text-secondary-foreground shadow-[0_1px_1px_rgb(0_0_0/0.08),inset_0_1px_rgb(255_255_255/0.16)] hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] hover:shadow-[0_2px_3px_rgb(0_0_0/0.08),inset_0_1px_rgb(255_255_255/0.20)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
           "shadow-none hover:bg-muted hover:text-foreground hover:shadow-none aria-expanded:bg-muted aria-expanded:text-foreground dark:shadow-none dark:hover:bg-muted/50",
+        link: "text-primary shadow-none underline-offset-4 hover:underline hover:shadow-none dark:shadow-none",
         success:
           "bg-[oklch(0.93_0.07_145)] text-[oklch(0.43_0.13_145)] shadow-none hover:bg-[oklch(0.90_0.08_145)] hover:shadow-none focus-visible:ring-[oklch(0.52_0.13_145/0.24)] dark:bg-[oklch(0.34_0.06_145)] dark:text-[oklch(0.74_0.16_145)] dark:hover:bg-[oklch(0.38_0.07_145)] dark:shadow-none dark:hover:shadow-none",
         warning:
@@ -24,7 +25,10 @@ const badgeVariants = cva(
           "bg-[oklch(0.93_0.06_27)] text-[oklch(0.56_0.20_27)] shadow-none hover:bg-[oklch(0.90_0.07_27)] hover:shadow-none focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-[oklch(0.33_0.07_27)] dark:text-[oklch(0.72_0.20_27)] dark:hover:bg-[oklch(0.37_0.08_27)] dark:shadow-none dark:hover:shadow-none dark:focus-visible:ring-destructive/40",
         shine:
           "border-border bg-[linear-gradient(110deg,#000000,48%,#ffffff,52%,#000000)] bg-[length:400%_100%] text-white shadow-[0_1px_1px_rgb(0_0_0/0.26),0_3px_7px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.18)] animate-[sunlace-shine_7s_linear_infinite] hover:shadow-[0_1px_1px_rgb(0_0_0/0.28),0_4px_10px_rgb(0_0_0/0.16),inset_0_1px_0_rgb(255_255_255/0.24)] motion-reduce:animate-none dark:bg-[linear-gradient(110deg,#000103,48%,#ffffff,52%,#000103)] dark:shadow-[0_0_0_1px_rgb(255_255_255/0.08),0_1px_0_rgb(255_255_255/0.1),0_8px_18px_rgb(0_0_0/0.5),inset_0_1px_0_rgb(255_255_255/0.24)] dark:hover:shadow-[0_0_0_1px_rgb(255_255_255/0.12),0_1px_0_rgb(255_255_255/0.14),0_10px_22px_rgb(0_0_0/0.58),inset_0_1px_0_rgb(255_255_255/0.3)]",
-        link: "text-primary shadow-none underline-offset-4 hover:underline hover:shadow-none dark:shadow-none",
+        "animated-border":
+          "relative overflow-visible border-primary/10 bg-background text-muted-foreground shadow-none hover:bg-muted hover:text-foreground hover:shadow-none",
+        "rotate-border":
+          "relative overflow-hidden border-transparent bg-transparent !p-px text-foreground shadow-none hover:shadow-none",
       },
     },
     defaultVariants: {
@@ -35,15 +39,53 @@ const badgeVariants = cva(
 
 function Badge({
   className,
+  children,
   variant = "default",
   render,
   ...props
 }: useRender.ComponentProps<"span"> & VariantProps<typeof badgeVariants>) {
+  const content =
+    variant === "animated-border" ? (
+      <>
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute -inset-px rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box]",
+            "[mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]"
+          )}
+        >
+          <div
+            className={cn(
+              "absolute aspect-square w-5 animate-[sunlace-border-run_5s_linear_infinite] bg-gradient-to-r from-transparent via-neutral-300 to-neutral-400 [offset-distance:0%] [offset-path:rect(0_auto_auto_0_round_20px)] motion-reduce:animate-none",
+              "dark:from-transparent dark:via-neutral-600 dark:to-neutral-400"
+            )}
+          />
+        </div>
+        <span className="relative z-10">{children}</span>
+      </>
+    ) : variant === "rotate-border" ? (
+      <>
+        <span
+          aria-hidden
+          className={cn(
+            "absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#4e4e4e_0%,#d4d4d4_50%,#414141_100%)] motion-reduce:animate-none",
+            "dark:bg-[conic-gradient(from_90deg_at_50%_50%,#c2c2c2_0%,#505050_50%,#bebebe_100%)]"
+          )}
+        />
+        <span className="relative z-10 inline-flex size-full items-center justify-center rounded-full bg-background px-3 text-foreground backdrop-blur-3xl">
+          {children}
+        </span>
+      </>
+    ) : (
+      children
+    );
+
   const badge = useRender({
     defaultTagName: "span",
     props: mergeProps<"span">(
       {
         className: cn(badgeVariants({ variant }), className),
+        children: content,
       },
       props
     ),
@@ -59,6 +101,17 @@ function Badge({
       <>
         <style>
           {`@keyframes sunlace-shine{0%{background-position:0 0}74%,100%{background-position:-400% 0}}`}
+        </style>
+        {badge}
+      </>
+    );
+  }
+
+  if (variant === "animated-border") {
+    return (
+      <>
+        <style>
+          {`@keyframes sunlace-border-run{0%{offset-distance:0%}100%{offset-distance:100%}}`}
         </style>
         {badge}
       </>
