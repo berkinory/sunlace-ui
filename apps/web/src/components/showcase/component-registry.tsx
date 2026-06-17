@@ -130,6 +130,10 @@ export type ComponentSettings = {
     dotScale: 1 | 2 | 3 | 4 | 5;
     shape: "circle" | "rounded" | "square";
   };
+  button?: {
+    disabled: boolean;
+    size: "xs" | "sm" | "default" | "lg";
+  };
 };
 
 export const defaultComponentSlug = componentItems[0].slug;
@@ -273,14 +277,47 @@ const previews: Partial<
       <Badge variant="outline">Outline</Badge>
     </div>
   ),
-  button: () => (
-    <div className="flex flex-wrap justify-center gap-2">
-      <Button>Default</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-    </div>
-  ),
+  button: (settings) => {
+    const size = settings?.button?.size ?? "default";
+    const disabled = settings?.button?.disabled ?? false;
+
+    return (
+      <div className="flex w-full max-w-2xl flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-xs font-medium text-muted-foreground">Variants</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Button disabled={disabled} size={size}>
+              Default
+            </Button>
+            <Button disabled={disabled} size={size} variant="secondary">
+              Secondary
+            </Button>
+            <Button disabled={disabled} size={size} variant="outline">
+              Outline
+            </Button>
+            <Button disabled={disabled} size={size} variant="ghost">
+              Ghost
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-xs font-medium text-muted-foreground">Semantic</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Button disabled={disabled} size={size} variant="success">
+              Success
+            </Button>
+            <Button disabled={disabled} size={size} variant="destructive">
+              Destructive
+            </Button>
+            <Button disabled={disabled} size={size} variant="link">
+              Link
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  },
   calendar: () => <Calendar />,
   card: () => (
     <Card className="w-full max-w-sm">
@@ -569,4 +606,29 @@ export function DitherAvatarDemo() {
     </div>
   );
 }`,
+  button: (settings) => {
+    const size = settings?.button?.size ?? "default";
+    const sizeAttr = size !== "default" ? ` size="${size}"` : "";
+    const disabledAttr = settings?.button?.disabled ? " disabled" : "";
+
+    return `import { Button } from "@/components/ui/button";
+
+export function ButtonDemo() {
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-wrap justify-center gap-2">
+        <Button${sizeAttr}${disabledAttr}>Default</Button>
+        <Button${sizeAttr} variant="secondary"${disabledAttr}>Secondary</Button>
+        <Button${sizeAttr} variant="outline"${disabledAttr}>Outline</Button>
+        <Button${sizeAttr} variant="ghost"${disabledAttr}>Ghost</Button>
+      </div>
+      <div className="flex flex-wrap justify-center gap-2">
+        <Button${sizeAttr} variant="success"${disabledAttr}>Success</Button>
+        <Button${sizeAttr} variant="destructive"${disabledAttr}>Destructive</Button>
+        <Button${sizeAttr} variant="link"${disabledAttr}>Link</Button>
+      </div>
+    </div>
+  );
+}`;
+  },
 };

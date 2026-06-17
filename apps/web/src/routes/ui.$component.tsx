@@ -89,6 +89,30 @@ const avatarProps = [
   },
 ];
 
+const buttonProps = [
+  {
+    name: "variant",
+    target: "Button",
+    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "destructive" | "link"',
+    defaultValue: '"default"',
+    description: "Controls the visual style and emphasis of the button.",
+  },
+  {
+    name: "size",
+    target: "Button",
+    type: '"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"',
+    defaultValue: '"default"',
+    description: "Controls the button height, padding, and icon dimensions.",
+  },
+  {
+    name: "disabled",
+    target: "Button",
+    type: "boolean",
+    defaultValue: "false",
+    description: "Prevents interaction and lowers visual emphasis.",
+  },
+];
+
 const ditherAvatarProps = [
   {
     name: "hash",
@@ -146,6 +170,12 @@ const componentPropGroups = {
       props: avatarProps.filter((prop) => prop.target === "Avatar"),
     },
   ],
+  button: [
+    {
+      title: "Button",
+      props: buttonProps.filter((prop) => prop.target === "Button"),
+    },
+  ],
   "dither-avatar": [
     {
       title: "DitherAvatar",
@@ -172,6 +202,12 @@ function UiComponent() {
   >({
     dotScale: 1,
     shape: "circle",
+  });
+  const [buttonSettings, setButtonSettings] = useState<
+    NonNullable<ComponentSettings["button"]>
+  >({
+    disabled: false,
+    size: "default",
   });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
@@ -201,7 +237,9 @@ function UiComponent() {
 } from "@/components/ui/avatar";`
         : activeComponent.slug === "dither-avatar"
           ? `import { DitherAvatar } from "@/components/ui/dither-avatar";`
-          : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
+          : activeComponent.slug === "button"
+            ? `import { Button } from "@/components/ui/button";`
+            : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
   const usageCode =
     activeComponent.slug === "accordion"
       ? `<Accordion defaultValue={["item-1"]}>
@@ -229,10 +267,16 @@ function UiComponent() {
   <DitherAvatar hash="sunlace" />
   <DitherAvatar hash="ui" />
 </div>`
-          : `<${toPascalCase(title)} />`;
+          : activeComponent.slug === "button"
+            ? `<div className="flex gap-2">
+  <Button>Continue</Button>
+  <Button variant="outline">Cancel</Button>
+</div>`
+            : `<${toPascalCase(title)} />`;
   const settings: ComponentSettings = {
     accordion: accordionSettings,
     avatar: avatarSettings,
+    button: buttonSettings,
     ditherAvatar: ditherAvatarSettings,
   };
   const propGroups =
@@ -262,6 +306,10 @@ function UiComponent() {
     setDitherAvatarSettings({
       dotScale: 1,
       shape: "circle",
+    });
+    setButtonSettings({
+      disabled: false,
+      size: "default",
     });
   }, [activeComponent.slug]);
 
@@ -451,6 +499,69 @@ function UiComponent() {
           </div>
         </div>
       </div>
+    ) : activeComponent.slug === "button" ? (
+      <div className="space-y-4 text-xs">
+        <div className="flex items-center gap-2 border-border border-b pb-3 font-medium text-foreground">
+          <HugeiconsIcon
+            aria-hidden
+            icon={Settings03Icon}
+            size={14}
+            strokeWidth={2}
+          />
+          Settings
+        </div>
+
+        <div className="space-y-2">
+          <p className="font-medium text-foreground">Button</p>
+          <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Size
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  className="min-w-24 justify-between"
+                  render={<Button size="sm" variant="outline" />}
+                >
+                  {buttonSettings.size.charAt(0).toUpperCase() +
+                    buttonSettings.size.slice(1)}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup
+                    value={buttonSettings.size}
+                    onValueChange={(size) => {
+                      setButtonSettings((current) => ({
+                        ...current,
+                        size: size as NonNullable<
+                          ComponentSettings["button"]
+                        >["size"],
+                      }));
+                    }}
+                  >
+                    <DropdownMenuRadioItem value="xs">Xs</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="sm">Sm</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="default">
+                      Default
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="lg">Lg</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </label>
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Disabled
+              <Switch
+                checked={buttonSettings.disabled}
+                onCheckedChange={(checked) => {
+                  setButtonSettings((current) => ({
+                    ...current,
+                    disabled: checked,
+                  }));
+                }}
+                size="sm"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
     ) : null;
 
   return (
@@ -470,9 +581,11 @@ function UiComponent() {
               ? "A vertically stacked set of interactive headings that each reveal a section of content."
               : activeComponent.slug === "avatar"
                 ? "A compact identity surface for people, teams, status, and stacked presence."
-                : activeComponent.slug === "dither-avatar"
-                  ? "A deterministic dithered identity surface generated from any string."
-                  : "Temporary component preview while the docs system is shaped."}
+                : activeComponent.slug === "button"
+                  ? "A clickable action control with variants for hierarchy, semantics, sizing, and icon-only usage."
+                  : activeComponent.slug === "dither-avatar"
+                    ? "A deterministic dithered identity surface generated from any string."
+                    : "Temporary component preview while the docs system is shaped."}
           </p>
           <div className="flex gap-2">
             <Button variant="outline">Docs</Button>
@@ -566,7 +679,8 @@ function UiComponent() {
               </div>
             )}
           </div>
-          {activeComponent.slug === "accordion" ? (
+          {activeComponent.slug === "accordion" ||
+          activeComponent.slug === "button" ? (
             <p className="mt-3 text-sm text-muted-foreground">
               Also supports Base UI {title.toLowerCase()} primitive props. See{" "}
               <a
