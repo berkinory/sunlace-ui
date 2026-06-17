@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "bg-[linear-gradient(to_top,oklch(0.52_0.11_145),oklch(0.58_0.12_145))] text-white shadow-none hover:bg-[linear-gradient(to_top,oklch(0.54_0.11_145),oklch(0.60_0.12_145))] hover:shadow-none focus-visible:ring-[oklch(0.56_0.11_145/0.25)] dark:bg-[linear-gradient(to_top,oklch(0.48_0.10_145),oklch(0.54_0.11_145))] dark:hover:bg-[linear-gradient(to_top,oklch(0.50_0.10_145),oklch(0.56_0.11_145))] dark:shadow-none dark:hover:shadow-none",
         destructive:
           "bg-[linear-gradient(to_top,oklch(0.48_0.15_27),oklch(0.54_0.17_27))] text-white shadow-none hover:bg-[linear-gradient(to_top,oklch(0.50_0.15_27),oklch(0.56_0.17_27))] hover:shadow-none focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-[linear-gradient(to_top,oklch(0.44_0.13_27),oklch(0.50_0.15_27))] dark:hover:bg-[linear-gradient(to_top,oklch(0.46_0.13_27),oklch(0.52_0.15_27))] dark:shadow-none dark:hover:shadow-none dark:focus-visible:ring-destructive/40",
+        shine:
+          "overflow-hidden border-border bg-[linear-gradient(110deg,#000000,48%,#ffffff,52%,#000000)] bg-[length:400%_100%] text-white shadow-[0_1px_1px_rgb(0_0_0/0.26),0_3px_7px_rgb(0_0_0/0.12),inset_0_1px_0_rgb(255_255_255/0.18)] animate-[sunlace-shine_7s_linear_infinite] hover:shadow-[0_1px_1px_rgb(0_0_0/0.28),0_4px_10px_rgb(0_0_0/0.16),inset_0_1px_0_rgb(255_255_255/0.24)] motion-reduce:animate-none dark:bg-[linear-gradient(110deg,#000103,48%,#ffffff,52%,#000103)] dark:shadow-[0_0_0_1px_rgb(255_255_255/0.08),0_1px_0_rgb(255_255_255/0.1),0_8px_18px_rgb(0_0_0/0.5),inset_0_1px_0_rgb(255_255_255/0.24)] dark:hover:shadow-[0_0_0_1px_rgb(255_255_255/0.12),0_1px_0_rgb(255_255_255/0.14),0_10px_22px_rgb(0_0_0/0.58),inset_0_1px_0_rgb(255_255_255/0.3)]",
         link: "text-primary shadow-none underline-offset-4 hover:underline hover:shadow-none dark:shadow-none",
       },
       size: {
@@ -44,16 +46,36 @@ const buttonVariants = cva(
 
 function Button({
   className,
+  children,
   variant = "default",
   size = "default",
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  if (variant === "shine") {
+    return (
+      <>
+        <style>
+          {`@keyframes sunlace-shine{0%{background-position:0 0}74%,100%{background-position:-400% 0}}`}
+        </style>
+        <ButtonPrimitive
+          data-slot="button"
+          className={cn(buttonVariants({ variant, size, className }))}
+          {...props}
+        >
+          {children}
+        </ButtonPrimitive>
+      </>
+    );
+  }
+
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {children}
+    </ButtonPrimitive>
   );
 }
 

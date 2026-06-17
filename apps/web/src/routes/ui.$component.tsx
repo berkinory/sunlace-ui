@@ -93,7 +93,7 @@ const buttonProps = [
   {
     name: "variant",
     target: "Button",
-    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "destructive" | "link"',
+    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "destructive" | "shine" | "link"',
     defaultValue: '"default"',
     description: "Controls the visual style and emphasis of the button.",
   },

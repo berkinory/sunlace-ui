@@ -309,6 +309,15 @@ const previews: Partial<
         </div>
 
         <div className="flex flex-col items-center gap-2">
+          <p className="text-xs font-medium text-muted-foreground">Animated</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Button disabled={disabled} size={size} variant="shine">
+              Shine
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
           <p className="text-xs font-medium text-muted-foreground">Semantic</p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             <Button disabled={disabled} size={size} variant="success">
@@ -654,6 +663,9 @@ export function ButtonDemo() {
         <Button${sizeAttr} variant="success"${disabledAttr}>Success</Button>
         <Button${sizeAttr} variant="destructive"${disabledAttr}>Destructive</Button>
         <Button${sizeAttr} variant="link"${disabledAttr}>Link</Button>
+      </div>
+      <div className="flex flex-wrap justify-center gap-2">
+        <Button${sizeAttr} variant="shine"${disabledAttr}>Shine</Button>
       </div>
     </div>
   );
