@@ -131,10 +131,6 @@ export type ComponentSettings = {
     dotScale: 1 | 2 | 3 | 4 | 5;
     shape: "circle" | "rounded" | "square";
   };
-  button?: {
-    disabled: boolean;
-    size: "xs" | "sm" | "default" | "lg";
-  };
   card?: {
     showAction: boolean;
     showFooter: boolean;
@@ -276,62 +272,39 @@ const previews: Partial<
     </div>
   ),
   badge: () => (
-    <div className="flex gap-2">
-      <Badge>Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="outline">Outline</Badge>
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Badge>Default</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="outline">Outline</Badge>
+        <Badge variant="ghost">Ghost</Badge>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="shine">Shine</Badge>
+        <Badge variant="link">Link</Badge>
+      </div>
     </div>
   ),
-  button: (settings) => {
-    const size = settings?.button?.size ?? "default";
-    const disabled = settings?.button?.disabled ?? false;
-
-    return (
-      <div className="flex w-full max-w-2xl flex-col items-center gap-6">
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-xs font-medium text-muted-foreground">Variants</p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <Button disabled={disabled} size={size}>
-              Default
-            </Button>
-            <Button disabled={disabled} size={size} variant="secondary">
-              Secondary
-            </Button>
-            <Button disabled={disabled} size={size} variant="outline">
-              Outline
-            </Button>
-            <Button disabled={disabled} size={size} variant="ghost">
-              Ghost
-            </Button>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-xs font-medium text-muted-foreground">Animated</p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <Button disabled={disabled} size={size} variant="shine">
-              Shine
-            </Button>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-xs font-medium text-muted-foreground">Semantic</p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <Button disabled={disabled} size={size} variant="success">
-              Success
-            </Button>
-            <Button disabled={disabled} size={size} variant="destructive">
-              Destructive
-            </Button>
-            <Button disabled={disabled} size={size} variant="link">
-              Link
-            </Button>
-          </div>
-        </div>
+  button: () => (
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button>Default</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
       </div>
-    );
-  },
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button variant="success">Success</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="shine">Shine</Button>
+        <Button variant="link">Link</Button>
+      </div>
+    </div>
+  ),
   calendar: () => <Calendar />,
   card: (settings) => {
     const size = settings?.card?.size ?? "default";
@@ -641,34 +614,48 @@ export function DitherAvatarDemo() {
     </div>
   );
 }`,
-  button: (settings) => {
-    const size = settings?.button?.size ?? "default";
-    const sizeAttr = size !== "default" ? ` size="${size}"` : "";
-    const disabledAttr = settings?.button?.disabled ? " disabled" : "";
+  badge: () => `import { Badge } from "@/components/ui/badge";
 
-    return `import { Button } from "@/components/ui/button";
-
-export function ButtonDemo() {
+export function BadgeDemo() {
   return (
-    <div className="flex flex-col items-center gap-6">
-      <div className="flex flex-wrap justify-center gap-2">
-        <Button${sizeAttr}${disabledAttr}>Default</Button>
-        <Button${sizeAttr} variant="secondary"${disabledAttr}>Secondary</Button>
-        <Button${sizeAttr} variant="outline"${disabledAttr}>Outline</Button>
-        <Button${sizeAttr} variant="ghost"${disabledAttr}>Ghost</Button>
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Badge>Default</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="outline">Outline</Badge>
+        <Badge variant="ghost">Ghost</Badge>
       </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        <Button${sizeAttr} variant="success"${disabledAttr}>Success</Button>
-        <Button${sizeAttr} variant="destructive"${disabledAttr}>Destructive</Button>
-        <Button${sizeAttr} variant="link"${disabledAttr}>Link</Button>
-      </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        <Button${sizeAttr} variant="shine"${disabledAttr}>Shine</Button>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="destructive">Destructive</Badge>
+        <Badge variant="shine">Shine</Badge>
+        <Badge variant="link">Link</Badge>
       </div>
     </div>
   );
-}`;
-  },
+}`,
+  button: () => `import { Button } from "@/components/ui/button";
+
+export function ButtonDemo() {
+  return (
+    <div className="flex flex-col items-center gap-7">
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button>Default</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="outline">Outline</Button>
+        <Button variant="ghost">Ghost</Button>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Button variant="success">Success</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="shine">Shine</Button>
+        <Button variant="link">Link</Button>
+      </div>
+    </div>
+  );
+}`,
   card: (settings) => {
     const size = settings?.card?.size ?? "default";
     const sizeAttr = size !== "default" ? ` size="${size}"` : "";

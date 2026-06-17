@@ -109,7 +109,7 @@ const buttonProps = [
   {
     name: "variant",
     target: "Button",
-    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "destructive" | "shine" | "link"',
+    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "warning" | "destructive" | "shine" | "link"',
     defaultValue: '"default"',
     description: "Controls the visual style and emphasis of the button.",
   },
@@ -126,6 +126,16 @@ const buttonProps = [
     type: "boolean",
     defaultValue: "false",
     description: "Prevents interaction and lowers visual emphasis.",
+  },
+];
+
+const badgeProps = [
+  {
+    name: "variant",
+    target: "Badge",
+    type: '"default" | "secondary" | "outline" | "ghost" | "success" | "warning" | "destructive" | "shine" | "link"',
+    defaultValue: '"default"',
+    description: "Controls the visual style and emphasis of the badge.",
   },
 ];
 
@@ -194,6 +204,12 @@ const componentPropGroups = {
     {
       title: "Avatar",
       props: avatarProps.filter((prop) => prop.target === "Avatar"),
+    },
+  ],
+  badge: [
+    {
+      title: "Badge",
+      props: badgeProps.filter((prop) => prop.target === "Badge"),
     },
   ],
   button: [
@@ -549,12 +565,6 @@ function UiComponent() {
     dotScale: 1,
     shape: "circle",
   });
-  const [buttonSettings, setButtonSettings] = useState<
-    NonNullable<ComponentSettings["button"]>
-  >({
-    disabled: false,
-    size: "default",
-  });
   const [cardSettings, setCardSettings] = useState<
     NonNullable<ComponentSettings["card"]>
   >({
@@ -590,10 +600,12 @@ function UiComponent() {
 } from "@/components/ui/avatar";`
         : activeComponent.slug === "dither-avatar"
           ? `import { DitherAvatar } from "@/components/ui/dither-avatar";`
-          : activeComponent.slug === "button"
-            ? `import { Button } from "@/components/ui/button";`
-            : activeComponent.slug === "card"
-              ? `import {
+          : activeComponent.slug === "badge"
+            ? `import { Badge } from "@/components/ui/badge";`
+            : activeComponent.slug === "button"
+              ? `import { Button } from "@/components/ui/button";`
+              : activeComponent.slug === "card"
+                ? `import {
   Card,
   CardContent,
   CardDescription,
@@ -601,7 +613,7 @@ function UiComponent() {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";`
-              : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
+                : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
   const usageCode =
     activeComponent.slug === "accordion"
       ? `<Accordion defaultValue={["item-1"]}>
@@ -629,13 +641,20 @@ function UiComponent() {
   <DitherAvatar hash="sunlace" />
   <DitherAvatar hash="ui" />
 </div>`
-          : activeComponent.slug === "button"
+          : activeComponent.slug === "badge"
             ? `<div className="flex gap-2">
+  <Badge>Default</Badge>
+  <Badge variant="outline">Outline</Badge>
+  <Badge variant="success">Success</Badge>
+  <Badge variant="warning">Warning</Badge>
+</div>`
+            : activeComponent.slug === "button"
+              ? `<div className="flex gap-2">
   <Button>Continue</Button>
   <Button variant="outline">Cancel</Button>
 </div>`
-            : activeComponent.slug === "card"
-              ? `<Card className="w-full max-w-sm">
+              : activeComponent.slug === "card"
+                ? `<Card className="w-full max-w-sm">
   <CardHeader>
     <CardTitle>Workspace</CardTitle>
     <CardDescription>Grouped content with actions and detail.</CardDescription>
@@ -646,11 +665,10 @@ function UiComponent() {
     <Button>Continue</Button>
   </CardFooter>
 </Card>`
-              : `<${toPascalCase(title)} />`;
+                : `<${toPascalCase(title)} />`;
   const settings: ComponentSettings = {
     accordion: accordionSettings,
     avatar: avatarSettings,
-    button: buttonSettings,
     card: cardSettings,
     ditherAvatar: ditherAvatarSettings,
   };
@@ -691,10 +709,6 @@ function UiComponent() {
     setDitherAvatarSettings({
       dotScale: 1,
       shape: "circle",
-    });
-    setButtonSettings({
-      disabled: false,
-      size: "default",
     });
     setCardSettings({
       showAction: false,
@@ -886,69 +900,6 @@ function UiComponent() {
                 </DropdownMenu>
               </label>
             ) : null}
-          </div>
-        </div>
-      </div>
-    ) : activeComponent.slug === "button" ? (
-      <div className="space-y-4 text-xs">
-        <div className="flex items-center gap-2 border-border border-b pb-3 font-medium text-foreground">
-          <HugeiconsIcon
-            aria-hidden
-            icon={Settings03Icon}
-            size={14}
-            strokeWidth={2}
-          />
-          Settings
-        </div>
-
-        <div className="space-y-2">
-          <p className="font-medium text-foreground">Button</p>
-          <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
-            <label className="flex items-center justify-between gap-3 text-muted-foreground">
-              Size
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  className="min-w-24 justify-between"
-                  render={<Button size="sm" variant="outline" />}
-                >
-                  {buttonSettings.size.charAt(0).toUpperCase() +
-                    buttonSettings.size.slice(1)}
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuRadioGroup
-                    value={buttonSettings.size}
-                    onValueChange={(size) => {
-                      setButtonSettings((current) => ({
-                        ...current,
-                        size: size as NonNullable<
-                          ComponentSettings["button"]
-                        >["size"],
-                      }));
-                    }}
-                  >
-                    <DropdownMenuRadioItem value="xs">Xs</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="sm">Sm</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="default">
-                      Default
-                    </DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="lg">Lg</DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </label>
-            <label className="flex items-center justify-between gap-3 text-muted-foreground">
-              Disabled
-              <Switch
-                checked={buttonSettings.disabled}
-                onCheckedChange={(checked) => {
-                  setButtonSettings((current) => ({
-                    ...current,
-                    disabled: checked,
-                  }));
-                }}
-                size="sm"
-              />
-            </label>
           </div>
         </div>
       </div>

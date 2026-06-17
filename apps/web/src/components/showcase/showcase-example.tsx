@@ -11,11 +11,11 @@ type ShowcaseExampleProps = {
 };
 
 const tokenClassByType = {
-  keyword: "text-rose-400",
-  component: "text-sky-400",
-  string: "text-blue-300",
-  punctuation: "text-foreground/70",
-  prop: "text-violet-300",
+  keyword: "text-rose-600 dark:text-rose-400",
+  component: "text-sky-700 dark:text-sky-400",
+  string: "text-emerald-700 dark:text-blue-300",
+  punctuation: "text-foreground/55 dark:text-foreground/70",
+  prop: "text-violet-700 dark:text-violet-300",
 };
 
 function highlightLine(line: string) {
@@ -176,13 +176,12 @@ export function ShowcaseExample({
           <CodeBlock code={code} expanded={expanded} />
 
           {!expanded ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-muted/16 backdrop-blur-[0.4px]">
+            <div className="absolute inset-0 flex items-center justify-center bg-background/32 backdrop-blur-[1px] dark:bg-muted/18">
               <Button
                 className="relative z-10 shadow-sm"
                 onClick={() => {
                   setExpanded(true);
                 }}
-                variant="outline"
               >
                 View Code
               </Button>
