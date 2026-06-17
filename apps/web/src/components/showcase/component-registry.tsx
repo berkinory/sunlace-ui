@@ -350,7 +350,7 @@ const previews: Partial<
   },
   checkbox: () => (
     <label className="flex items-center gap-3 text-sm">
-      <Checkbox defaultChecked /> Accept terms
+      <Checkbox defaultChecked /> Accept Terms
     </label>
   ),
   combobox: () => (
@@ -672,6 +672,16 @@ export function ButtonDemo() {
         <Button variant="rotate-border">Rotate Border</Button>
       </div>
     </div>
+  );
+}`,
+  checkbox: () => `import { Checkbox } from "@/components/ui/checkbox";
+
+export function CheckboxDemo() {
+  return (
+    <label className="flex items-center gap-3 text-sm">
+      <Checkbox defaultChecked />
+      Accept Terms
+    </label>
   );
 }`,
   card: (settings) => {

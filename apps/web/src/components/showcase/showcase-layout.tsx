@@ -146,10 +146,7 @@ export function ShowcaseLayout({
 
             {tocItems.length > 0 ? (
               <aside className="hidden px-4 pt-7 pb-10 xl:block">
-                <nav
-                  aria-label="On this page"
-                  className="sticky top-7 text-sm"
-                >
+                <nav aria-label="On this page" className="sticky top-7 text-sm">
                   <div className="relative flex h-8 items-center pl-4 text-xs font-medium text-muted-foreground">
                     <HugeiconsIcon
                       aria-hidden
