@@ -13,8 +13,10 @@ import {
   Button,
   Calendar,
   Card,
+  CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   Checkbox,
@@ -133,6 +135,11 @@ export type ComponentSettings = {
   button?: {
     disabled: boolean;
     size: "xs" | "sm" | "default" | "lg";
+  };
+  card?: {
+    showAction: boolean;
+    showFooter: boolean;
+    size: "default" | "sm";
   };
 };
 
@@ -319,17 +326,38 @@ const previews: Partial<
     );
   },
   calendar: () => <Calendar />,
-  card: () => (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>Component Card</CardTitle>
-        <CardDescription>Temporary showcase preview.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Button className="w-full">Continue</Button>
-      </CardContent>
-    </Card>
-  ),
+  card: (settings) => {
+    const size = settings?.card?.size ?? "default";
+    const showFooter = settings?.card?.showFooter ?? true;
+    const showAction = settings?.card?.showAction ?? false;
+
+    return (
+      <Card className="w-full max-w-sm" size={size}>
+        <CardHeader>
+          <CardTitle>Workspace</CardTitle>
+          <CardDescription>
+            Grouped content with bordered surfaces and soft depth.
+          </CardDescription>
+          {showAction ? (
+            <CardAction>
+              <Button size="sm" variant="outline">
+                Edit
+              </Button>
+            </CardAction>
+          ) : null}
+        </CardHeader>
+        <CardContent className="text-muted-foreground">
+          Cards use a light border, soft drop shadow, and inset highlight.
+        </CardContent>
+        {showFooter ? (
+          <CardFooter className="justify-end gap-2">
+            <Button variant="outline">Cancel</Button>
+            <Button>Continue</Button>
+          </CardFooter>
+        ) : null}
+      </Card>
+    );
+  },
   checkbox: () => (
     <label className="flex items-center gap-3 text-sm">
       <Checkbox defaultChecked /> Accept terms
@@ -628,6 +656,54 @@ export function ButtonDemo() {
         <Button${sizeAttr} variant="link"${disabledAttr}>Link</Button>
       </div>
     </div>
+  );
+}`;
+  },
+  card: (settings) => {
+    const size = settings?.card?.size ?? "default";
+    const sizeAttr = size !== "default" ? ` size="${size}"` : "";
+    const showFooter = settings?.card?.showFooter ?? true;
+    const showAction = settings?.card?.showAction ?? false;
+
+    return `import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function CardDemo() {
+  return (
+    <Card className="w-full max-w-sm"${sizeAttr}>
+      <CardHeader>
+        <CardTitle>Workspace</CardTitle>
+        <CardDescription>
+          Grouped content with bordered surfaces and soft depth.
+        </CardDescription>${
+          showAction
+            ? `
+        <CardAction>
+          <Button size="sm" variant="outline">Edit</Button>
+        </CardAction>`
+            : ""
+        }
+      </CardHeader>
+      <CardContent className="text-muted-foreground">
+        Cards use a light border, soft drop shadow, and inset highlight.
+      </CardContent>${
+        showFooter
+          ? `
+      <CardFooter className="justify-end gap-2">
+        <Button variant="outline">Cancel</Button>
+        <Button>Continue</Button>
+      </CardFooter>`
+          : ""
+      }
+    </Card>
   );
 }`;
   },

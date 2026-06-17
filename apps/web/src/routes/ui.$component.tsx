@@ -113,6 +113,16 @@ const buttonProps = [
   },
 ];
 
+const cardProps = [
+  {
+    name: "size",
+    target: "Card",
+    type: '"default" | "sm"',
+    defaultValue: '"default"',
+    description: "Controls card padding and title scale.",
+  },
+];
+
 const ditherAvatarProps = [
   {
     name: "hash",
@@ -176,6 +186,12 @@ const componentPropGroups = {
       props: buttonProps.filter((prop) => prop.target === "Button"),
     },
   ],
+  card: [
+    {
+      title: "Card",
+      props: cardProps.filter((prop) => prop.target === "Card"),
+    },
+  ],
   "dither-avatar": [
     {
       title: "DitherAvatar",
@@ -209,6 +225,13 @@ function UiComponent() {
     disabled: false,
     size: "default",
   });
+  const [cardSettings, setCardSettings] = useState<
+    NonNullable<ComponentSettings["card"]>
+  >({
+    showAction: false,
+    showFooter: true,
+    size: "default",
+  });
   const activeComponent = isComponentSlug(component)
     ? (componentBySlug.get(component) ?? componentBySlug.get("accordion"))
     : componentBySlug.get("accordion");
@@ -239,7 +262,16 @@ function UiComponent() {
           ? `import { DitherAvatar } from "@/components/ui/dither-avatar";`
           : activeComponent.slug === "button"
             ? `import { Button } from "@/components/ui/button";`
-            : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
+            : activeComponent.slug === "card"
+              ? `import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";`
+              : `import { ${toPascalCase(title)} } from "@/components/ui/${activeComponent.slug}";`;
   const usageCode =
     activeComponent.slug === "accordion"
       ? `<Accordion defaultValue={["item-1"]}>
@@ -272,11 +304,24 @@ function UiComponent() {
   <Button>Continue</Button>
   <Button variant="outline">Cancel</Button>
 </div>`
-            : `<${toPascalCase(title)} />`;
+            : activeComponent.slug === "card"
+              ? `<Card className="w-full max-w-sm">
+  <CardHeader>
+    <CardTitle>Workspace</CardTitle>
+    <CardDescription>Grouped content with actions and detail.</CardDescription>
+  </CardHeader>
+  <CardContent>Card body content.</CardContent>
+  <CardFooter className="justify-end gap-2">
+    <Button variant="outline">Cancel</Button>
+    <Button>Continue</Button>
+  </CardFooter>
+</Card>`
+              : `<${toPascalCase(title)} />`;
   const settings: ComponentSettings = {
     accordion: accordionSettings,
     avatar: avatarSettings,
     button: buttonSettings,
+    card: cardSettings,
     ditherAvatar: ditherAvatarSettings,
   };
   const propGroups =
@@ -309,6 +354,11 @@ function UiComponent() {
     });
     setButtonSettings({
       disabled: false,
+      size: "default",
+    });
+    setCardSettings({
+      showAction: false,
+      showFooter: true,
       size: "default",
     });
   }, [activeComponent.slug]);
@@ -562,6 +612,80 @@ function UiComponent() {
           </div>
         </div>
       </div>
+    ) : activeComponent.slug === "card" ? (
+      <div className="space-y-4 text-xs">
+        <div className="flex items-center gap-2 border-border border-b pb-3 font-medium text-foreground">
+          <HugeiconsIcon
+            aria-hidden
+            icon={Settings03Icon}
+            size={14}
+            strokeWidth={2}
+          />
+          Settings
+        </div>
+
+        <div className="space-y-2">
+          <p className="font-medium text-foreground">Card</p>
+          <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Size
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  className="min-w-24 justify-between"
+                  render={<Button size="sm" variant="outline" />}
+                >
+                  {cardSettings.size.charAt(0).toUpperCase() +
+                    cardSettings.size.slice(1)}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuRadioGroup
+                    value={cardSettings.size}
+                    onValueChange={(size) => {
+                      setCardSettings((current) => ({
+                        ...current,
+                        size: size as NonNullable<
+                          ComponentSettings["card"]
+                        >["size"],
+                      }));
+                    }}
+                  >
+                    <DropdownMenuRadioItem value="default">
+                      Default
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="sm">Sm</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </label>
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Footer
+              <Switch
+                checked={cardSettings.showFooter}
+                onCheckedChange={(checked) => {
+                  setCardSettings((current) => ({
+                    ...current,
+                    showFooter: checked,
+                  }));
+                }}
+                size="sm"
+              />
+            </label>
+            <label className="flex items-center justify-between gap-3 text-muted-foreground">
+              Action
+              <Switch
+                checked={cardSettings.showAction}
+                onCheckedChange={(checked) => {
+                  setCardSettings((current) => ({
+                    ...current,
+                    showAction: checked,
+                  }));
+                }}
+                size="sm"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
     ) : null;
 
   return (
@@ -583,9 +707,11 @@ function UiComponent() {
                 ? "A compact identity surface for people, teams, status, and stacked presence."
                 : activeComponent.slug === "button"
                   ? "A clickable action control with variants for hierarchy, semantics, sizing, and icon-only usage."
-                  : activeComponent.slug === "dither-avatar"
-                    ? "A deterministic dithered identity surface generated from any string."
-                    : "Temporary component preview while the docs system is shaped."}
+                  : activeComponent.slug === "card"
+                    ? "A bordered surface for grouped content, header actions, body detail, and footer controls."
+                    : activeComponent.slug === "dither-avatar"
+                      ? "A deterministic dithered identity surface generated from any string."
+                      : "Temporary component preview while the docs system is shaped."}
           </p>
           <div className="flex gap-2">
             <Button variant="outline">Docs</Button>
