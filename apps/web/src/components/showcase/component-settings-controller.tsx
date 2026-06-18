@@ -29,7 +29,7 @@ const cardVariantLabels = {
   "animated-border": "Animated",
 } as const;
 
-const settingsSelectTriggerClass = "w-24 min-w-0 justify-between";
+const settingsSelectTriggerClass = "w-28 min-w-0 justify-between";
 
 function SettingsShell({
   children,
@@ -51,7 +51,7 @@ function SettingsShell({
       </div>
       <div className="space-y-2">
         <p className="font-medium text-foreground">{title}</p>
-        <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5 [&_[data-slot=dropdown-menu-trigger]]:w-24 [&_[data-slot=dropdown-menu-trigger]]:min-w-0">
+        <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5 [&_[data-slot=dropdown-menu-trigger]]:w-28 [&_[data-slot=dropdown-menu-trigger]]:min-w-0">
           {children}
         </div>
       </div>
@@ -856,6 +856,76 @@ function SkeletonSettings({
   return children({ controls, settings: { skeleton: settings } });
 }
 
+function SliderSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["slider"]>
+  >({
+    disabled: false,
+    orientation: "horizontal",
+    range: false,
+  });
+
+  const controls = (
+    <SettingsShell title="Slider">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Orientation
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={settingsSelectTriggerClass}
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.orientation === "horizontal" ? "Horizontal" : "Vertical"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(orientation) => {
+                setSettings((current) => ({
+                  ...current,
+                  orientation: orientation as NonNullable<
+                    ComponentSettings["slider"]
+                  >["orientation"],
+                }));
+              }}
+              value={settings.orientation}
+            >
+              <DropdownMenuRadioItem value="horizontal">
+                Horizontal
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="vertical">
+                Vertical
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Range
+        <Switch
+          checked={settings.range}
+          onCheckedChange={(range) => {
+            setSettings((current) => ({ ...current, range }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Disabled
+        <Switch
+          checked={settings.disabled}
+          onCheckedChange={(disabled) => {
+            setSettings((current) => ({ ...current, disabled }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { slider: settings } });
+}
+
 function ProgressSettings({
   children,
 }: Pick<ComponentSettingsControllerProps, "children">) {
@@ -959,6 +1029,8 @@ function ComponentSettingsController({
       return <SelectSettings>{children}</SelectSettings>;
     case "skeleton":
       return <SkeletonSettings>{children}</SkeletonSettings>;
+    case "slider":
+      return <SliderSettings>{children}</SliderSettings>;
     default:
       return children({ controls: null, settings: {} });
   }

@@ -7,18 +7,24 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  orientation = "horizontal",
+  thumbCollisionBehavior = "none",
   ...props
 }: SliderPrimitive.Root.Props) {
   const _values = Array.isArray(value)
     ? value
-    : Array.isArray(defaultValue)
-      ? defaultValue
-      : [min, max];
+    : typeof value === "number"
+      ? [value]
+      : Array.isArray(defaultValue)
+        ? defaultValue
+        : typeof defaultValue === "number"
+          ? [defaultValue]
+          : [min];
 
   return (
     <SliderPrimitive.Root
       className={cn(
-        "data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full",
+        orientation === "horizontal" ? "w-full" : "h-full",
         className
       )}
       data-slot="slider"
@@ -26,24 +32,39 @@ function Slider({
       value={value}
       min={min}
       max={max}
-      thumbAlignment="edge"
+      orientation={orientation}
+      thumbAlignment="center"
+      thumbCollisionBehavior={thumbCollisionBehavior}
       {...props}
     >
-      <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-40 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col">
+      <SliderPrimitive.Control
+        className={cn(
+          "relative flex touch-none items-center select-none data-disabled:opacity-50",
+          orientation === "horizontal"
+            ? "h-5 w-full"
+            : "h-full min-h-40 w-5 flex-col"
+        )}
+      >
         <SliderPrimitive.Track
           data-slot="slider-track"
-          className="relative grow overflow-hidden rounded-full bg-muted select-none data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1"
+          className={cn(
+            "relative grow overflow-hidden rounded-full bg-muted ring-1 ring-foreground/5 select-none",
+            orientation === "horizontal" ? "h-1.5 w-full" : "h-full w-1.5"
+          )}
         >
           <SliderPrimitive.Indicator
             data-slot="slider-range"
-            className="bg-primary select-none data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+            className={cn(
+              "rounded-full bg-primary select-none",
+              orientation === "horizontal" ? "h-full" : "w-full"
+            )}
           />
         </SliderPrimitive.Track>
         {Array.from({ length: _values.length }, (_, index) => (
           <SliderPrimitive.Thumb
             data-slot="slider-thumb"
             key={index}
-            className="relative block size-3 shrink-0 rounded-full border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3 disabled:pointer-events-none disabled:opacity-50"
+            className="relative block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[transform,box-shadow] duration-150 ease-out select-none after:absolute after:-inset-2 hover:scale-110 hover:ring-3 focus-visible:scale-110 focus-visible:ring-3 focus-visible:outline-hidden active:scale-95 active:ring-3 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
           />
         ))}
       </SliderPrimitive.Control>

@@ -90,6 +90,11 @@ export type ComponentSettings = {
   skeleton?: {
     animation: "none" | "pulse" | "shimmer";
   };
+  slider?: {
+    disabled: boolean;
+    orientation: "horizontal" | "vertical";
+    range: boolean;
+  };
 };
 
 export const defaultComponentSlug = componentItems[0].slug;

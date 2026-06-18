@@ -143,7 +143,7 @@ export function ShowcaseExample({
         <div
           className={
             controls
-              ? "grid h-[400px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_200px]"
+              ? "grid h-[400px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_240px]"
               : "flex h-[400px] items-center justify-center p-8"
           }
         >
