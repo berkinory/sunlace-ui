@@ -222,6 +222,23 @@ function PropsFootnote({
     );
   }
 
+  if (component === "skeleton") {
+    return (
+      <p className="mt-3 text-sm text-muted-foreground">
+        Also supports{" "}
+        <a
+          className="underline underline-offset-3 hover:text-foreground"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div"
+          rel="noreferrer"
+          target="_blank"
+        >
+          native div props
+        </a>
+        .
+      </p>
+    );
+  }
+
   if (!primitiveDocsUrl) {
     return null;
   }

@@ -78,6 +78,9 @@ export type ComponentSettings = {
     grouped: boolean;
     side: "bottom" | "top";
   };
+  skeleton?: {
+    animation: "none" | "pulse" | "shimmer";
+  };
 };
 
 export const defaultComponentSlug = componentItems[0].slug;

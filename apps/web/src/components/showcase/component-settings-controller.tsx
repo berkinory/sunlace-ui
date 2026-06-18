@@ -739,6 +739,53 @@ function PopoverSettings({
   return children({ controls, settings: { popover: settings } });
 }
 
+function SkeletonSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["skeleton"]>
+  >({
+    animation: "shimmer",
+  });
+
+  const controls = (
+    <SettingsShell title="Skeleton">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Animation
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-20 justify-between px-2"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.animation.charAt(0).toUpperCase() +
+              settings.animation.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(animation) => {
+                setSettings({
+                  animation: animation as NonNullable<
+                    ComponentSettings["skeleton"]
+                  >["animation"],
+                });
+              }}
+              value={settings.animation}
+            >
+              <DropdownMenuRadioItem value="shimmer">
+                Shimmer
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="pulse">Pulse</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="none">None</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { skeleton: settings } });
+}
+
 function ShapeControl({
   onChange,
   value,
@@ -798,6 +845,8 @@ function ComponentSettingsController({
       return <PopoverSettings>{children}</PopoverSettings>;
     case "select":
       return <SelectSettings>{children}</SelectSettings>;
+    case "skeleton":
+      return <SkeletonSettings>{children}</SkeletonSettings>;
     default:
       return children({ controls: null, settings: {} });
   }

@@ -1,29 +1,108 @@
 import { Skeleton } from "@sunlace/ui";
 
+import type { ComponentSettings } from "../component-catalog";
 import type { ComponentDocDefinition } from "./types";
 
-const showcaseCode = `import { Skeleton } from "@/components/ui/skeleton";
+function getShowcaseCode(settings?: ComponentSettings) {
+  const animation = settings?.skeleton?.animation ?? "shimmer";
+  const animationProp =
+    animation === "shimmer" ? "" : ` animation="${animation}"`;
+
+  return `import { Skeleton } from "@/components/ui/skeleton";
 
 export function SkeletonDemo() {
   return (
-    <div className="w-full max-w-sm space-y-3">
-      <Skeleton className="h-4 w-40" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-2/3" />
+    <div className="flex w-full max-w-sm items-center gap-3">
+      <Skeleton className="size-10 rounded-full"${animationProp} />
+      <div className="flex-1 space-y-2">
+        <Skeleton className="h-3.5 w-32"${animationProp} />
+        <Skeleton className="h-3 w-48 max-w-full"${animationProp} />
+      </div>
+    </div>
+  );
+}`;
+}
+
+const tableCode = `import { Skeleton } from "@/components/ui/skeleton";
+
+export function TableSkeleton() {
+  return (
+    <div className="w-full max-w-md divide-y rounded-lg border">
+      {[0, 1, 2, 3].map((row) => (
+        <div className="grid grid-cols-[1fr_6rem] gap-4 p-3" key={row}>
+          <div className="space-y-2">
+            <Skeleton className="h-3.5 w-32" />
+            <Skeleton className="h-3 w-48 max-w-full" />
+          </div>
+          <Skeleton className="h-7 w-full self-center" />
+        </div>
+      ))}
     </div>
   );
 }`;
 
-export const skeletonDocs: ComponentDocDefinition = {
-  description: "A placeholder surface for content that is still loading.",
-  getShowcaseCode: () => showcaseCode,
-  importCode: `import { Skeleton } from "@/components/ui/skeleton";`,
-  renderPreview: () => (
-    <div className="w-full max-w-sm space-y-3">
-      <Skeleton className="h-4 w-40" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-2/3" />
+function Preview({ settings }: { settings?: ComponentSettings }) {
+  const animation = settings?.skeleton?.animation;
+
+  return (
+    <div className="flex w-full max-w-sm items-center gap-3">
+      <Skeleton animation={animation} className="size-10 rounded-full" />
+      <div className="flex-1 space-y-2">
+        <Skeleton animation={animation} className="h-3.5 w-32" />
+        <Skeleton animation={animation} className="h-3 w-48 max-w-full" />
+      </div>
     </div>
-  ),
+  );
+}
+
+function TableExample() {
+  return (
+    <div className="w-full max-w-md divide-y rounded-lg border">
+      {[0, 1, 2, 3].map((row) => (
+        <div className="grid grid-cols-[1fr_6rem] gap-4 p-3" key={row}>
+          <div className="space-y-2">
+            <Skeleton className="h-3.5 w-32" />
+            <Skeleton className="h-3 w-48 max-w-full" />
+          </div>
+          <Skeleton className="h-7 w-full self-center" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export const skeletonDocs: ComponentDocDefinition = {
+  description:
+    "A shape-preserving placeholder for content that is still loading.",
+  examples: [
+    {
+      code: tableCode,
+      preview: <TableExample />,
+      resetKey: "skeleton-table-example",
+      title: "Table Rows",
+    },
+  ],
+  getShowcaseCode,
+  importCode: `import { Skeleton } from "@/components/ui/skeleton";`,
+  props: [
+    {
+      title: "Skeleton",
+      props: [
+        {
+          name: "animation",
+          type: '"shimmer" | "pulse" | "none"',
+          defaultValue: '"shimmer"',
+          description: "Sets the loading animation style.",
+        },
+        {
+          name: "className",
+          type: "string",
+          defaultValue: "-",
+          description: "Defines the placeholder shape and dimensions.",
+        },
+      ],
+    },
+  ],
+  renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Skeleton className="h-4 w-full" />`,
 };
