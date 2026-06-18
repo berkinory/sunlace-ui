@@ -488,6 +488,66 @@ function DropdownMenuSettings({
   return children({ controls, settings: { dropdownMenu: settings } });
 }
 
+function DrawerSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["drawer"]>
+  >({
+    direction: "right",
+    showFooter: true,
+  });
+
+  const controls = (
+    <SettingsShell title="Drawer">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Direction
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.direction.charAt(0).toUpperCase() +
+              settings.direction.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(direction) => {
+                setSettings((current) => ({
+                  ...current,
+                  direction: direction as NonNullable<
+                    ComponentSettings["drawer"]
+                  >["direction"],
+                }));
+              }}
+              value={settings.direction}
+            >
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="left">Left</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Footer
+        <Switch
+          checked={settings.showFooter}
+          onCheckedChange={(showFooter) => {
+            setSettings((current) => ({ ...current, showFooter }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { drawer: settings } });
+}
+
 function SelectSettings({
   children,
 }: Pick<ComponentSettingsControllerProps, "children">) {
@@ -653,6 +713,8 @@ function ComponentSettingsController({
       return <DialogSettings>{children}</DialogSettings>;
     case "dropdown-menu":
       return <DropdownMenuSettings>{children}</DropdownMenuSettings>;
+    case "drawer":
+      return <DrawerSettings>{children}</DrawerSettings>;
     case "select":
       return <SelectSettings>{children}</SelectSettings>;
     default:

@@ -51,6 +51,10 @@ export type ComponentSettings = {
     showCloseButton: boolean;
     showFooter: boolean;
   };
+  drawer?: {
+    direction: "bottom" | "left" | "right" | "top";
+    showFooter: boolean;
+  };
   ditherAvatar?: {
     dotScale: 1 | 2 | 3 | 4 | 5;
     shape: "circle" | "rounded" | "square";
