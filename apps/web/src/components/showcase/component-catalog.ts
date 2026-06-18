@@ -47,6 +47,10 @@ export type ComponentSettings = {
     showTrigger: boolean;
     side: "bottom" | "top";
   };
+  dialog?: {
+    showCloseButton: boolean;
+    showFooter: boolean;
+  };
   ditherAvatar?: {
     dotScale: 1 | 2 | 3 | 4 | 5;
     shape: "circle" | "rounded" | "square";

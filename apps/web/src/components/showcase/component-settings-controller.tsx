@@ -332,6 +332,44 @@ function ComboboxSettings({
   return children({ controls, settings: { combobox: settings } });
 }
 
+function DialogSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["dialog"]>
+  >({
+    showCloseButton: true,
+    showFooter: true,
+  });
+
+  const controls = (
+    <SettingsShell title="Dialog">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Close Button
+        <Switch
+          checked={settings.showCloseButton}
+          onCheckedChange={(showCloseButton) => {
+            setSettings((current) => ({ ...current, showCloseButton }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Footer
+        <Switch
+          checked={settings.showFooter}
+          onCheckedChange={(showFooter) => {
+            setSettings((current) => ({ ...current, showFooter }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { dialog: settings } });
+}
+
 function DropdownMenuSettings({
   children,
 }: Pick<ComponentSettingsControllerProps, "children">) {
@@ -611,6 +649,8 @@ function ComponentSettingsController({
       return <ComboboxSettings>{children}</ComboboxSettings>;
     case "dither-avatar":
       return <DitherAvatarSettings>{children}</DitherAvatarSettings>;
+    case "dialog":
+      return <DialogSettings>{children}</DialogSettings>;
     case "dropdown-menu":
       return <DropdownMenuSettings>{children}</DropdownMenuSettings>;
     case "select":
