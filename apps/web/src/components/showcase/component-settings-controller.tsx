@@ -660,6 +660,85 @@ function SelectSettings({
   return children({ controls, settings: { select: settings } });
 }
 
+function PopoverSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["popover"]>
+  >({
+    align: "center",
+    side: "bottom",
+  });
+
+  const controls = (
+    <SettingsShell title="Popover">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Side
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.side.charAt(0).toUpperCase() + settings.side.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(side) => {
+                setSettings((current) => ({
+                  ...current,
+                  side: side as NonNullable<
+                    ComponentSettings["popover"]
+                  >["side"],
+                }));
+              }}
+              value={settings.side}
+            >
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="left">Left</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Align
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.align.charAt(0).toUpperCase() + settings.align.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(align) => {
+                setSettings((current) => ({
+                  ...current,
+                  align: align as NonNullable<
+                    ComponentSettings["popover"]
+                  >["align"],
+                }));
+              }}
+              value={settings.align}
+            >
+              <DropdownMenuRadioItem value="start">Start</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="center">
+                Center
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="end">End</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { popover: settings } });
+}
+
 function ShapeControl({
   onChange,
   value,
@@ -715,6 +794,8 @@ function ComponentSettingsController({
       return <DropdownMenuSettings>{children}</DropdownMenuSettings>;
     case "drawer":
       return <DrawerSettings>{children}</DrawerSettings>;
+    case "popover":
+      return <PopoverSettings>{children}</PopoverSettings>;
     case "select":
       return <SelectSettings>{children}</SelectSettings>;
     default:

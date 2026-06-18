@@ -67,6 +67,10 @@ export type ComponentSettings = {
     showShortcuts: boolean;
     side: "bottom" | "top";
   };
+  popover?: {
+    align: "center" | "end" | "start";
+    side: "bottom" | "left" | "right" | "top";
+  };
   select?: {
     align: "center" | "start";
     alignItemWithTrigger: boolean;

@@ -12,6 +12,10 @@ function PopoverTrigger({ ...props }: PopoverPrimitive.Trigger.Props) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }
 
+function PopoverClose({ ...props }: PopoverPrimitive.Close.Props) {
+  return <PopoverPrimitive.Close data-slot="popover-close" {...props} />;
+}
+
 function PopoverContent({
   className,
   align = "center",
@@ -36,7 +40,7 @@ function PopoverContent({
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "z-50 flex w-72 origin-(--transform-origin) flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "z-50 flex w-72 origin-(--transform-origin) flex-col gap-3 rounded-lg border border-border bg-popover bg-clip-padding p-3 text-sm text-popover-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_8px_24px_rgb(0_0_0/0.1),inset_0_1px_rgb(255_255_255/0.16)] outline-none data-[side=bottom]:slide-in-from-top-1 data-[side=inline-end]:slide-in-from-left-1 data-[side=inline-start]:slide-in-from-right-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-175 data-open:ease-[cubic-bezier(0.16,1,0.3,1)] data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-98 data-closed:duration-125 data-closed:ease-in motion-reduce:transition-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.3),0_10px_28px_rgb(0_0_0/0.24),inset_0_1px_rgb(255_255_255/0.07)]",
             className
           )}
           {...props}
@@ -50,7 +54,7 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="popover-header"
-      className={cn("flex flex-col gap-0.5 text-sm", className)}
+      className={cn("flex flex-col gap-1 text-sm", className)}
       {...props}
     />
   );
@@ -60,7 +64,7 @@ function PopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props) {
   return (
     <PopoverPrimitive.Title
       data-slot="popover-title"
-      className={cn("font-medium", className)}
+      className={cn("leading-5 font-medium", className)}
       {...props}
     />
   );
@@ -73,7 +77,7 @@ function PopoverDescription({
   return (
     <PopoverPrimitive.Description
       data-slot="popover-description"
-      className={cn("text-muted-foreground", className)}
+      className={cn("text-sm leading-5 text-muted-foreground", className)}
       {...props}
     />
   );
@@ -81,6 +85,7 @@ function PopoverDescription({
 
 export {
   Popover,
+  PopoverClose,
   PopoverContent,
   PopoverDescription,
   PopoverHeader,
