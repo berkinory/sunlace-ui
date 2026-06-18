@@ -38,12 +38,33 @@ export type ComponentSettings = {
   card?: {
     showAction: boolean;
     showFooter: boolean;
-    size: "default" | "sm";
     variant: "default" | "shine" | "animated-border";
+  };
+  combobox?: {
+    autoHighlight: boolean;
+    disabled: boolean;
+    showClear: boolean;
+    showTrigger: boolean;
+    side: "bottom" | "top";
   };
   ditherAvatar?: {
     dotScale: 1 | 2 | 3 | 4 | 5;
     shape: "circle" | "rounded" | "square";
+  };
+  dropdownMenu?: {
+    align: "end" | "start";
+    disabledItem: boolean;
+    showDestructive: boolean;
+    showLabels: boolean;
+    showShortcuts: boolean;
+    side: "bottom" | "top";
+  };
+  select?: {
+    align: "center" | "start";
+    alignItemWithTrigger: boolean;
+    disabled: boolean;
+    grouped: boolean;
+    side: "bottom" | "top";
   };
 };
 

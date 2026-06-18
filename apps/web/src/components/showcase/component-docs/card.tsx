@@ -186,13 +186,12 @@ function BillingExample() {
 }
 
 function renderPreview(settings?: ComponentSettings) {
-  const size = settings?.card?.size ?? "default";
   const variant = settings?.card?.variant ?? "default";
   const showFooter = settings?.card?.showFooter ?? true;
   const showAction = settings?.card?.showAction ?? false;
 
   return (
-    <Card className="w-full max-w-sm" size={size} variant={variant}>
+    <Card className="w-full max-w-sm" variant={variant}>
       <CardHeader>
         <CardTitle>Workspace</CardTitle>
         <CardDescription>
@@ -220,8 +219,6 @@ function renderPreview(settings?: ComponentSettings) {
 }
 
 function getShowcaseCode(settings?: ComponentSettings) {
-  const size = settings?.card?.size ?? "default";
-  const sizeAttr = size !== "default" ? ` size="${size}"` : "";
   const variant = settings?.card?.variant ?? "default";
   const variantAttr = variant !== "default" ? ` variant="${variant}"` : "";
   const showFooter = settings?.card?.showFooter ?? true;
@@ -240,7 +237,7 @@ import {
 
 export function CardDemo() {
   return (
-    <Card className="w-full max-w-sm"${sizeAttr}${variantAttr}>
+    <Card className="w-full max-w-sm"${variantAttr}>
       <CardHeader>
         <CardTitle>Workspace</CardTitle>
         <CardDescription>

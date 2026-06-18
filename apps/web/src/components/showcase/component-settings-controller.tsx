@@ -179,7 +179,6 @@ function CardSettings({
   >({
     showAction: false,
     showFooter: true,
-    size: "default",
     variant: "default",
   });
 
@@ -218,33 +217,6 @@ function CardSettings({
         </DropdownMenu>
       </label>
       <label className="flex items-center justify-between gap-3 text-muted-foreground">
-        Size
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className="min-w-24 justify-between"
-            render={<Button size="sm" variant="outline" />}
-          >
-            {settings.size === "sm" ? "Sm" : "Default"}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuRadioGroup
-              onValueChange={(size) => {
-                setSettings((current) => ({
-                  ...current,
-                  size: size as NonNullable<ComponentSettings["card"]>["size"],
-                }));
-              }}
-              value={settings.size}
-            >
-              <DropdownMenuRadioItem value="default">
-                Default
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="sm">Sm</DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </label>
-      <label className="flex items-center justify-between gap-3 text-muted-foreground">
         Footer
         <Switch
           checked={settings.showFooter}
@@ -268,6 +240,326 @@ function CardSettings({
   );
 
   return children({ controls, settings: { card: settings } });
+}
+
+function ComboboxSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["combobox"]>
+  >({
+    autoHighlight: true,
+    disabled: false,
+    showClear: false,
+    showTrigger: true,
+    side: "bottom",
+  });
+
+  const controls = (
+    <SettingsShell title="Combobox">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Side
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.side === "bottom" ? "Bottom" : "Top"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(side) => {
+                setSettings((current) => ({
+                  ...current,
+                  side: side as NonNullable<
+                    ComponentSettings["combobox"]
+                  >["side"],
+                }));
+              }}
+              value={settings.side}
+            >
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Auto Highlight
+        <Switch
+          checked={settings.autoHighlight}
+          onCheckedChange={(autoHighlight) => {
+            setSettings((current) => ({ ...current, autoHighlight }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Clear
+        <Switch
+          checked={settings.showClear}
+          onCheckedChange={(showClear) => {
+            setSettings((current) => ({ ...current, showClear }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Trigger
+        <Switch
+          checked={settings.showTrigger}
+          onCheckedChange={(showTrigger) => {
+            setSettings((current) => ({ ...current, showTrigger }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Disabled
+        <Switch
+          checked={settings.disabled}
+          onCheckedChange={(disabled) => {
+            setSettings((current) => ({ ...current, disabled }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { combobox: settings } });
+}
+
+function DropdownMenuSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["dropdownMenu"]>
+  >({
+    align: "start",
+    disabledItem: false,
+    showDestructive: true,
+    showLabels: true,
+    showShortcuts: true,
+    side: "bottom",
+  });
+
+  const controls = (
+    <SettingsShell title="Dropdown Menu">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Side
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.side === "bottom" ? "Bottom" : "Top"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(side) => {
+                setSettings((current) => ({
+                  ...current,
+                  side: side as NonNullable<
+                    ComponentSettings["dropdownMenu"]
+                  >["side"],
+                }));
+              }}
+              value={settings.side}
+            >
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Align
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.align === "start" ? "Start" : "End"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(align) => {
+                setSettings((current) => ({
+                  ...current,
+                  align: align as NonNullable<
+                    ComponentSettings["dropdownMenu"]
+                  >["align"],
+                }));
+              }}
+              value={settings.align}
+            >
+              <DropdownMenuRadioItem value="start">Start</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="end">End</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Labels
+        <Switch
+          checked={settings.showLabels}
+          onCheckedChange={(showLabels) => {
+            setSettings((current) => ({ ...current, showLabels }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Shortcuts
+        <Switch
+          checked={settings.showShortcuts}
+          onCheckedChange={(showShortcuts) => {
+            setSettings((current) => ({ ...current, showShortcuts }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Destructive
+        <Switch
+          checked={settings.showDestructive}
+          onCheckedChange={(showDestructive) => {
+            setSettings((current) => ({ ...current, showDestructive }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Disabled Item
+        <Switch
+          checked={settings.disabledItem}
+          onCheckedChange={(disabledItem) => {
+            setSettings((current) => ({ ...current, disabledItem }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { dropdownMenu: settings } });
+}
+
+function SelectSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["select"]>
+  >({
+    align: "center",
+    alignItemWithTrigger: false,
+    disabled: false,
+    grouped: true,
+    side: "bottom",
+  });
+
+  const controls = (
+    <SettingsShell title="Select">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Side
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.side === "bottom" ? "Bottom" : "Top"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(side) => {
+                setSettings((current) => ({
+                  ...current,
+                  side: side as NonNullable<
+                    ComponentSettings["select"]
+                  >["side"],
+                }));
+              }}
+              value={settings.side}
+            >
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Align
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.align === "center" ? "Center" : "Start"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(align) => {
+                setSettings((current) => ({
+                  ...current,
+                  align: align as NonNullable<
+                    ComponentSettings["select"]
+                  >["align"],
+                }));
+              }}
+              value={settings.align}
+            >
+              <DropdownMenuRadioItem value="center">
+                Center
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="start">Start</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Align Selected
+        <Switch
+          checked={settings.alignItemWithTrigger}
+          onCheckedChange={(alignItemWithTrigger) => {
+            setSettings((current) => ({
+              ...current,
+              alignItemWithTrigger,
+            }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Groups
+        <Switch
+          checked={settings.grouped}
+          onCheckedChange={(grouped) => {
+            setSettings((current) => ({ ...current, grouped }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Disabled
+        <Switch
+          checked={settings.disabled}
+          onCheckedChange={(disabled) => {
+            setSettings((current) => ({ ...current, disabled }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { select: settings } });
 }
 
 function ShapeControl({
@@ -315,8 +607,14 @@ function ComponentSettingsController({
       return <AccordionSettings>{children}</AccordionSettings>;
     case "card":
       return <CardSettings>{children}</CardSettings>;
+    case "combobox":
+      return <ComboboxSettings>{children}</ComboboxSettings>;
     case "dither-avatar":
       return <DitherAvatarSettings>{children}</DitherAvatarSettings>;
+    case "dropdown-menu":
+      return <DropdownMenuSettings>{children}</DropdownMenuSettings>;
+    case "select":
+      return <SelectSettings>{children}</SelectSettings>;
     default:
       return children({ controls: null, settings: {} });
   }
