@@ -11,9 +11,18 @@ import {
   getDefaultClassNames,
   type DayButton,
   type Locale,
+  type MonthCaptionProps,
+  useDayPicker,
 } from "react-day-picker";
 
 import { Button, buttonVariants } from "./button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
 
 function Calendar({
   className,
@@ -21,12 +30,16 @@ function Calendar({
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
+  easyNavigation = false,
   locale,
   formatters,
   components,
+  startMonth,
+  endMonth,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"];
+  easyNavigation?: boolean;
 }) {
   const defaultClassNames = getDefaultClassNames();
 
@@ -34,12 +47,22 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn(
-        "group/calendar bg-background p-2 [--cell-radius:var(--radius-md)] [--cell-size:calc(var(--spacing)*7)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
+        "group/calendar rounded-xl border border-border bg-card bg-clip-padding p-3 text-card-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_3px_8px_rgb(0_0_0/0.05),inset_0_1px_rgb(255_255_255/0.18)] [--cell-radius:var(--radius-md)] [--cell-size:calc(var(--spacing)*8)] dark:shadow-[0_1px_1px_rgb(0_0_0/0.32),0_4px_12px_rgb(0_0_0/0.22),inset_0_1px_rgb(255_255_255/0.08)] in-data-[slot=card-content]:border-0 in-data-[slot=card-content]:bg-transparent in-data-[slot=card-content]:shadow-none in-data-[slot=popover-content]:border-0 in-data-[slot=popover-content]:bg-transparent in-data-[slot=popover-content]:shadow-none",
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className
       )}
-      captionLayout={captionLayout}
+      captionLayout={easyNavigation ? "label" : captionLayout}
+      startMonth={
+        easyNavigation && !startMonth
+          ? new Date(new Date().getFullYear() - 100, 0)
+          : startMonth
+      }
+      endMonth={
+        easyNavigation && !endMonth
+          ? new Date(new Date().getFullYear() + 10, 11)
+          : endMonth
+      }
       locale={locale}
       formatters={{
         formatMonthDropdown: (date) =>
@@ -59,12 +82,12 @@ function Calendar({
         ),
         button_previous: cn(
           buttonVariants({ variant: buttonVariant }),
-          "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
+          "size-(--cell-size) rounded-(--cell-radius) p-0 text-muted-foreground select-none hover:text-foreground aria-disabled:opacity-50",
           defaultClassNames.button_previous
         ),
         button_next: cn(
           buttonVariants({ variant: buttonVariant }),
-          "size-(--cell-size) p-0 select-none aria-disabled:opacity-50",
+          "size-(--cell-size) rounded-(--cell-radius) p-0 text-muted-foreground select-none hover:text-foreground aria-disabled:opacity-50",
           defaultClassNames.button_next
         ),
         month_caption: cn(
@@ -76,7 +99,7 @@ function Calendar({
           defaultClassNames.dropdowns
         ),
         dropdown_root: cn(
-          "relative rounded-(--cell-radius)",
+          "relative rounded-(--cell-radius) border border-input bg-background/60 px-1.5 py-1 transition-colors hover:bg-muted/60",
           defaultClassNames.dropdown_root
         ),
         dropdown: cn(
@@ -87,15 +110,15 @@ function Calendar({
           "font-medium select-none",
           captionLayout === "label"
             ? "text-sm"
-            : "flex items-center gap-1 rounded-(--cell-radius) text-sm [&>svg]:size-3.5 [&>svg]:text-muted-foreground",
+            : "flex items-center gap-1 rounded-(--cell-radius) text-xs [&>svg]:size-3.5 [&>svg]:text-muted-foreground",
           defaultClassNames.caption_label
         ),
         weekdays: cn("flex", defaultClassNames.weekdays),
         weekday: cn(
-          "flex-1 rounded-(--cell-radius) text-[0.8rem] font-normal text-muted-foreground select-none",
+          "flex-1 rounded-(--cell-radius) text-xs font-medium text-muted-foreground/80 select-none",
           defaultClassNames.weekday
         ),
-        week: cn("mt-2 flex w-full", defaultClassNames.week),
+        week: cn("mt-1 flex w-full", defaultClassNames.week),
         week_number_header: cn(
           "w-(--cell-size) select-none",
           defaultClassNames.week_number_header
@@ -121,11 +144,11 @@ function Calendar({
           defaultClassNames.range_end
         ),
         today: cn(
-          "rounded-(--cell-radius) bg-muted text-foreground data-[selected=true]:rounded-none",
+          "rounded-(--cell-radius) bg-muted/70 text-foreground data-[selected=true]:rounded-none",
           defaultClassNames.today
         ),
         outside: cn(
-          "text-muted-foreground aria-selected:text-muted-foreground",
+          "text-muted-foreground/55 aria-selected:text-muted-foreground",
           defaultClassNames.outside
         ),
         disabled: cn(
@@ -181,6 +204,9 @@ function Calendar({
         DayButton: ({ ...props }) => (
           <CalendarDayButton locale={locale} {...props} />
         ),
+        ...(easyNavigation
+          ? { MonthCaption: CalendarMonthCaption }
+          : undefined),
         WeekNumber: ({ children, ...props }) => {
           return (
             <td {...props}>
@@ -194,6 +220,79 @@ function Calendar({
       }}
       {...props}
     />
+  );
+}
+
+function CalendarMonthCaption({ calendarMonth }: MonthCaptionProps) {
+  const { dayPickerProps, formatters, goToMonth } = useDayPicker();
+  const month = calendarMonth.date.getMonth();
+  const year = calendarMonth.date.getFullYear();
+  const firstYear = dayPickerProps.startMonth?.getFullYear() ?? year - 100;
+  const lastYear = dayPickerProps.endMonth?.getFullYear() ?? year + 10;
+  const years = Array.from(
+    { length: lastYear - firstYear + 1 },
+    (_, index) => firstYear + index
+  );
+
+  return (
+    <div
+      className="relative z-20 flex h-(--cell-size) items-center justify-center gap-1.5 px-(--cell-size)"
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+      onPointerDown={(event) => {
+        event.stopPropagation();
+      }}
+    >
+      <Select
+        modal={false}
+        onValueChange={(nextMonth) => {
+          if (nextMonth) goToMonth(new Date(year, Number(nextMonth), 1));
+        }}
+        value={String(month)}
+      >
+        <SelectTrigger
+          aria-label="Choose the Month"
+          className="h-7 min-w-20 px-2"
+        >
+          <SelectValue>
+            {formatters.formatMonthDropdown(calendarMonth.date)}
+          </SelectValue>
+        </SelectTrigger>
+        <SelectContent align="start">
+          {Array.from({ length: 12 }, (_, monthIndex) => {
+            const date = new Date(year, monthIndex, 1);
+
+            return (
+              <SelectItem key={monthIndex} value={String(monthIndex)}>
+                {formatters.formatMonthDropdown(date)}
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
+      <Select
+        modal={false}
+        onValueChange={(nextYear) => {
+          if (nextYear) goToMonth(new Date(Number(nextYear), month, 1));
+        }}
+        value={String(year)}
+      >
+        <SelectTrigger
+          aria-label="Choose the Year"
+          className="h-7 min-w-20 px-2"
+        >
+          <SelectValue>{year}</SelectValue>
+        </SelectTrigger>
+        <SelectContent align="start">
+          {years.map((yearOption) => (
+            <SelectItem key={yearOption} value={String(yearOption)}>
+              {yearOption}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }
 
@@ -226,7 +325,7 @@ function CalendarDayButton({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground dark:hover:text-foreground [&>span]:text-xs [&>span]:opacity-70",
+        "relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0 leading-none font-normal transition-[background-color,color,transform] duration-150 ease-out active:scale-95 group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px] group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius) data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground data-[range-end=true]:hover:!bg-primary data-[range-end=true]:hover:!text-primary-foreground data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground data-[range-middle=true]:hover:!bg-muted data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius) data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-start=true]:hover:!bg-primary data-[range-start=true]:hover:!text-primary-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[selected-single=true]:hover:!bg-primary data-[selected-single=true]:hover:!text-primary-foreground motion-reduce:transition-none [&>span]:text-xs [&>span]:opacity-70",
         defaultClassNames.day,
         className
       )}

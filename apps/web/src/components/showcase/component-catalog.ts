@@ -40,6 +40,11 @@ export type ComponentSettings = {
     showFooter: boolean;
     variant: "default" | "shine" | "animated-border";
   };
+  calendar?: {
+    easyNavigation: boolean;
+    mode: "range" | "single";
+    showOutsideDays: boolean;
+  };
   combobox?: {
     autoHighlight: boolean;
     disabled: boolean;

@@ -29,6 +29,8 @@ const cardVariantLabels = {
   "animated-border": "Animated",
 } as const;
 
+const settingsSelectTriggerClass = "w-24 min-w-0 justify-between";
+
 function SettingsShell({
   children,
   title,
@@ -49,7 +51,7 @@ function SettingsShell({
       </div>
       <div className="space-y-2">
         <p className="font-medium text-foreground">{title}</p>
-        <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5">
+        <div className="space-y-1.5 rounded-md bg-muted/40 p-2.5 [&_[data-slot=dropdown-menu-trigger]]:w-24 [&_[data-slot=dropdown-menu-trigger]]:min-w-0">
           {children}
         </div>
       </div>
@@ -240,6 +242,74 @@ function CardSettings({
   );
 
   return children({ controls, settings: { card: settings } });
+}
+
+function CalendarSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["calendar"]>
+  >({
+    easyNavigation: false,
+    mode: "single",
+    showOutsideDays: true,
+  });
+
+  const controls = (
+    <SettingsShell title="Calendar">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Selection
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={settingsSelectTriggerClass}
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.mode === "single" ? "Single" : "Range"}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(mode) => {
+                setSettings((current) => ({
+                  ...current,
+                  mode: mode as NonNullable<
+                    ComponentSettings["calendar"]
+                  >["mode"],
+                }));
+              }}
+              value={settings.mode}
+            >
+              <DropdownMenuRadioItem value="single">
+                Single
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="range">Range</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Easy Navigate
+        <Switch
+          checked={settings.easyNavigation}
+          onCheckedChange={(easyNavigation) => {
+            setSettings((current) => ({ ...current, easyNavigation }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Outside Days
+        <Switch
+          checked={settings.showOutsideDays}
+          onCheckedChange={(showOutsideDays) => {
+            setSettings((current) => ({ ...current, showOutsideDays }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { calendar: settings } });
 }
 
 function ComboboxSettings({
@@ -869,6 +939,8 @@ function ComponentSettingsController({
       return <AccordionSettings>{children}</AccordionSettings>;
     case "card":
       return <CardSettings>{children}</CardSettings>;
+    case "calendar":
+      return <CalendarSettings>{children}</CalendarSettings>;
     case "combobox":
       return <ComboboxSettings>{children}</ComboboxSettings>;
     case "dither-avatar":
