@@ -215,12 +215,6 @@ export const dialogDocs: ComponentDocDefinition = {
           defaultValue: "true",
           description: "Shows the close button in the top-right corner.",
         },
-        {
-          name: "className",
-          type: "string",
-          defaultValue: "-",
-          description: "Customizes the dialog surface.",
-        },
       ],
     },
     {

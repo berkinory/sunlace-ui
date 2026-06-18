@@ -94,12 +94,6 @@ export const skeletonDocs: ComponentDocDefinition = {
           defaultValue: '"shimmer"',
           description: "Sets the loading animation style.",
         },
-        {
-          name: "className",
-          type: "string",
-          defaultValue: "-",
-          description: "Defines the placeholder shape and dimensions.",
-        },
       ],
     },
   ],

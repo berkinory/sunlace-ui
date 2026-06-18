@@ -246,17 +246,6 @@ export const drawerDocs: ComponentDocDefinition = {
         },
       ],
     },
-    {
-      title: "DrawerContent",
-      props: [
-        {
-          name: "className",
-          type: "string",
-          defaultValue: "-",
-          description: "Customizes size, layout, and surface styling.",
-        },
-      ],
-    },
   ],
   renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Drawer>
