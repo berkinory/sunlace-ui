@@ -143,16 +143,16 @@ export function ShowcaseExample({
         <div
           className={
             controls
-              ? "grid h-[300px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_200px]"
-              : "flex h-[300px] items-center justify-center overflow-auto p-8"
+              ? "grid h-[400px] grid-cols-1 md:grid-cols-[minmax(0,1fr)_200px]"
+              : "flex h-[400px] items-center justify-center p-8"
           }
         >
           {controls && mobileTab === "settings" ? (
-            <div className="showcase-scrollbar h-[300px] overflow-y-auto bg-muted/25 p-4 md:hidden">
+            <div className="showcase-scrollbar h-[400px] overflow-y-auto bg-muted/25 p-4 md:hidden">
               {controls}
             </div>
           ) : controls ? (
-            <div className="showcase-scrollbar flex h-[300px] items-center justify-center overflow-auto p-8 md:hidden">
+            <div className="flex h-[400px] items-center justify-center p-8 md:hidden">
               {preview}
             </div>
           ) : (
@@ -161,12 +161,12 @@ export function ShowcaseExample({
             </div>
           )}
           {controls ? (
-            <div className="showcase-scrollbar hidden h-[300px] items-center justify-center overflow-auto p-8 md:flex">
+            <div className="hidden h-[400px] items-center justify-center p-8 md:flex">
               {preview}
             </div>
           ) : null}
           {controls ? (
-            <aside className="showcase-scrollbar hidden h-[300px] overflow-y-auto border-border border-l bg-muted/25 p-4 md:block">
+            <aside className="showcase-scrollbar hidden h-[400px] overflow-y-auto border-border border-l bg-muted/25 p-4 md:block">
               {controls}
             </aside>
           ) : null}
