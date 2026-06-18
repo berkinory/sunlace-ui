@@ -13,7 +13,7 @@ export * from "./input";
 export * from "./input-group";
 export * from "./popover";
 export * from "./progress";
-export * from "./radio-group";
+export * from "./radio";
 export * from "./select";
 export * from "./skeleton";
 export * from "./slider";

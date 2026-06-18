@@ -180,7 +180,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
             {componentItems.map((item) => (
               <Fragment key={item.slug}>
                 {renderNavLink({
-                  children: "navLabel" in item ? item.navLabel : item.label,
+                  children: item.label,
                   component: item.slug,
                   itemKey: item.slug,
                   isActive: activeKey === item.slug,

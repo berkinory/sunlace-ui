@@ -13,7 +13,7 @@ export const componentItems = [
   { slug: "input", label: "Input" },
   { slug: "popover", label: "Popover" },
   { slug: "progress", label: "Progress" },
-  { slug: "radio-group", label: "Radio Group", navLabel: "Radio" },
+  { slug: "radio", label: "Radio" },
   { slug: "select", label: "Select" },
   { slug: "skeleton", label: "Skeleton" },
   { slug: "slider", label: "Slider" },

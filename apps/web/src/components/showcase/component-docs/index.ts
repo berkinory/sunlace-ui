@@ -13,7 +13,7 @@ import { dropdownMenuDocs } from "./dropdown-menu";
 import { inputDocs } from "./input";
 import { popoverDocs } from "./popover";
 import { progressDocs } from "./progress";
-import { radioGroupDocs } from "./radio-group";
+import { radioDocs } from "./radio";
 import { selectDocs } from "./select";
 import { skeletonDocs } from "./skeleton";
 import { sliderDocs } from "./slider";
@@ -41,7 +41,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   input: inputDocs,
   popover: popoverDocs,
   progress: progressDocs,
-  "radio-group": radioGroupDocs,
+  radio: radioDocs,
   select: selectDocs,
   skeleton: skeletonDocs,
   slider: sliderDocs,
