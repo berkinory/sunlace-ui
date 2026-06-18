@@ -786,6 +786,44 @@ function SkeletonSettings({
   return children({ controls, settings: { skeleton: settings } });
 }
 
+function ProgressSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["progress"]>
+  >({
+    indeterminate: false,
+    showLabel: true,
+  });
+
+  const controls = (
+    <SettingsShell title="Progress">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Label
+        <Switch
+          checked={settings.showLabel}
+          onCheckedChange={(showLabel) => {
+            setSettings((current) => ({ ...current, showLabel }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Indeterminate
+        <Switch
+          checked={settings.indeterminate}
+          onCheckedChange={(indeterminate) => {
+            setSettings((current) => ({ ...current, indeterminate }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { progress: settings } });
+}
+
 function ShapeControl({
   onChange,
   value,
@@ -843,6 +881,8 @@ function ComponentSettingsController({
       return <DrawerSettings>{children}</DrawerSettings>;
     case "popover":
       return <PopoverSettings>{children}</PopoverSettings>;
+    case "progress":
+      return <ProgressSettings>{children}</ProgressSettings>;
     case "select":
       return <SelectSettings>{children}</SelectSettings>;
     case "skeleton":

@@ -6,21 +6,33 @@ import { cn } from "@sunlace/ui/lib/utils";
 function Progress({
   className,
   children,
+  size = "default",
   value,
   ...props
-}: ProgressPrimitive.Root.Props) {
+}: ProgressPrimitive.Root.Props & {
+  size?: "default" | "sm";
+}) {
   return (
-    <ProgressPrimitive.Root
-      value={value}
-      data-slot="progress"
-      className={cn("flex flex-wrap gap-3", className)}
-      {...props}
-    >
-      {children}
-      <ProgressTrack>
-        <ProgressIndicator />
-      </ProgressTrack>
-    </ProgressPrimitive.Root>
+    <>
+      <style>
+        {`@keyframes sunlace-progress-indeterminate{0%{transform:translateX(-100%)}100%{transform:translateX(500%)}}`}
+      </style>
+      <ProgressPrimitive.Root
+        value={value}
+        data-size={size}
+        data-slot="progress"
+        className={cn(
+          "group/progress grid w-full grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <ProgressTrack>
+          <ProgressIndicator />
+        </ProgressTrack>
+      </ProgressPrimitive.Root>
+    </>
   );
 }
 
@@ -28,7 +40,7 @@ function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
   return (
     <ProgressPrimitive.Track
       className={cn(
-        "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+        "relative col-span-full flex h-1.5 w-full items-center overflow-hidden rounded-full bg-muted ring-1 ring-foreground/5 group-data-[size=sm]/progress:h-1",
         className
       )}
       data-slot="progress-track"
@@ -44,7 +56,10 @@ function ProgressIndicator({
   return (
     <ProgressPrimitive.Indicator
       data-slot="progress-indicator"
-      className={cn("h-full bg-primary transition-all", className)}
+      className={cn(
+        "h-full rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] data-indeterminate:w-1/5 data-indeterminate:animate-[sunlace-progress-indeterminate_1.4s_ease-in-out_infinite] motion-reduce:transition-none motion-reduce:data-indeterminate:animate-none",
+        className
+      )}
       {...props}
     />
   );

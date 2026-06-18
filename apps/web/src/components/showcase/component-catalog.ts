@@ -71,6 +71,10 @@ export type ComponentSettings = {
     align: "center" | "end" | "start";
     side: "bottom" | "left" | "right" | "top";
   };
+  progress?: {
+    indeterminate: boolean;
+    showLabel: boolean;
+  };
   select?: {
     align: "center" | "start";
     alignItemWithTrigger: boolean;
