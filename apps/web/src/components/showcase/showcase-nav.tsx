@@ -91,6 +91,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
         data-active={isActive ? true : undefined}
         hash={hash}
         params={{ component }}
+        resetScroll={false}
         ref={(node) => {
           if (!node) {
             linkRefs.current.delete(itemKey);
@@ -179,7 +180,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
             {componentItems.map((item) => (
               <Fragment key={item.slug}>
                 {renderNavLink({
-                  children: item.label,
+                  children: "navLabel" in item ? item.navLabel : item.label,
                   component: item.slug,
                   itemKey: item.slug,
                   isActive: activeKey === item.slug,
