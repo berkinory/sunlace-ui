@@ -80,7 +80,7 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
     <TabsPrimitive.Panel
       data-slot="tabs-content"
       className={cn(
-        "flex-1 text-sm outline-none transition-[height] duration-[var(--resize-dur)] ease-[var(--resize-ease)] will-change-[height] [--resize-dur:300ms] [--resize-ease:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+        "flex-1 text-sm outline-none transition-[height,opacity,filter,transform] delay-[var(--tabs-content-delay)] duration-[var(--tabs-content-dur)] ease-[var(--tabs-content-ease)] will-change-[height,opacity,filter,transform] [--tabs-content-delay:90ms] [--tabs-content-dur:260ms] [--tabs-content-ease:cubic-bezier(0.16,1,0.3,1)] data-[ending-style]:absolute data-[ending-style]:w-full data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:blur-[3px] data-[ending-style]:[--tabs-content-delay:0ms] data-[ending-style]:[--tabs-content-dur:120ms] data-[ending-style]:[transform:translateY(-2px)] data-[starting-style]:opacity-0 data-[starting-style]:blur-[3px] data-[starting-style]:[transform:translateY(2px)] motion-reduce:transition-none motion-reduce:blur-none motion-reduce:transform-none",
         className
       )}
       {...props}
