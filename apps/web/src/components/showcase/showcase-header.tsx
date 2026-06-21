@@ -65,7 +65,7 @@ function ShowcaseHeader({
               <HugeiconsIcon icon={Menu11Icon} size={18} strokeWidth={2} />
             </Button>
           </DrawerTrigger>
-          <DrawerContent className="flex h-full w-[min(20rem,calc(100vw-1rem))] flex-col border-border/80 bg-sidebar p-0 shadow-xl">
+          <DrawerContent className="flex h-full data-[vaul-drawer-direction=right]:w-[min(16rem,calc(100vw-4rem))] flex-col border-border/80 bg-sidebar p-0 shadow-xl">
             <ShowcaseNav activeSlug={activeSlug} mobile />
           </DrawerContent>
         </Drawer>
