@@ -51,7 +51,7 @@ function TabsList({
       {variant === "default" ? (
         <TabsPrimitive.Indicator
           data-slot="tabs-indicator"
-          className="absolute z-0 rounded-md border border-border bg-background shadow-sm ring-1 ring-foreground/5 transition-[left,top,width,height] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] [height:var(--active-tab-height)] [left:var(--active-tab-left)] [top:var(--active-tab-top)] [width:var(--active-tab-width)] dark:border-input dark:bg-input/50 motion-reduce:transition-none"
+          className="absolute top-0 left-0 z-0 rounded-md border border-border bg-background shadow-sm ring-1 ring-foreground/5 transition-[transform,width,height] duration-[var(--tabs-dur)] ease-[var(--tabs-ease)] will-change-[transform,width,height] [--tabs-dur:250ms] [--tabs-ease:cubic-bezier(0.22,1,0.36,1)] [height:var(--active-tab-height)] [transform:translate(var(--active-tab-left),var(--active-tab-top))] [width:var(--active-tab-width)] dark:border-input dark:bg-input/50 motion-reduce:transition-none"
         />
       ) : null}
       {props.children}
@@ -79,7 +79,10 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
-      className={cn("flex-1 text-sm outline-none", className)}
+      className={cn(
+        "flex-1 text-sm outline-none transition-[height] duration-[var(--resize-dur)] ease-[var(--resize-ease)] will-change-[height] [--resize-dur:300ms] [--resize-ease:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+        className
+      )}
       {...props}
     />
   );

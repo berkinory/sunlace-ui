@@ -11,8 +11,12 @@ import {
   TabsList,
   TabsTrigger,
 } from "@sunlace/ui";
+import { useState } from "react";
 
 import type { ComponentDocDefinition } from "./types";
+
+const resizeCardClass =
+  "overflow-hidden transition-[height] duration-[var(--resize-dur)] ease-[var(--resize-ease)] will-change-[height] [--resize-dur:300ms] [--resize-ease:cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
 
 const showcaseCode = `import { Button } from "@/components/ui/button";
 import {
@@ -29,19 +33,28 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import { useState } from "react";
 
 export function TabsDemo() {
+  const [tab, setTab] = useState("login");
+
   return (
-    <Tabs className="w-full max-w-sm" defaultValue="login">
-      <TabsList className="grid w-full grid-cols-2">
+    <Tabs className="w-full max-w-sm gap-4" onValueChange={setTab} value={tab}>
+      <TabsList>
         <TabsTrigger value="login">Log In</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
       </TabsList>
-      <Card className="min-h-72">
+      <Card
+        className={
+          tab === "login"
+            ? "h-60 overflow-hidden transition-[height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            : "h-72 overflow-hidden transition-[height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        }
+      >
         <TabsContent value="login">
           <CardHeader>
             <CardTitle>Welcome Back</CardTitle>
-            <CardDescription>Log in to continue to your account.</CardDescription>
+            <CardDescription>Log in to continue.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             <Input aria-label="Email" placeholder="Email" type="email" />
@@ -56,7 +69,7 @@ export function TabsDemo() {
         <TabsContent value="register">
           <CardHeader>
             <CardTitle>Create an Account</CardTitle>
-            <CardDescription>Get started with a new account.</CardDescription>
+            <CardDescription>Finish the extra details before starting.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             <Input aria-label="Name" placeholder="Name" />
@@ -74,20 +87,88 @@ export function TabsDemo() {
   );
 }`;
 
-function Preview() {
+const projectCode = `import { Card, CardContent } from "@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+
+export function ProjectTabs() {
   return (
-    <Tabs className="w-full max-w-sm" defaultValue="login">
-      <TabsList className="grid w-full grid-cols-2">
+    <Tabs className="w-80 gap-4" defaultValue="overview">
+      <TabsList variant="line">
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="activity">Activity</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+      </TabsList>
+      <Card>
+        <TabsContent value="overview">
+          <CardContent className="text-muted-foreground">
+            Track launch status, ownership, and current project health.
+          </CardContent>
+        </TabsContent>
+        <TabsContent value="activity">
+          <CardContent className="text-muted-foreground">
+            Review recent deploys, comments, and handoff notes.
+          </CardContent>
+        </TabsContent>
+        <TabsContent value="settings">
+          <CardContent className="text-muted-foreground">
+            Manage access, notifications, and automation rules.
+          </CardContent>
+        </TabsContent>
+      </Card>
+    </Tabs>
+  );
+}`;
+
+function ProjectExample() {
+  return (
+    <Tabs className="w-80 gap-4" defaultValue="overview">
+      <TabsList variant="line">
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="activity">Activity</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+      </TabsList>
+      <Card>
+        <TabsContent value="overview">
+          <CardContent className="text-muted-foreground">
+            Track launch status, ownership, and current project health.
+          </CardContent>
+        </TabsContent>
+        <TabsContent value="activity">
+          <CardContent className="text-muted-foreground">
+            Review recent deploys, comments, and handoff notes.
+          </CardContent>
+        </TabsContent>
+        <TabsContent value="settings">
+          <CardContent className="text-muted-foreground">
+            Manage access, notifications, and automation rules.
+          </CardContent>
+        </TabsContent>
+      </Card>
+    </Tabs>
+  );
+}
+
+function Preview() {
+  const [tab, setTab] = useState("login");
+
+  return (
+    <Tabs className="w-full max-w-sm gap-4" onValueChange={setTab} value={tab}>
+      <TabsList>
         <TabsTrigger value="login">Log In</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
       </TabsList>
-      <Card className="min-h-72">
+      <Card
+        className={`${resizeCardClass} ${tab === "login" ? "h-60" : "h-72"}`}
+      >
         <TabsContent value="login">
           <CardHeader>
             <CardTitle>Welcome Back</CardTitle>
-            <CardDescription>
-              Log in to continue to your account.
-            </CardDescription>
+            <CardDescription>Log in to continue.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             <Input aria-label="Email" placeholder="Email" type="email" />
@@ -102,7 +183,9 @@ function Preview() {
         <TabsContent value="register">
           <CardHeader>
             <CardTitle>Create an Account</CardTitle>
-            <CardDescription>Get started with a new account.</CardDescription>
+            <CardDescription>
+              Finish the extra details before starting.
+            </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             <Input aria-label="Name" placeholder="Name" />
@@ -122,6 +205,14 @@ function Preview() {
 
 export const tabsDocs: ComponentDocDefinition = {
   description: "A set of layered panels switched by a shared tab list.",
+  examples: [
+    {
+      code: projectCode,
+      preview: <ProjectExample />,
+      resetKey: "tabs-project-example",
+      title: "Project Sections",
+    },
+  ],
   getShowcaseCode: () => showcaseCode,
   importCode: `import {
   Tabs,
