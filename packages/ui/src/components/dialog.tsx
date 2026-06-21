@@ -6,6 +6,11 @@ import * as React from "react";
 
 import { Button } from "./button";
 
+const dialogTransitionVars =
+  "[--modal-close-dur:280ms] [--modal-ease:cubic-bezier(0.22,1,0.36,1)] [--modal-open-dur:280ms]";
+
+const dialogScaleVars = "[--modal-scale-close:0.94] [--modal-scale:0.94]";
+
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
@@ -30,7 +35,8 @@ function DialogOverlay({
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/30 supports-backdrop-filter:backdrop-blur-[2px] data-open:animate-in data-open:fade-in-0 data-open:duration-250 data-open:ease-out data-closed:animate-out data-closed:fade-out-0 data-closed:duration-175 data-closed:ease-in motion-reduce:transition-none dark:bg-black/50",
+        "fixed inset-0 isolate z-50 bg-black/30 opacity-100 supports-backdrop-filter:backdrop-blur-[2px] transition-opacity duration-[var(--modal-open-dur)] ease-[var(--modal-ease)] data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:duration-[var(--modal-close-dur)] data-[starting-style]:opacity-0 motion-reduce:transition-none dark:bg-black/50",
+        dialogTransitionVars,
         className
       )}
       {...props}
@@ -52,7 +58,9 @@ function DialogContent({
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-5 rounded-xl border border-border bg-card bg-clip-padding p-5 text-sm text-card-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_12px_40px_rgb(0_0_0/0.14),inset_0_1px_rgb(255_255_255/0.18)] outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:slide-in-from-bottom-3 data-open:zoom-in-[0.97] data-open:duration-300 data-open:ease-[cubic-bezier(0.16,1,0.3,1)] data-closed:animate-out data-closed:fade-out-0 data-closed:slide-out-to-bottom-1 data-closed:zoom-out-[0.985] data-closed:duration-175 data-closed:ease-[cubic-bezier(0.4,0,1,1)] motion-reduce:transition-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.32),0_16px_48px_rgb(0_0_0/0.32),inset_0_1px_rgb(255_255_255/0.08)]",
+          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] gap-5 rounded-xl border border-border bg-card bg-clip-padding p-5 text-sm text-card-foreground opacity-100 shadow-[0_1px_1px_rgb(0_0_0/0.06),0_12px_40px_rgb(0_0_0/0.14),inset_0_1px_rgb(255_255_255/0.18)] outline-none transition-[transform,opacity] duration-[var(--modal-open-dur)] ease-[var(--modal-ease)] will-change-[transform,opacity] origin-center [transform:translate(-50%,-50%)_scale(1)] sm:max-w-md data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:duration-[var(--modal-close-dur)] data-[ending-style]:[transform:translate(-50%,-50%)_scale(var(--modal-scale-close))] data-[starting-style]:opacity-0 data-[starting-style]:[transform:translate(-50%,-50%)_scale(var(--modal-scale))] motion-reduce:transition-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.32),0_16px_48px_rgb(0_0_0/0.32),inset_0_1px_rgb(255_255_255/0.08)]",
+          dialogTransitionVars,
+          dialogScaleVars,
           className
         )}
         {...props}

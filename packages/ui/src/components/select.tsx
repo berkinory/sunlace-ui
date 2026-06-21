@@ -91,7 +91,9 @@ function SelectContent({
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            "relative isolate z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-1 data-[side=inline-end]:slide-in-from-left-1 data-[side=inline-start]:slide-in-from-right-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-150 data-open:ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none",
+            "relative isolate z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10",
+            "opacity-100 transition-[transform,opacity] duration-[var(--dropdown-open-dur)] ease-[var(--dropdown-ease)] will-change-[transform,opacity] data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:duration-[var(--dropdown-close-dur)] data-[ending-style]:[transform:scale(var(--dropdown-closing-scale))] data-[starting-style]:opacity-0 data-[starting-style]:[transform:scale(var(--dropdown-pre-scale))] data-open:[transform:scale(1)] motion-reduce:transition-none",
+            "[--dropdown-close-dur:150ms] [--dropdown-closing-scale:0.99] [--dropdown-ease:cubic-bezier(0.22,1,0.36,1)] [--dropdown-open-dur:250ms] [--dropdown-pre-scale:0.97]",
             className
           )}
           {...props}

@@ -38,7 +38,9 @@ function PopoverContent({
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "z-50 flex w-72 origin-(--transform-origin) flex-col gap-3 rounded-lg border border-border bg-popover bg-clip-padding p-3 text-sm text-popover-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_8px_24px_rgb(0_0_0/0.1),inset_0_1px_rgb(255_255_255/0.16)] outline-none data-[side=bottom]:slide-in-from-top-1 data-[side=inline-end]:slide-in-from-left-1 data-[side=inline-start]:slide-in-from-right-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:duration-175 data-open:ease-[cubic-bezier(0.16,1,0.3,1)] data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-98 data-closed:duration-125 data-closed:ease-in motion-reduce:transition-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.3),0_10px_28px_rgb(0_0_0/0.24),inset_0_1px_rgb(255_255_255/0.07)]",
+            "z-50 flex w-72 origin-(--transform-origin) flex-col gap-3 rounded-lg border border-border bg-popover bg-clip-padding p-3 text-sm text-popover-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_8px_24px_rgb(0_0_0/0.1),inset_0_1px_rgb(255_255_255/0.16)] outline-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.3),0_10px_28px_rgb(0_0_0/0.24),inset_0_1px_rgb(255_255_255/0.07)]",
+            "opacity-100 transition-[transform,opacity] duration-[var(--dropdown-open-dur)] ease-[var(--dropdown-ease)] will-change-[transform,opacity] data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:duration-[var(--dropdown-close-dur)] data-[ending-style]:[transform:scale(var(--dropdown-closing-scale))] data-[starting-style]:opacity-0 data-[starting-style]:[transform:scale(var(--dropdown-pre-scale))] data-open:[transform:scale(1)] motion-reduce:transition-none",
+            "[--dropdown-close-dur:150ms] [--dropdown-closing-scale:0.99] [--dropdown-ease:cubic-bezier(0.22,1,0.36,1)] [--dropdown-open-dur:250ms] [--dropdown-pre-scale:0.97]",
             className
           )}
           {...props}

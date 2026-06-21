@@ -34,7 +34,9 @@ function DrawerOverlay({
     <DrawerPrimitive.Overlay
       data-slot="drawer-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/30 supports-backdrop-filter:backdrop-blur-[2px] data-open:animate-in data-open:fade-in-0 data-open:duration-250 data-open:ease-out data-closed:animate-out data-closed:fade-out-0 data-closed:duration-175 data-closed:ease-in motion-reduce:transition-none dark:bg-black/50",
+        "fixed inset-0 z-50 bg-black/30 supports-backdrop-filter:backdrop-blur-[2px] dark:bg-black/50",
+        "opacity-100 transition-opacity duration-[var(--panel-open-dur)] ease-[var(--panel-ease)] data-closed:pointer-events-none data-closed:opacity-0 data-closed:duration-[var(--panel-close-dur)] data-open:opacity-100 data-open:duration-[var(--panel-open-dur)] motion-reduce:transition-none",
+        "[--panel-blur:2px] [--panel-close-dur:350ms] [--panel-ease:cubic-bezier(0.22,1,0.36,1)] [--panel-open-dur:400ms]",
         className
       )}
       {...props}
@@ -54,6 +56,8 @@ function DrawerContent({
         data-slot="drawer-content"
         className={cn(
           "group/drawer-content fixed z-50 flex h-auto flex-col border-border bg-card bg-clip-padding text-sm text-card-foreground shadow-[0_1px_1px_rgb(0_0_0/0.06),0_12px_40px_rgb(0_0_0/0.14),inset_0_1px_rgb(255_255_255/0.18)] outline-none dark:shadow-[0_1px_1px_rgb(0_0_0/0.32),0_16px_48px_rgb(0_0_0/0.32),inset_0_1px_rgb(255_255_255/0.08)] data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[85dvh] data-[vaul-drawer-direction=bottom]:rounded-t-xl data-[vaul-drawer-direction=bottom]:border-t data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-[min(85vw,24rem)] data-[vaul-drawer-direction=left]:rounded-r-xl data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-[min(85vw,24rem)] data-[vaul-drawer-direction=right]:rounded-l-xl data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[85dvh] data-[vaul-drawer-direction=top]:rounded-b-xl data-[vaul-drawer-direction=top]:border-b",
+          "opacity-100 transition-[opacity,filter] duration-[var(--panel-open-dur)] ease-[var(--panel-ease)] will-change-[opacity,filter] [filter:none] data-closed:pointer-events-none data-closed:opacity-0 data-closed:duration-[var(--panel-close-dur)] data-closed:[filter:blur(var(--panel-blur))] data-open:pointer-events-auto data-open:opacity-100 data-open:duration-[var(--panel-open-dur)] data-open:[filter:none] motion-reduce:transition-none",
+          "[--panel-blur:2px] [--panel-close-dur:350ms] [--panel-ease:cubic-bezier(0.22,1,0.36,1)] [--panel-open-dur:400ms]",
           className
         )}
         {...props}
