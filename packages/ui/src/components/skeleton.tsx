@@ -25,4 +25,61 @@ function Skeleton({
   );
 }
 
-export { Skeleton };
+function SkeletonReveal({
+  className,
+  revealed,
+  ...props
+}: React.ComponentProps<"div"> & {
+  revealed?: boolean;
+}) {
+  return (
+    <div
+      data-slot="skeleton-reveal"
+      data-state={revealed ? "revealed" : "loading"}
+      className={cn(
+        "group/skeleton-reveal grid [--skeleton-reveal-blur:2px] [--skeleton-reveal-dur:400ms] [--skeleton-reveal-ease:ease-in-out]",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+function SkeletonRevealSkeleton({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="skeleton-reveal-skeleton"
+      className={cn(
+        "col-start-1 row-start-1 z-1 opacity-100 blur-none transition-[opacity,filter] duration-[var(--skeleton-reveal-dur)] ease-[var(--skeleton-reveal-ease)] group-data-[state=revealed]/skeleton-reveal:pointer-events-none group-data-[state=revealed]/skeleton-reveal:opacity-0 group-data-[state=revealed]/skeleton-reveal:blur-[var(--skeleton-reveal-blur)] motion-reduce:transition-none motion-reduce:blur-none",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+function SkeletonRevealContent({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="skeleton-reveal-content"
+      className={cn(
+        "col-start-1 row-start-1 z-2 opacity-0 blur-[var(--skeleton-reveal-blur)] transition-[opacity,filter] duration-[var(--skeleton-reveal-dur)] ease-[var(--skeleton-reveal-ease)] group-data-[state=revealed]/skeleton-reveal:opacity-100 group-data-[state=revealed]/skeleton-reveal:blur-none motion-reduce:transition-none motion-reduce:blur-none",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+export {
+  Skeleton,
+  SkeletonReveal,
+  SkeletonRevealContent,
+  SkeletonRevealSkeleton,
+};

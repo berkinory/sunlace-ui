@@ -96,6 +96,18 @@ export const skeletonDocs: ComponentDocDefinition = {
         },
       ],
     },
+    {
+      title: "SkeletonReveal",
+      props: [
+        {
+          name: "revealed",
+          type: "boolean",
+          defaultValue: "false",
+          description:
+            "Cross-fades from the skeleton layer to the content layer.",
+        },
+      ],
+    },
   ],
   renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Skeleton className="h-4 w-full" />`,
