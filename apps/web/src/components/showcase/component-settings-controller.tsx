@@ -809,6 +809,64 @@ function PopoverSettings({
   return children({ controls, settings: { popover: settings } });
 }
 
+function TooltipSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["tooltip"]>
+  >({
+    showArrow: true,
+    side: "top",
+  });
+
+  const controls = (
+    <SettingsShell title="Tooltip">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Side
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="min-w-24 justify-between"
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.side.charAt(0).toUpperCase() + settings.side.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(side) => {
+                setSettings((current) => ({
+                  ...current,
+                  side: side as NonNullable<
+                    ComponentSettings["tooltip"]
+                  >["side"],
+                }));
+              }}
+              value={settings.side}
+            >
+              <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="bottom">
+                Bottom
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="left">Left</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Arrow
+        <Switch
+          checked={settings.showArrow}
+          onCheckedChange={(showArrow) => {
+            setSettings((current) => ({ ...current, showArrow }));
+          }}
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { tooltip: settings } });
+}
+
 function SkeletonSettings({
   children,
 }: Pick<ComponentSettingsControllerProps, "children">) {
@@ -1031,6 +1089,8 @@ function ComponentSettingsController({
       return <SkeletonSettings>{children}</SkeletonSettings>;
     case "slider":
       return <SliderSettings>{children}</SliderSettings>;
+    case "tooltip":
+      return <TooltipSettings>{children}</TooltipSettings>;
     default:
       return children({ controls: null, settings: {} });
   }

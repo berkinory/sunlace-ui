@@ -21,7 +21,6 @@ export const componentItems = [
   { slug: "spinner", label: "Spinner" },
   { slug: "switch", label: "Switch" },
   { slug: "tabs", label: "Tabs" },
-  { slug: "toggle", label: "Toggle" },
   { slug: "tooltip", label: "Tooltip" },
 ] as const;
 
@@ -93,6 +92,10 @@ export type ComponentSettings = {
     disabled: boolean;
     orientation: "horizontal" | "vertical";
     range: boolean;
+  };
+  tooltip?: {
+    showArrow: boolean;
+    side: "bottom" | "left" | "right" | "top";
   };
 };
 
