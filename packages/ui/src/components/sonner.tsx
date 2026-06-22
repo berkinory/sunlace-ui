@@ -64,13 +64,13 @@ const sonnerStyles = `
 `;
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
     <>
       <style>{sonnerStyles}</style>
       <Sonner
-        theme={theme as ToasterProps["theme"]}
+        theme={(resolvedTheme ?? "dark") as ToasterProps["theme"]}
         className="toaster group"
         style={
           {

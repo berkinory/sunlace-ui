@@ -1,13 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="description" content="Sunlace component library" />
     <meta property="og:site_name" content="Sunlace" />
     <meta property="og:title" content="Sunlace" />
     <meta property="og:description" content="Sunlace component library" />
     <title>Sunlace</title>
+    <script>
+      (function () {
+        try {
+          var storageKey = "vite-ui-theme";
+          var theme = localStorage.getItem(storageKey) || "dark";
+          var root = document.documentElement;
+
+          if (theme === "system") {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          }
+
+          root.classList.toggle("dark", theme === "dark");
+        } catch (_) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -39,7 +39,7 @@ const RootComponent = () => (
     <HeadContent />
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="dark"
       enableSystem
       storageKey="vite-ui-theme"
     >

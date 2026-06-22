@@ -205,6 +205,11 @@
 
   html {
     overscroll-behavior: none;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 }
 

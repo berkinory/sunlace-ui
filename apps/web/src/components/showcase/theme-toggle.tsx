@@ -13,7 +13,7 @@ const prefersReducedMotion =
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const ref = useRef<HTMLButtonElement>(null);
-  const state = resolvedTheme === "dark" ? "dark" : "light";
+  const state = resolvedTheme === "light" ? "light" : "dark";
   const nextTheme = state === "dark" ? "light" : "dark";
 
   const toggle = () => {
