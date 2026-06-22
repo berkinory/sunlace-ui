@@ -40,7 +40,6 @@ const RootComponent = () => (
     <ThemeProvider
       attribute="class"
       defaultTheme="system"
-      disableTransitionOnChange
       enableSystem
       storageKey="vite-ui-theme"
     >
