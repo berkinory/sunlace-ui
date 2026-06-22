@@ -21,7 +21,7 @@ export function SonnerDemo() {
   return (
     <>
       <div className="flex flex-wrap gap-2">
-        <Button variant="outline" onClick={() => toast("sunlace toast")}>
+        <Button variant="outline" onClick={() => toast("Sunlace Toast Example")}>
           Default
         </Button>
         <Button variant="success" onClick={() => toast.success("Changes saved")}>
@@ -81,7 +81,7 @@ export function SonnerDemo() {
 function Preview() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-2">
-      <Button variant="outline" onClick={() => toast("sunlace toast")}>
+      <Button variant="outline" onClick={() => toast("Sunlace Toast Example")}>
         Default
       </Button>
       <Button variant="success" onClick={() => toast.success("Changes saved")}>
