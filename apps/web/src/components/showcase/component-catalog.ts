@@ -15,6 +15,7 @@ export const componentItems = [
   { slug: "progress", label: "Progress" },
   { slug: "radio", label: "Radio" },
   { slug: "select", label: "Select" },
+  { slug: "shimmer-text", label: "Shimmer Text" },
   { slug: "skeleton", label: "Skeleton" },
   { slug: "slider", label: "Slider" },
   { slug: "sonner", label: "Sonner" },

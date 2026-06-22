@@ -15,6 +15,7 @@ import { popoverDocs } from "./popover";
 import { progressDocs } from "./progress";
 import { radioDocs } from "./radio";
 import { selectDocs } from "./select";
+import { shimmerTextDocs } from "./shimmer-text";
 import { skeletonDocs } from "./skeleton";
 import { sliderDocs } from "./slider";
 import { sonnerDocs } from "./sonner";
@@ -42,6 +43,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   progress: progressDocs,
   radio: radioDocs,
   select: selectDocs,
+  "shimmer-text": shimmerTextDocs,
   skeleton: skeletonDocs,
   slider: sliderDocs,
   sonner: sonnerDocs,
