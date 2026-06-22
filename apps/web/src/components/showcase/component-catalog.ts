@@ -7,6 +7,7 @@ export const componentItems = [
   { slug: "card", label: "Card" },
   { slug: "checkbox", label: "Checkbox" },
   { slug: "combobox", label: "Combobox" },
+  { slug: "command-palette", label: "Command Palette" },
   { slug: "dialog", label: "Dialog" },
   { slug: "dither-avatar", label: "Dither Avatar" },
   { slug: "dock", label: "Dock" },

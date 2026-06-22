@@ -7,6 +7,7 @@ import {
 import { Agentation } from "agentation";
 import { useEffect } from "react";
 
+import { SiteCommandPaletteProvider } from "@/components/showcase/site-command-palette";
 import { ThemeProvider } from "@/components/showcase/theme-provider";
 
 import "../index.css";
@@ -43,9 +44,11 @@ const RootComponent = () => (
       enableSystem
       storageKey="vite-ui-theme"
     >
-      <RybbitAnalytics />
-      <Outlet />
-      {import.meta.env.DEV && <Agentation />}
+      <SiteCommandPaletteProvider>
+        <RybbitAnalytics />
+        <Outlet />
+        {import.meta.env.DEV && <Agentation />}
+      </SiteCommandPaletteProvider>
     </ThemeProvider>
   </>
 );

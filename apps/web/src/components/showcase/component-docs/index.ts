@@ -7,6 +7,7 @@ import { calendarDocs } from "./calendar";
 import { cardDocs } from "./card";
 import { checkboxDocs } from "./checkbox";
 import { comboboxDocs } from "./combobox";
+import { commandPaletteDocs } from "./command-palette";
 import { dialogDocs } from "./dialog";
 import { ditherAvatarDocs } from "./dither-avatar";
 import { dockDocs } from "./dock";
@@ -38,6 +39,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   card: cardDocs,
   checkbox: checkboxDocs,
   combobox: comboboxDocs,
+  "command-palette": commandPaletteDocs,
   dialog: dialogDocs,
   "dither-avatar": ditherAvatarDocs,
   dock: dockDocs,

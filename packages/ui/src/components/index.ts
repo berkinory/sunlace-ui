@@ -6,6 +6,7 @@ export * from "./calendar";
 export * from "./card";
 export * from "./checkbox";
 export * from "./combobox";
+export * from "./command-palette";
 export * from "./dialog";
 export * from "./dither-avatar";
 export * from "./dock";

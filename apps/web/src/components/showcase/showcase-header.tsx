@@ -1,4 +1,4 @@
-import { Menu11Icon } from "@hugeicons/core-free-icons";
+import { Menu11Icon, Search01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Button,
@@ -10,11 +10,44 @@ import { Link, useRouterState } from "@tanstack/react-router";
 
 import { defaultComponentSlug, type ComponentSlug } from "./component-registry";
 import { ShowcaseNav } from "./showcase-nav";
+import { useSiteCommandPalette } from "./site-command-palette";
 import { ThemeToggle } from "./theme-toggle";
 
 type ShowcaseHeaderProps = {
   activeSlug?: ComponentSlug;
 };
+
+function CommandPaletteTrigger({
+  className,
+  showLabel = true,
+}: {
+  className?: string;
+  showLabel?: boolean;
+}) {
+  const { setOpen } = useSiteCommandPalette();
+
+  return (
+    <Button
+      className={className}
+      size="sm"
+      type="button"
+      variant="outline"
+      onClick={() => setOpen(true)}
+    >
+      <HugeiconsIcon icon={Search01Icon} strokeWidth={2} />
+      {showLabel ? (
+        <>
+          <span className="hidden sm:inline">Search</span>
+          <span className="hidden rounded-sm border border-border px-1.5 font-medium text-[10px] text-muted-foreground xl:inline">
+            ⌘K
+          </span>
+        </>
+      ) : (
+        <span className="sr-only">Open command palette</span>
+      )}
+    </Button>
+  );
+}
 
 function ShowcaseHeader({
   activeSlug = defaultComponentSlug,
@@ -54,9 +87,14 @@ function ShowcaseHeader({
           Components
         </Link>
         <span className="text-muted-foreground">Changelog</span>
+        <CommandPaletteTrigger className="hidden h-8 gap-2 text-muted-foreground lg:flex" />
         <ThemeToggle />
       </nav>
       <div className="flex items-center gap-2 lg:hidden">
+        <CommandPaletteTrigger
+          className="size-8 shrink-0 px-0"
+          showLabel={false}
+        />
         <ThemeToggle />
         <Drawer direction="right">
           <DrawerTrigger asChild>
