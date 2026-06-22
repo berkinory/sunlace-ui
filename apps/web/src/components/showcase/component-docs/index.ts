@@ -11,6 +11,7 @@ import { ditherAvatarDocs } from "./dither-avatar";
 import { drawerDocs } from "./drawer";
 import { dropdownMenuDocs } from "./dropdown-menu";
 import { inputDocs } from "./input";
+import { numberPopDocs } from "./number-pop";
 import { popoverDocs } from "./popover";
 import { progressDocs } from "./progress";
 import { radioDocs } from "./radio";
@@ -39,6 +40,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   drawer: drawerDocs,
   "dropdown-menu": dropdownMenuDocs,
   input: inputDocs,
+  "number-pop": numberPopDocs,
   popover: popoverDocs,
   progress: progressDocs,
   radio: radioDocs,

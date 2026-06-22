@@ -11,6 +11,7 @@ export const componentItems = [
   { slug: "drawer", label: "Drawer" },
   { slug: "dropdown-menu", label: "Dropdown Menu" },
   { slug: "input", label: "Input" },
+  { slug: "number-pop", label: "Number Pop" },
   { slug: "popover", label: "Popover" },
   { slug: "progress", label: "Progress" },
   { slug: "radio", label: "Radio" },

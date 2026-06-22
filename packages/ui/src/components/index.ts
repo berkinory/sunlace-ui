@@ -11,6 +11,7 @@ export * from "./drawer";
 export * from "./dropdown-menu";
 export * from "./input";
 export * from "./input-group";
+export * from "./number-pop";
 export * from "./popover";
 export * from "./progress";
 export * from "./radio";
