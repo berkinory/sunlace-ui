@@ -8,6 +8,7 @@ export const componentItems = [
   { slug: "combobox", label: "Combobox" },
   { slug: "dialog", label: "Dialog" },
   { slug: "dither-avatar", label: "Dither Avatar" },
+  { slug: "dock", label: "Dock" },
   { slug: "drawer", label: "Drawer" },
   { slug: "dropdown-menu", label: "Dropdown Menu" },
   { slug: "input", label: "Input" },

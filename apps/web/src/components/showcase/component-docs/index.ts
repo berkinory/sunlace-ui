@@ -8,6 +8,7 @@ import { checkboxDocs } from "./checkbox";
 import { comboboxDocs } from "./combobox";
 import { dialogDocs } from "./dialog";
 import { ditherAvatarDocs } from "./dither-avatar";
+import { dockDocs } from "./dock";
 import { drawerDocs } from "./drawer";
 import { dropdownMenuDocs } from "./dropdown-menu";
 import { inputDocs } from "./input";
@@ -37,6 +38,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   combobox: comboboxDocs,
   dialog: dialogDocs,
   "dither-avatar": ditherAvatarDocs,
+  dock: dockDocs,
   drawer: drawerDocs,
   "dropdown-menu": dropdownMenuDocs,
   input: inputDocs,
