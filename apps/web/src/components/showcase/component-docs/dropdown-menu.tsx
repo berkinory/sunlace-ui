@@ -56,7 +56,7 @@ export function DropdownMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="outline" />}>
-        Open Menu
+        Open menu
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48"${dropdown?.align === "end" ? ' align="end"' : ""}${dropdown?.side === "top" ? ' side="top"' : ""}>
         <DropdownMenuGroup>
@@ -90,7 +90,7 @@ export function DropdownMenuDemo() {
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <HugeiconsIcon icon={Cancel01Icon} />
-          Delete Workspace
+          Delete workspace
         </DropdownMenuItem>`
         }
       </DropdownMenuContent>
@@ -134,7 +134,7 @@ export function WorkspaceMenuDemo() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-52">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Sunlace UI</DropdownMenuLabel>
+          <DropdownMenuLabel>Acme Inc</DropdownMenuLabel>
           <DropdownMenuItem>
             <HugeiconsIcon icon={Settings03Icon} />
             Settings
@@ -148,10 +148,10 @@ export function WorkspaceMenuDemo() {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <HugeiconsIcon icon={Layers01Icon} />
-              Move To
+              Move to
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
-              <DropdownMenuItem>Design System</DropdownMenuItem>
+              <DropdownMenuItem>Design system</DropdownMenuItem>
               <DropdownMenuItem>Experiments</DropdownMenuItem>
               <DropdownMenuItem>Archive</DropdownMenuItem>
             </DropdownMenuSubContent>
@@ -160,7 +160,7 @@ export function WorkspaceMenuDemo() {
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <HugeiconsIcon icon={Cancel01Icon} />
-          Delete Workspace
+          Delete workspace
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -193,7 +193,7 @@ export function PreferencesMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="outline" />}>
-        View Options
+        View options
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
         <DropdownMenuRadioGroup onValueChange={setTheme} value={theme}>
@@ -215,7 +215,7 @@ export function PreferencesMenuDemo() {
           checked={compact}
           onCheckedChange={setCompact}
         >
-          Compact Density
+          Compact density
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -228,7 +228,7 @@ function renderPreview(settings?: ComponentSettings) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="outline" />}>
-        Open Menu
+        Open menu
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align={dropdown?.align}
@@ -259,7 +259,7 @@ function renderPreview(settings?: ComponentSettings) {
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive">
               <HugeiconsIcon icon={Cancel01Icon} />
-              Delete Workspace
+              Delete workspace
             </DropdownMenuItem>
           </>
         )}
@@ -279,7 +279,7 @@ function SubmenuExample() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-52">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Sunlace UI</DropdownMenuLabel>
+          <DropdownMenuLabel>Acme Inc</DropdownMenuLabel>
           <DropdownMenuItem>
             <HugeiconsIcon icon={Settings03Icon} />
             Settings
@@ -293,10 +293,10 @@ function SubmenuExample() {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <HugeiconsIcon icon={Layers01Icon} />
-              Move To
+              Move to
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
-              <DropdownMenuItem>Design System</DropdownMenuItem>
+              <DropdownMenuItem>Design system</DropdownMenuItem>
               <DropdownMenuItem>Experiments</DropdownMenuItem>
               <DropdownMenuItem>Archive</DropdownMenuItem>
             </DropdownMenuSubContent>
@@ -305,7 +305,7 @@ function SubmenuExample() {
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">
           <HugeiconsIcon icon={Cancel01Icon} />
-          Delete Workspace
+          Delete workspace
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -319,7 +319,7 @@ function PreferencesExample() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="outline" />}>
-        View Options
+        View options
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
         <DropdownMenuRadioGroup onValueChange={setTheme} value={theme}>
@@ -339,7 +339,7 @@ function PreferencesExample() {
           checked={compact}
           onCheckedChange={setCompact}
         >
-          Compact Density
+          Compact density
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -347,20 +347,19 @@ function PreferencesExample() {
 }
 
 export const dropdownMenuDocs: ComponentDocDefinition = {
-  description:
-    "A compact action menu with nested navigation, selection controls, keyboard shortcuts, and destructive states.",
+  description: "A compact action menu with navigation and selection controls.",
   examples: [
     {
       code: submenuCode,
       preview: <SubmenuExample />,
       resetKey: "dropdown-menu-submenu-example",
-      title: "Workspace Actions",
+      title: "Workspace actions",
     },
     {
       code: preferencesCode,
       preview: <PreferencesExample />,
       resetKey: "dropdown-menu-preferences-example",
-      title: "View Preferences",
+      title: "View preferences",
     },
   ],
   getShowcaseCode,
@@ -462,14 +461,14 @@ export const dropdownMenuDocs: ComponentDocDefinition = {
   renderPreview,
   usageCode: `<DropdownMenu>
   <DropdownMenuTrigger render={<Button variant="outline" />}>
-    Open Menu
+    Open menu
   </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuItem>Settings</DropdownMenuItem>
     <DropdownMenuItem>Duplicate</DropdownMenuItem>
     <DropdownMenuSeparator />
     <DropdownMenuItem variant="destructive">
-      Delete Workspace
+      Delete workspace
     </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`,

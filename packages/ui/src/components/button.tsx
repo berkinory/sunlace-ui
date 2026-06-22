@@ -46,6 +46,7 @@ const buttonVariants = cva(
           "bg-[oklch(0.93_0.07_145)] text-[oklch(0.43_0.13_145)] shadow-none hover:bg-[oklch(0.90_0.08_145)] hover:shadow-none focus-visible:ring-[oklch(0.52_0.13_145/0.24)] dark:bg-[oklch(0.34_0.06_145)] dark:text-[oklch(0.74_0.16_145)] dark:hover:bg-[oklch(0.38_0.07_145)] dark:shadow-none dark:hover:shadow-none",
         warning:
           "bg-[oklch(0.93_0.09_76)] text-[oklch(0.48_0.14_62)] shadow-none hover:bg-[oklch(0.90_0.10_76)] hover:shadow-none focus-visible:ring-[oklch(0.58_0.16_68/0.24)] dark:bg-[oklch(0.37_0.07_68)] dark:text-[oklch(0.78_0.16_76)] dark:hover:bg-[oklch(0.41_0.08_68)] dark:shadow-none dark:hover:shadow-none",
+        info: "bg-[oklch(0.93_0.07_250)] text-[oklch(0.5_0.16_255)] shadow-none hover:bg-[oklch(0.90_0.08_250)] hover:shadow-none focus-visible:ring-[oklch(0.6_0.16_255/0.24)] dark:bg-[oklch(0.34_0.07_250)] dark:text-[oklch(0.78_0.14_255)] dark:hover:bg-[oklch(0.38_0.08_250)] dark:shadow-none dark:hover:shadow-none",
         destructive:
           "bg-[oklch(0.93_0.06_27)] text-[oklch(0.56_0.20_27)] shadow-none hover:bg-[oklch(0.90_0.07_27)] hover:shadow-none focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-[oklch(0.33_0.07_27)] dark:text-[oklch(0.72_0.20_27)] dark:hover:bg-[oklch(0.37_0.08_27)] dark:shadow-none dark:hover:shadow-none dark:focus-visible:ring-destructive/40",
         shine:

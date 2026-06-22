@@ -31,7 +31,7 @@ export function AccordionCardDemo() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Release Checklist</CardTitle>
+        <CardTitle>Release checklist</CardTitle>
         <CardDescription>
           Track the final passes before publishing a component update.
         </CardDescription>
@@ -39,19 +39,19 @@ export function AccordionCardDemo() {
       <CardContent>
         <Accordion defaultValue={["design"]}>
           <AccordionItem value="design">
-            <AccordionTrigger>Design Review</AccordionTrigger>
+            <AccordionTrigger>Design review</AccordionTrigger>
             <AccordionContent>
               Validate spacing, color tokens, focus states, and dark mode.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="qa">
-            <AccordionTrigger>QA Pass</AccordionTrigger>
+            <AccordionTrigger>QA pass</AccordionTrigger>
             <AccordionContent>
               Test keyboard navigation across desktop and mobile viewports.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="docs">
-            <AccordionTrigger>Docs Update</AccordionTrigger>
+            <AccordionTrigger>Docs update</AccordionTrigger>
             <AccordionContent>
               Keep the usage snippet aligned with the shipped component API.
             </AccordionContent>
@@ -67,7 +67,7 @@ function Example() {
     <div className="w-[28rem] max-w-full">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Release Checklist</CardTitle>
+          <CardTitle>Release checklist</CardTitle>
           <CardDescription>
             Track the final passes before publishing a component update.
           </CardDescription>
@@ -75,19 +75,19 @@ function Example() {
         <CardContent>
           <Accordion defaultValue={["design"]}>
             <AccordionItem value="design">
-              <AccordionTrigger>Design Review</AccordionTrigger>
+              <AccordionTrigger>Design review</AccordionTrigger>
               <AccordionContent>
                 Validate spacing, color tokens, focus states, and dark mode.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="qa">
-              <AccordionTrigger>QA Pass</AccordionTrigger>
+              <AccordionTrigger>QA pass</AccordionTrigger>
               <AccordionContent>
                 Test keyboard navigation across desktop and mobile viewports.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="docs">
-              <AccordionTrigger>Docs Update</AccordionTrigger>
+              <AccordionTrigger>Docs update</AccordionTrigger>
               <AccordionContent>
                 Keep the usage snippet aligned with the shipped component API.
               </AccordionContent>
@@ -182,14 +182,13 @@ export function AccordionDemo() {
 }
 
 export const accordionDocs: ComponentDocDefinition = {
-  description:
-    "A vertically stacked set of interactive headings that each reveal a section of content.",
+  description: "A stack of collapsible sections.",
   examples: [
     {
       code: exampleCode,
       preview: <Example />,
       resetKey: "accordion-card-example",
-      title: "Card Wrapped Accordion",
+      title: "Release checklist",
     },
   ],
   getShowcaseCode,

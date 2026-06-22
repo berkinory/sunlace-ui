@@ -43,29 +43,29 @@ import {
 } from "@/components/ui/radio";
 
 export function ControlledRadio() {
-  const [environment, setEnvironment] = useState("preview");
+  const [visibility, setVisibility] = useState("public");
 
   return (
     <div className="grid gap-3">
       <Radio
-        onValueChange={(value) => setEnvironment(value)}
-        value={environment}
+        onValueChange={(value) => setVisibility(value)}
+        value={visibility}
       >
         <label className="flex items-center gap-3">
-          <RadioItem value="preview" />
-          Preview
+          <RadioItem value="public" />
+          Public
         </label>
         <label className="flex items-center gap-3">
-          <RadioItem value="production" />
-          Production
+          <RadioItem value="private" />
+          Private
         </label>
         <label className="flex items-center gap-3 text-muted-foreground">
-          <RadioItem disabled value="archived" />
-          Archived
+          <RadioItem disabled value="team" />
+          Team only
         </label>
       </Radio>
       <p className="w-52 text-center text-sm text-muted-foreground">
-        Deploying to <span className="text-foreground">{environment}</span>.
+        Project is <span className="text-foreground">{visibility}</span>.
       </p>
     </div>
   );
@@ -107,39 +107,39 @@ function Preview() {
 }
 
 function ControlledExample() {
-  const [environment, setEnvironment] = useState("preview");
+  const [visibility, setVisibility] = useState("public");
 
   return (
     <div className="grid gap-3">
-      <Radio onValueChange={setEnvironment} value={environment}>
+      <Radio onValueChange={setVisibility} value={visibility}>
         <label className="flex items-center gap-3">
-          <RadioItem value="preview" />
-          Preview
+          <RadioItem value="public" />
+          Public
         </label>
         <label className="flex items-center gap-3">
-          <RadioItem value="production" />
-          Production
+          <RadioItem value="private" />
+          Private
         </label>
         <label className="flex items-center gap-3 text-muted-foreground">
-          <RadioItem disabled value="archived" />
-          Archived
+          <RadioItem disabled value="team" />
+          Team only
         </label>
       </Radio>
       <p className="w-52 text-center text-sm text-muted-foreground">
-        Deploying to <span className="text-foreground">{environment}</span>.
+        Project is <span className="text-foreground">{visibility}</span>.
       </p>
     </div>
   );
 }
 
 export const radioDocs: ComponentDocDefinition = {
-  description: "A set of mutually exclusive options with keyboard navigation.",
+  description: "A single-choice selection from a list of options.",
   examples: [
     {
       code: controlledCode,
       preview: <ControlledExample />,
       resetKey: "radio-controlled-example",
-      title: "Controlled Environment",
+      title: "Project visibility",
     },
   ],
   getShowcaseCode: () => showcaseCode,

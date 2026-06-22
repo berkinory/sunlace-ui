@@ -102,6 +102,17 @@ export type ComponentSettings = {
   skeleton?: {
     animation: "none" | "pulse" | "shimmer";
   };
+  sonner?: {
+    closeButton: boolean;
+    expand: boolean;
+    position:
+      | "bottom-center"
+      | "bottom-left"
+      | "bottom-right"
+      | "top-center"
+      | "top-left"
+      | "top-right";
+  };
   slider?: {
     disabled: boolean;
     orientation: "horizontal" | "vertical";

@@ -9,6 +9,7 @@ export function BadgeStatusDemo() {
     <div className="flex flex-wrap gap-2">
       <Badge variant="success">Synced</Badge>
       <Badge variant="warning">Pending</Badge>
+      <Badge variant="info">Info</Badge>
       <Badge variant="destructive">Failed</Badge>
       <Badge variant="outline">Draft</Badge>
     </div>
@@ -30,6 +31,7 @@ export function BadgeDemo() {
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="success">Success</Badge>
         <Badge variant="warning">Warning</Badge>
+        <Badge variant="info">Info</Badge>
         <Badge variant="destructive">Destructive</Badge>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
@@ -42,8 +44,7 @@ export function BadgeDemo() {
 }`;
 
 export const badgeDocs: ComponentDocDefinition = {
-  description:
-    "A compact label for status, metadata, and low-friction emphasis.",
+  description: "A compact label for status and metadata.",
   examples: [
     {
       code: exampleCode,
@@ -51,12 +52,13 @@ export const badgeDocs: ComponentDocDefinition = {
         <div className="flex flex-wrap gap-2">
           <Badge variant="success">Synced</Badge>
           <Badge variant="warning">Pending</Badge>
+          <Badge variant="info">Info</Badge>
           <Badge variant="destructive">Failed</Badge>
           <Badge variant="outline">Draft</Badge>
         </div>
       ),
       resetKey: "badge-status-example",
-      title: "Status Badges",
+      title: "Status badges",
     },
   ],
   getShowcaseCode: () => showcaseCode,
@@ -67,7 +69,7 @@ export const badgeDocs: ComponentDocDefinition = {
       props: [
         {
           name: "variant",
-          type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "destructive" | "shine" | "animated-border" | "rotate-border"',
+          type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "info" | "destructive" | "shine" | "animated-border" | "rotate-border"',
           defaultValue: '"default"',
           description: "Controls the visual style and emphasis of the badge.",
         },
@@ -86,6 +88,7 @@ export const badgeDocs: ComponentDocDefinition = {
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Badge variant="success">Success</Badge>
         <Badge variant="warning">Warning</Badge>
+        <Badge variant="info">Info</Badge>
         <Badge variant="destructive">Destructive</Badge>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">

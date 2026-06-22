@@ -41,7 +41,7 @@ export function TabsDemo() {
   return (
     <Tabs className="w-full max-w-sm gap-4" onValueChange={setTab} value={tab}>
       <TabsList>
-        <TabsTrigger value="login">Log In</TabsTrigger>
+        <TabsTrigger value="login">Log in</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
       </TabsList>
       <Card
@@ -53,7 +53,7 @@ export function TabsDemo() {
       >
         <TabsContent value="login">
           <CardHeader>
-            <CardTitle>Welcome Back</CardTitle>
+            <CardTitle>Welcome back</CardTitle>
             <CardDescription>Log in to continue.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -63,12 +63,12 @@ export function TabsDemo() {
               placeholder="Password"
               type="password"
             />
-            <Button className="mt-1 w-full">Log In</Button>
+            <Button className="mt-1 w-full">Log in</Button>
           </CardContent>
         </TabsContent>
         <TabsContent value="register">
           <CardHeader>
-            <CardTitle>Create an Account</CardTitle>
+            <CardTitle>Create an account</CardTitle>
             <CardDescription>Finish the extra details before starting.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -79,7 +79,7 @@ export function TabsDemo() {
               placeholder="Password"
               type="password"
             />
-            <Button className="mt-1 w-full">Create Account</Button>
+            <Button className="mt-1 w-full">Create account</Button>
           </CardContent>
         </TabsContent>
       </Card>
@@ -159,7 +159,7 @@ function Preview() {
   return (
     <Tabs className="w-full max-w-sm gap-4" onValueChange={setTab} value={tab}>
       <TabsList>
-        <TabsTrigger value="login">Log In</TabsTrigger>
+        <TabsTrigger value="login">Log in</TabsTrigger>
         <TabsTrigger value="register">Register</TabsTrigger>
       </TabsList>
       <Card
@@ -167,7 +167,7 @@ function Preview() {
       >
         <TabsContent value="login">
           <CardHeader>
-            <CardTitle>Welcome Back</CardTitle>
+            <CardTitle>Welcome back</CardTitle>
             <CardDescription>Log in to continue.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -177,12 +177,12 @@ function Preview() {
               placeholder="Password"
               type="password"
             />
-            <Button className="mt-1 w-full">Log In</Button>
+            <Button className="mt-1 w-full">Log in</Button>
           </CardContent>
         </TabsContent>
         <TabsContent value="register">
           <CardHeader>
-            <CardTitle>Create an Account</CardTitle>
+            <CardTitle>Create an account</CardTitle>
             <CardDescription>
               Finish the extra details before starting.
             </CardDescription>
@@ -195,7 +195,7 @@ function Preview() {
               placeholder="Password"
               type="password"
             />
-            <Button className="mt-1 w-full">Create Account</Button>
+            <Button className="mt-1 w-full">Create account</Button>
           </CardContent>
         </TabsContent>
       </Card>
@@ -204,13 +204,13 @@ function Preview() {
 }
 
 export const tabsDocs: ComponentDocDefinition = {
-  description: "A set of layered panels switched by a shared tab list.",
+  description: "A set of panels switched by a shared tab list.",
   examples: [
     {
       code: projectCode,
       preview: <ProjectExample />,
       resetKey: "tabs-project-example",
-      title: "Project Sections",
+      title: "Project sections",
     },
   ],
   getShowcaseCode: () => showcaseCode,
@@ -300,7 +300,7 @@ export const tabsDocs: ComponentDocDefinition = {
   renderPreview: () => <Preview />,
   usageCode: `<Tabs defaultValue="login">
   <TabsList>
-    <TabsTrigger value="login">Log In</TabsTrigger>
+    <TabsTrigger value="login">Log in</TabsTrigger>
     <TabsTrigger value="register">Register</TabsTrigger>
   </TabsList>
   <TabsContent value="login">Log in form</TabsContent>

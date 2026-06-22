@@ -164,20 +164,19 @@ export function DitherAvatarDemo() {
 }
 
 export const ditherAvatarDocs: ComponentDocDefinition = {
-  description:
-    "A deterministic dithered identity surface generated from any string.",
+  description: "A deterministic avatar generated from any string.",
   examples: [
     {
       code: gridCode,
       preview: <GridExample />,
       resetKey: "dither-identity-grid-example",
-      title: "Identity Grid",
+      title: "Identity grid",
     },
     {
       code: listCode,
       preview: <ListExample />,
       resetKey: "dither-wallet-list-example",
-      title: "Wallet List",
+      title: "Wallet list",
     },
   ],
   getShowcaseCode,

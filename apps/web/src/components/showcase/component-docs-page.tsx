@@ -122,6 +122,7 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
                 <PropsFootnote
                   component={component}
                   primitiveDocsUrl={docs.primitiveDocsUrl}
+                  primitiveName={docs.primitiveName}
                   title={title}
                 />
               </Section>
@@ -190,10 +191,12 @@ function PropsTable({ props }: { props: ComponentProp[] }) {
 function PropsFootnote({
   component,
   primitiveDocsUrl,
+  primitiveName = "Base UI",
   title,
 }: {
   component: ComponentSlug;
   primitiveDocsUrl?: string;
+  primitiveName?: string;
   title: string;
 }) {
   if (component === "badge" || component === "spinner") {
@@ -245,14 +248,14 @@ function PropsFootnote({
 
   return (
     <p className="mt-3 text-sm text-muted-foreground">
-      Also supports Base UI {title.toLowerCase()} primitive props. See{" "}
+      Also supports {primitiveName} {title.toLowerCase()} primitive props. See{" "}
       <a
         className="underline underline-offset-3 hover:text-foreground"
         href={primitiveDocsUrl}
         rel="noreferrer"
         target="_blank"
       >
-        Base UI {title}
+        {primitiveName === "Base UI" ? `Base UI ${title}` : primitiveName}
       </a>
       .
     </p>

@@ -9,7 +9,7 @@ export function CheckboxDemo() {
   return (
     <label className="flex items-center gap-3 text-sm">
       <Checkbox defaultChecked />
-      Accept Terms
+      Accept terms
     </label>
   );
 }`;
@@ -27,7 +27,7 @@ export function CheckboxTermsDemo() {
       <label className="flex items-start gap-3">
         <Checkbox checked={accepted} onCheckedChange={setAccepted} />
         <span className="grid gap-1">
-          <span className="font-medium">Accept Terms</span>
+          <span className="font-medium">Accept terms</span>
           <span className="text-sm text-muted-foreground">
             I agree to the terms of service and privacy policy.
           </span>
@@ -46,7 +46,7 @@ function TermsExample() {
       <label className="flex items-start gap-3">
         <Checkbox checked={accepted} onCheckedChange={setAccepted} />
         <span className="grid gap-1">
-          <span className="font-medium">Accept Terms</span>
+          <span className="font-medium">Accept terms</span>
           <span className="text-sm text-muted-foreground">
             I agree to the terms of service and privacy policy.
           </span>
@@ -78,7 +78,7 @@ export function CheckboxIndeterminateDemo() {
             setSelected(selected.map(() => checked));
           }}
         />
-        All Permissions
+        All permissions
       </label>
       <div className="ml-7 grid gap-3">
         {permissions.map((permission, index) => (
@@ -118,7 +118,7 @@ function IndeterminateExample() {
             setSelected(selected.map(() => checked));
           }}
         />
-        All Permissions
+        All permissions
       </label>
       <div className="ml-7 grid gap-3">
         {permissions.map((permission, index) => (
@@ -142,20 +142,19 @@ function IndeterminateExample() {
 }
 
 export const checkboxDocs: ComponentDocDefinition = {
-  description:
-    "An accessible binary or mixed-state control for forms, selections, and grouped options.",
+  description: "A binary or mixed-state selection control.",
   examples: [
     {
       code: termsCode,
       preview: <TermsExample />,
       resetKey: "checkbox-terms-example",
-      title: "Terms Acceptance",
+      title: "Terms acceptance",
     },
     {
       code: indeterminateCode,
       preview: <IndeterminateExample />,
       resetKey: "checkbox-indeterminate-example",
-      title: "Indeterminate Group",
+      title: "User permissions",
     },
   ],
   getShowcaseCode: () => showcaseCode,
@@ -213,11 +212,11 @@ export const checkboxDocs: ComponentDocDefinition = {
   ],
   renderPreview: () => (
     <label className="flex items-center gap-3 text-sm">
-      <Checkbox defaultChecked /> Accept Terms
+      <Checkbox defaultChecked /> Accept terms
     </label>
   ),
   usageCode: `<label className="flex items-center gap-3">
   <Checkbox defaultChecked />
-  Accept Terms
+  Accept terms
 </label>`,
 };

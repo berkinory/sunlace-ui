@@ -72,14 +72,13 @@ function TableExample() {
 }
 
 export const skeletonDocs: ComponentDocDefinition = {
-  description:
-    "A shape-preserving placeholder for content that is still loading.",
+  description: "A placeholder for loading content.",
   examples: [
     {
       code: tableCode,
       preview: <TableExample />,
       resetKey: "skeleton-table-example",
-      title: "Table Rows",
+      title: "Table rows",
     },
   ],
   getShowcaseCode,

@@ -33,22 +33,22 @@ export function DrawerDemo() {
   return (
     <Drawer${drawer?.direction && drawer.direction !== "bottom" ? ` direction="${drawer.direction}"` : ""}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Open Preferences</Button>
+        <Button variant="outline">Open drawer</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Workspace Preferences</DrawerTitle>
+          <DrawerTitle>Workspace preferences</DrawerTitle>
           <DrawerDescription>
             Choose how your workspace behaves across devices.
           </DrawerDescription>
         </DrawerHeader>
         <div className="grid gap-3 px-5 pb-5">
           <div className="flex items-center justify-between gap-4">
-            <span>Activity Notifications</span>
+            <span>Activity notifications</span>
             <Switch defaultChecked />
           </div>
           <div className="flex items-center justify-between gap-4">
-            <span>Weekly Summary</span>
+            <span>Weekly summary</span>
             <Switch />
           </div>
         </div>${
@@ -57,7 +57,7 @@ export function DrawerDemo() {
             : `
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button>Save Preferences</Button>
+            <Button>Save preferences</Button>
           </DrawerClose>
         </DrawerFooter>`
         }
@@ -89,11 +89,11 @@ export function ActivityDrawer() {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <Button variant="outline">View Activity</Button>
+        <Button variant="outline">View activity</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Project Activity</DrawerTitle>
+          <DrawerTitle>Project activity</DrawerTitle>
           <DrawerDescription>
             Recent changes across the Acme workspace.
           </DrawerDescription>
@@ -108,7 +108,7 @@ export function ActivityDrawer() {
         </div>
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button variant="outline">Close Activity</Button>
+            <Button variant="outline">Close activity</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -122,29 +122,29 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
   return (
     <Drawer direction={drawer?.direction}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Open Preferences</Button>
+        <Button variant="outline">Open drawer</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Workspace Preferences</DrawerTitle>
+          <DrawerTitle>Workspace preferences</DrawerTitle>
           <DrawerDescription>
             Choose how your workspace behaves across devices.
           </DrawerDescription>
         </DrawerHeader>
         <div className="grid gap-3 overflow-y-auto px-5 pb-5">
           <label className="flex items-center justify-between gap-4">
-            <span>Activity Notifications</span>
+            <span>Activity notifications</span>
             <Switch defaultChecked />
           </label>
           <label className="flex items-center justify-between gap-4">
-            <span>Weekly Summary</span>
+            <span>Weekly summary</span>
             <Switch />
           </label>
         </div>
         {drawer?.showFooter === false ? null : (
           <DrawerFooter>
             <DrawerClose asChild>
-              <Button>Save Preferences</Button>
+              <Button>Save preferences</Button>
             </DrawerClose>
           </DrawerFooter>
         )}
@@ -154,20 +154,20 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
 }
 
 const activity = [
-  { event: "Deployment Completed", time: "2 minutes ago" },
-  { event: "Domain Connected", time: "18 minutes ago" },
-  { event: "Member Invited", time: "1 hour ago" },
+  { event: "Deployment completed", time: "2 minutes ago" },
+  { event: "Domain connected", time: "18 minutes ago" },
+  { event: "Member invited", time: "1 hour ago" },
 ];
 
 function ActivityExample() {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <Button variant="outline">View Activity</Button>
+        <Button variant="outline">View activity</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Project Activity</DrawerTitle>
+          <DrawerTitle>Project activity</DrawerTitle>
           <DrawerDescription>
             Recent changes across the Acme workspace.
           </DrawerDescription>
@@ -185,7 +185,7 @@ function ActivityExample() {
         </div>
         <DrawerFooter>
           <DrawerClose asChild>
-            <Button variant="outline">Close Activity</Button>
+            <Button variant="outline">Close activity</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -194,14 +194,13 @@ function ActivityExample() {
 }
 
 export const drawerDocs: ComponentDocDefinition = {
-  description:
-    "A gesture-driven sheet for mobile actions, compact forms, and progressive detail.",
+  description: "A gesture-driven sheet for mobile actions and forms.",
   examples: [
     {
       code: activityCode,
       preview: <ActivityExample />,
       resetKey: "drawer-activity-example",
-      title: "Activity Panel",
+      title: "Activity panel",
     },
   ],
   getShowcaseCode,
@@ -250,11 +249,11 @@ export const drawerDocs: ComponentDocDefinition = {
   renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Drawer>
   <DrawerTrigger asChild>
-    <Button variant="outline">Open Drawer</Button>
+    <Button variant="outline">Open drawer</Button>
   </DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
-      <DrawerTitle>Drawer Title</DrawerTitle>
+      <DrawerTitle>Workspace preferences</DrawerTitle>
       <DrawerDescription>Supporting detail.</DrawerDescription>
     </DrawerHeader>
     <DrawerFooter>

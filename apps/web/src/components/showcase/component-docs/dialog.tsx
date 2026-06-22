@@ -32,17 +32,17 @@ import {
 export function DialogDemo() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button variant="outline" />}>Edit Profile</DialogTrigger>
+      <DialogTrigger render={<Button variant="outline" />}>Open dialog</DialogTrigger>
       <DialogContent${dialog?.showCloseButton === false ? " showCloseButton={false}" : ""}>
         <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
             Update the details visible to your workspace.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-2">
           <label className="text-sm font-medium" htmlFor="display-name">
-            Display Name
+            Display name
           </label>
           <input
             className="h-8 rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
@@ -55,7 +55,7 @@ export function DialogDemo() {
             : `
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
-          <DialogClose render={<Button />}>Save Changes</DialogClose>
+          <DialogClose render={<Button />}>Save changes</DialogClose>
         </DialogFooter>`
         }
       </DialogContent>
@@ -80,18 +80,18 @@ export function DeleteProjectDialog() {
   return (
     <Dialog>
       <DialogTrigger render={<Button variant="destructive" />}>
-        Delete Project
+        Delete project
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Project?</DialogTitle>
+          <DialogTitle>Delete project?</DialogTitle>
           <DialogDescription>
             This permanently removes the project and its deployment history.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
-          <Button variant="destructive">Delete Project</Button>
+          <Button variant="destructive">Delete project</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -104,11 +104,11 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
   return (
     <Dialog>
       <DialogTrigger render={<Button variant="outline" />}>
-        Edit Profile
+        Open dialog
       </DialogTrigger>
       <DialogContent showCloseButton={dialog?.showCloseButton}>
         <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
             Update the details visible to your workspace.
           </DialogDescription>
@@ -118,7 +118,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
             className="text-sm font-medium"
             htmlFor="showcase-display-name"
           >
-            Display Name
+            Display name
           </label>
           <Input defaultValue="Ada Lovelace" id="showcase-display-name" />
         </div>
@@ -127,7 +127,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
             <DialogClose render={<Button variant="outline" />}>
               Cancel
             </DialogClose>
-            <DialogClose render={<Button />}>Save Changes</DialogClose>
+            <DialogClose render={<Button />}>Save changes</DialogClose>
           </DialogFooter>
         )}
       </DialogContent>
@@ -139,11 +139,11 @@ function ConfirmationExample() {
   return (
     <Dialog>
       <DialogTrigger render={<Button variant="destructive" />}>
-        Delete Project
+        Delete project
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Project?</DialogTitle>
+          <DialogTitle>Delete project?</DialogTitle>
           <DialogDescription>
             This permanently removes the project and its deployment history.
           </DialogDescription>
@@ -152,7 +152,7 @@ function ConfirmationExample() {
           <DialogClose render={<Button variant="outline" />}>
             Cancel
           </DialogClose>
-          <Button variant="destructive">Delete Project</Button>
+          <Button variant="destructive">Delete project</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -160,14 +160,13 @@ function ConfirmationExample() {
 }
 
 export const dialogDocs: ComponentDocDefinition = {
-  description:
-    "A focused modal surface for forms, confirmations, and short decision flows.",
+  description: "A modal surface for forms and confirmations.",
   examples: [
     {
       code: confirmationCode,
       preview: <ConfirmationExample />,
       resetKey: "dialog-confirmation-example",
-      title: "Destructive Confirmation",
+      title: "Destructive confirmation",
     },
   ],
   getShowcaseCode,
@@ -231,10 +230,10 @@ export const dialogDocs: ComponentDocDefinition = {
   ],
   renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Dialog>
-  <DialogTrigger render={<Button variant="outline" />}>Open Dialog</DialogTrigger>
+  <DialogTrigger render={<Button variant="outline" />}>Open dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogTitle>Edit profile</DialogTitle>
       <DialogDescription>Supporting detail.</DialogDescription>
     </DialogHeader>
     <DialogFooter>

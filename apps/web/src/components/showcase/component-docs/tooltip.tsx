@@ -25,9 +25,9 @@ export function TooltipDemo() {
   return (
     <TooltipProvider delay={80}>
       <Tooltip>
-        <TooltipTrigger render={<Button variant="outline" />}>Hover Me</TooltipTrigger>
+        <TooltipTrigger render={<Button variant="outline" />}>Hover for info</TooltipTrigger>
         <TooltipContent${tooltip?.side && tooltip.side !== "top" ? ` side="${tooltip.side}"` : ""}${tooltip?.showArrow === false ? " showArrow={false}" : ""}>
-          Tooltip Preview
+          Quick info
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -49,7 +49,7 @@ export function FormTooltip() {
     <TooltipProvider delay={80}>
       <div className="grid w-72 gap-2">
         <label className="text-sm font-medium" htmlFor="workspace">
-          Workspace Slug
+          Workspace slug
         </label>
         <div className="flex gap-2">
           <Input id="workspace" placeholder="sunlace" />
@@ -72,10 +72,10 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
     <TooltipProvider delay={80}>
       <Tooltip>
         <TooltipTrigger render={<Button variant="outline" />}>
-          Hover Me
+          Hover for info
         </TooltipTrigger>
         <TooltipContent showArrow={tooltip?.showArrow} side={tooltip?.side}>
-          Tooltip Preview
+          Quick info
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -87,7 +87,7 @@ function FormExample() {
     <TooltipProvider delay={80}>
       <div className="grid w-72 gap-2">
         <label className="font-medium text-sm" htmlFor="workspace">
-          Workspace Slug
+          Workspace slug
         </label>
         <div className="flex gap-2">
           <Input id="workspace" placeholder="sunlace" />
@@ -106,13 +106,13 @@ function FormExample() {
 }
 
 export const tooltipDocs: ComponentDocDefinition = {
-  description: "A short label that appears near a focused or hovered trigger.",
+  description: "A label that appears on hover or focus.",
   examples: [
     {
       code: formCode,
       preview: <FormExample />,
-      resetKey: "tooltip-form-example",
-      title: "Field Help",
+      resetKey: "tooltip-field-hint-example",
+      title: "Field hint",
     },
   ],
   getShowcaseCode,
@@ -181,9 +181,9 @@ export const tooltipDocs: ComponentDocDefinition = {
   usageCode: `<TooltipProvider delay={80}>
   <Tooltip>
     <TooltipTrigger render={<Button variant="outline" />}>
-      Hover Me
+      Hover for info
     </TooltipTrigger>
-    <TooltipContent>Tooltip Preview</TooltipContent>
+    <TooltipContent>Quick info</TooltipContent>
   </Tooltip>
 </TooltipProvider>`,
 };

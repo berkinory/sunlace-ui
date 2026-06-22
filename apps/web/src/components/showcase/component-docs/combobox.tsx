@@ -297,19 +297,19 @@ function RichResultsExample() {
 
 export const comboboxDocs: ComponentDocDefinition = {
   description:
-    "A searchable selection control with built-in filtering, keyboard navigation, rich item rendering, and multiple selection.",
+    "A searchable selection control with filtering and keyboard navigation.",
   examples: [
     {
       code: multipleCode,
       preview: <MultipleExample />,
       resetKey: "combobox-multiple-example",
-      title: "Multiple Selection",
+      title: "Multiple selection",
     },
     {
       code: richResultsCode,
       preview: <RichResultsExample />,
       resetKey: "combobox-rich-results-example",
-      title: "Rich Search Results",
+      title: "Rich search results",
     },
   ],
   getShowcaseCode,

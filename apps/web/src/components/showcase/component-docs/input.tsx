@@ -73,7 +73,7 @@ export function ValidationInput() {
         type="button"
         variant="outline"
       >
-        Trigger Error
+        Trigger error
       </Button>
     </InputField>
   );
@@ -157,7 +157,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
           type="button"
           variant="outline"
         >
-          Trigger Error
+          Trigger error
         </Button>
       ) : null}
     </div>
@@ -184,7 +184,7 @@ function ValidationExample() {
         type="button"
         variant="outline"
       >
-        Trigger Error
+        Trigger error
       </Button>
     </InputField>
   );
@@ -223,26 +223,25 @@ function ClearableExample() {
 }
 
 export const inputDocs: ComponentDocDefinition = {
-  description:
-    "A text field for collecting short-form user input with optional validation, icons, clear, and password reveal controls.",
+  description: "A text field with validation, icons, and clear controls.",
   examples: [
     {
       code: validationCode,
       preview: <ValidationExample />,
       resetKey: "input-validation-example",
-      title: "Validation Feedback",
+      title: "Validation feedback",
     },
     {
       code: passwordCode,
       preview: <PasswordExample />,
       resetKey: "input-password-example",
-      title: "Password Reveal",
+      title: "Password reveal",
     },
     {
       code: clearableCode,
       preview: <ClearableExample />,
       resetKey: "input-clearable-example",
-      title: "Clearable Search",
+      title: "Clearable search",
     },
   ],
   getShowcaseCode,

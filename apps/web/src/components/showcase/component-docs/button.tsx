@@ -4,26 +4,27 @@ import type { ComponentDocDefinition } from "./types";
 
 const actionCode = `import { Button } from "@/components/ui/button";
 
-export function ButtonVariantDemo() {
+export function ButtonEditorDemo() {
   return (
     <div className="flex flex-wrap gap-2">
-      <Button>Save Changes</Button>
+      <Button>Save changes</Button>
       <Button variant="secondary">Preview</Button>
       <Button variant="outline">Cancel</Button>
       <Button variant="ghost">Dismiss</Button>
-      <Button variant="link">View Logs</Button>
+      <Button variant="link">View logs</Button>
     </div>
   );
 }`;
 
 const intentCode = `import { Button } from "@/components/ui/button";
 
-export function ButtonIntentDemo() {
+export function ButtonDeployDemo() {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-2">
         <Button variant="success">Approve</Button>
         <Button variant="warning">Review</Button>
+        <Button variant="info">Details</Button>
         <Button variant="destructive">Delete</Button>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -50,6 +51,7 @@ export function ButtonDemo() {
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="success">Success</Button>
         <Button variant="warning">Warning</Button>
+        <Button variant="info">Info</Button>
         <Button variant="destructive">Destructive</Button>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
@@ -67,6 +69,7 @@ function IntentExample() {
       <div className="flex flex-wrap gap-2">
         <Button variant="success">Approve</Button>
         <Button variant="warning">Review</Button>
+        <Button variant="info">Details</Button>
         <Button variant="destructive">Delete</Button>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -79,28 +82,27 @@ function IntentExample() {
 }
 
 export const buttonDocs: ComponentDocDefinition = {
-  description:
-    "A clickable action control with variants for hierarchy, semantics, sizing, and icon-only usage.",
+  description: "An action control with hierarchy, intent, and sizing variants.",
   examples: [
     {
       code: actionCode,
       preview: (
         <div className="flex flex-wrap gap-2">
-          <Button>Save Changes</Button>
+          <Button>Save changes</Button>
           <Button variant="secondary">Preview</Button>
           <Button variant="outline">Cancel</Button>
           <Button variant="ghost">Dismiss</Button>
-          <Button variant="link">View Logs</Button>
+          <Button variant="link">View logs</Button>
         </div>
       ),
       resetKey: "button-variant-example",
-      title: "Action Variants",
+      title: "Editor toolbar",
     },
     {
       code: intentCode,
       preview: <IntentExample />,
       resetKey: "button-intent-example",
-      title: "Intent Variants",
+      title: "Deployment panel",
     },
   ],
   getShowcaseCode: () => showcaseCode,
@@ -112,7 +114,7 @@ export const buttonDocs: ComponentDocDefinition = {
       props: [
         {
           name: "variant",
-          type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "destructive" | "shine" | "animated-border" | "rotate-border"',
+          type: '"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "info" | "destructive" | "shine" | "animated-border" | "rotate-border"',
           defaultValue: '"default"',
           description: "Controls the visual style and emphasis of the button.",
         },
@@ -144,6 +146,7 @@ export const buttonDocs: ComponentDocDefinition = {
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button variant="success">Success</Button>
         <Button variant="warning">Warning</Button>
+        <Button variant="info">Info</Button>
         <Button variant="destructive">Destructive</Button>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">

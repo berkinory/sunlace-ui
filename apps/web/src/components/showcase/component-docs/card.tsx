@@ -25,7 +25,7 @@ export function CardSurfaceDemo() {
     <div className="grid gap-3 sm:grid-cols-2">
       <Card className="w-72" variant="shine">
         <CardHeader>
-          <CardTitle>Release Window</CardTitle>
+          <CardTitle>Release window</CardTitle>
           <CardDescription>Production deploy</CardDescription>
         </CardHeader>
         <CardContent>
@@ -34,7 +34,7 @@ export function CardSurfaceDemo() {
       </Card>
       <Card className="w-72" variant="animated-border">
         <CardHeader>
-          <CardTitle>Sync Status</CardTitle>
+          <CardTitle>Sync status</CardTitle>
           <CardDescription>Queue is healthy</CardDescription>
         </CardHeader>
         <CardContent>
@@ -50,7 +50,7 @@ function SurfaceExample() {
     <div className="grid gap-3 sm:grid-cols-2">
       <Card className="w-72" variant="shine">
         <CardHeader>
-          <CardTitle>Release Window</CardTitle>
+          <CardTitle>Release window</CardTitle>
           <CardDescription>Production deploy</CardDescription>
         </CardHeader>
         <CardContent>
@@ -59,7 +59,7 @@ function SurfaceExample() {
       </Card>
       <Card className="w-72" variant="animated-border">
         <CardHeader>
-          <CardTitle>Sync Status</CardTitle>
+          <CardTitle>Sync status</CardTitle>
           <CardDescription>Queue is healthy</CardDescription>
         </CardHeader>
         <CardContent>
@@ -137,7 +137,7 @@ export function CardBillingDemo() {
   return (
     <Card className="w-80">
       <CardHeader>
-        <CardTitle>Pro Workspace</CardTitle>
+        <CardTitle>Pro workspace</CardTitle>
         <CardDescription>Renewing on July 17</CardDescription>
       </CardHeader>
       <CardContent>
@@ -163,7 +163,7 @@ function BillingExample() {
   return (
     <Card className="w-80">
       <CardHeader>
-        <CardTitle>Pro Workspace</CardTitle>
+        <CardTitle>Pro workspace</CardTitle>
         <CardDescription>Renewing on July 17</CardDescription>
       </CardHeader>
       <CardContent>
@@ -268,26 +268,25 @@ export function CardDemo() {
 }
 
 export const cardDocs: ComponentDocDefinition = {
-  description:
-    "A bordered surface for grouped content, header actions, body detail, and footer controls.",
+  description: "A bordered surface for grouped content.",
   examples: [
     {
       code: surfaceCode,
       preview: <SurfaceExample />,
       resetKey: "card-surface-example",
-      title: "Surface Variants",
+      title: "Operational cards",
     },
     {
       code: metricCode,
       preview: <MetricExample />,
       resetKey: "card-metric-example",
-      title: "Metric Card",
+      title: "Revenue summary",
     },
     {
       code: billingCode,
       preview: <BillingExample />,
       resetKey: "card-billing-example",
-      title: "Billing Card",
+      title: "Subscription plan",
     },
   ],
   getShowcaseCode,

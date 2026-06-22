@@ -8,7 +8,7 @@ export function SwitchDemo() {
   return (
     <label className="flex items-center gap-3 text-sm">
       <Switch defaultChecked />
-      Automatic Updates
+      Automatic updates
     </label>
   );
 }`;
@@ -19,17 +19,17 @@ const preferences = [
   {
     defaultChecked: true,
     description: "Product updates and feature announcements.",
-    label: "Product News",
+    label: "Product news",
   },
   {
     defaultChecked: false,
     description: "Weekly account activity and usage reports.",
-    label: "Weekly Summary",
+    label: "Weekly summary",
   },
   {
     defaultChecked: true,
     description: "Security alerts and unusual sign-in activity.",
-    label: "Security Alerts",
+    label: "Security alerts",
   },
 ];
 
@@ -61,17 +61,17 @@ const preferences = [
   {
     defaultChecked: true,
     description: "Product updates and feature announcements.",
-    label: "Product News",
+    label: "Product news",
   },
   {
     defaultChecked: false,
     description: "Weekly account activity and usage reports.",
-    label: "Weekly Summary",
+    label: "Weekly summary",
   },
   {
     defaultChecked: true,
     description: "Security alerts and unusual sign-in activity.",
-    label: "Security Alerts",
+    label: "Security alerts",
   },
 ];
 
@@ -103,19 +103,19 @@ function Preview() {
   return (
     <label className="flex items-center gap-3 text-sm">
       <Switch defaultChecked />
-      Automatic Updates
+      Automatic updates
     </label>
   );
 }
 
 export const switchDocs: ComponentDocDefinition = {
-  description: "A binary control for immediately toggling a setting.",
+  description: "A toggle for binary on/off states.",
   examples: [
     {
       code: preferencesCode,
       preview: <PreferencesExample />,
-      resetKey: "switch-preferences-example",
-      title: "Notification Preferences",
+      resetKey: "switch-notification-settings-example",
+      title: "Notification settings",
     },
   ],
   getShowcaseCode: () => showcaseCode,
@@ -179,6 +179,6 @@ export const switchDocs: ComponentDocDefinition = {
   renderPreview: () => <Preview />,
   usageCode: `<label className="flex items-center gap-3">
   <Switch defaultChecked />
-  Automatic Updates
+  Automatic updates
 </label>`,
 };

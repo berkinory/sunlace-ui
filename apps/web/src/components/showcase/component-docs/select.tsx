@@ -82,25 +82,25 @@ import {
 } from "@/components/ui/select";
 
 const statuses = {
-  active: {
+  available: {
     icon: CheckmarkCircle02Icon,
-    label: "Active",
+    label: "Available",
     color: "text-emerald-600 dark:text-emerald-400",
   },
-  paused: {
+  busy: {
     icon: Alert02Icon,
-    label: "Paused",
+    label: "Busy",
     color: "text-amber-600 dark:text-amber-400",
   },
-  deploying: {
+  meeting: {
     icon: Loading03Icon,
-    label: "Deploying",
+    label: "In meeting",
     color: "text-blue-600 dark:text-blue-400",
   },
 };
 
 export function StatusSelectDemo() {
-  const [status, setStatus] = useState<keyof typeof statuses>("active");
+  const [status, setStatus] = useState<keyof typeof statuses>("available");
   const current = statuses[status];
 
   return (
@@ -127,29 +127,29 @@ export function StatusSelectDemo() {
         </SelectContent>
       </Select>
       <p className="w-48 text-center text-sm text-muted-foreground">
-        Deployments will inherit the <span className="text-foreground">
+        Status is <span className="text-foreground">
           {current.label.toLowerCase()}
-        </span> state.
+        </span>.
       </p>
     </div>
   );
 }`;
 
 const statuses = {
-  active: {
+  available: {
     color: "text-emerald-600 dark:text-emerald-400",
     icon: CheckmarkCircle02Icon,
-    label: "Active",
+    label: "Available",
   },
-  deploying: {
-    color: "text-blue-600 dark:text-blue-400",
-    icon: Loading03Icon,
-    label: "Deploying",
-  },
-  paused: {
+  busy: {
     color: "text-amber-600 dark:text-amber-400",
     icon: Alert02Icon,
-    label: "Paused",
+    label: "Busy",
+  },
+  meeting: {
+    color: "text-blue-600 dark:text-blue-400",
+    icon: Loading03Icon,
+    label: "In meeting",
   },
 };
 
@@ -216,7 +216,7 @@ function SelectPreview({ settings }: { settings?: ComponentSettings }) {
 }
 
 function StatusExample() {
-  const [status, setStatus] = useState<keyof typeof statuses>("active");
+  const [status, setStatus] = useState<keyof typeof statuses>("available");
   const current = statuses[status];
 
   return (
@@ -243,23 +243,21 @@ function StatusExample() {
         </SelectContent>
       </Select>
       <p className="w-48 text-center text-sm text-muted-foreground">
-        Deployments will inherit the{" "}
-        <span className="text-foreground">{current.label.toLowerCase()}</span>{" "}
-        state.
+        Status is{" "}
+        <span className="text-foreground">{current.label.toLowerCase()}</span>.
       </p>
     </div>
   );
 }
 
 export const selectDocs: ComponentDocDefinition = {
-  description:
-    "A single-value selection control with grouped options, rich item content, form integration, and precise popup positioning.",
+  description: "A single-value selection control with grouped options.",
   examples: [
     {
       code: statusCode,
       preview: <StatusExample />,
       resetKey: "select-status-example",
-      title: "Controlled Status",
+      title: "Team status",
     },
   ],
   getShowcaseCode,

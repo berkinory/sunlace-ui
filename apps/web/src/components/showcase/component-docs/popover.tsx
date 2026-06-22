@@ -33,11 +33,11 @@ export function PopoverDemo() {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="outline" />}>
-        Add Note
+        Open popover
       </PopoverTrigger>
       <PopoverContent${popover?.side && popover.side !== "bottom" ? ` side="${popover.side}"` : ""}${popover?.align && popover.align !== "center" ? ` align="${popover.align}"` : ""}>
         <PopoverHeader>
-          <PopoverTitle>Quick Note</PopoverTitle>
+          <PopoverTitle>Quick note</PopoverTitle>
           <PopoverDescription>
             Add context without leaving the current view.
           </PopoverDescription>
@@ -47,7 +47,7 @@ export function PopoverDemo() {
           <PopoverClose render={<Button size="sm" variant="ghost" />}>
             Cancel
           </PopoverClose>
-          <PopoverClose render={<Button size="sm" />}>Save Note</PopoverClose>
+          <PopoverClose render={<Button size="sm" />}>Save note</PopoverClose>
         </div>
       </PopoverContent>
     </Popover>
@@ -70,7 +70,7 @@ export function PreferencesPopover() {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="outline" />}>
-        View Options
+        View options
       </PopoverTrigger>
       <PopoverContent align="end">
         <PopoverHeader>
@@ -80,11 +80,11 @@ export function PreferencesPopover() {
           </PopoverDescription>
         </PopoverHeader>
         <label className="flex items-center justify-between gap-4">
-          Deployment Updates
+          Deployment updates
           <Switch defaultChecked />
         </label>
         <label className="flex items-center justify-between gap-4">
-          Weekly Summary
+          Weekly summary
           <Switch />
         </label>
       </PopoverContent>
@@ -98,11 +98,11 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="outline" />}>
-        Add Note
+        Open popover
       </PopoverTrigger>
       <PopoverContent align={popover?.align} side={popover?.side}>
         <PopoverHeader>
-          <PopoverTitle>Quick Note</PopoverTitle>
+          <PopoverTitle>Quick note</PopoverTitle>
           <PopoverDescription>
             Add context without leaving the current view.
           </PopoverDescription>
@@ -112,7 +112,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
           <PopoverClose render={<Button size="sm" variant="ghost" />}>
             Cancel
           </PopoverClose>
-          <PopoverClose render={<Button size="sm" />}>Save Note</PopoverClose>
+          <PopoverClose render={<Button size="sm" />}>Save note</PopoverClose>
         </div>
       </PopoverContent>
     </Popover>
@@ -123,7 +123,7 @@ function PreferencesExample() {
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="outline" />}>
-        View Options
+        View options
       </PopoverTrigger>
       <PopoverContent align="end">
         <PopoverHeader>
@@ -133,11 +133,11 @@ function PreferencesExample() {
           </PopoverDescription>
         </PopoverHeader>
         <label className="flex items-center justify-between gap-4">
-          Deployment Updates
+          Deployment updates
           <Switch defaultChecked />
         </label>
         <label className="flex items-center justify-between gap-4">
-          Weekly Summary
+          Weekly summary
           <Switch />
         </label>
       </PopoverContent>
@@ -146,14 +146,13 @@ function PreferencesExample() {
 }
 
 export const popoverDocs: ComponentDocDefinition = {
-  description:
-    "A compact floating surface for contextual forms, details, and lightweight controls.",
+  description: "A floating surface for contextual content and controls.",
   examples: [
     {
       code: preferencesCode,
       preview: <PreferencesExample />,
       resetKey: "popover-preferences-example",
-      title: "Notification Preferences",
+      title: "Notification preferences",
     },
   ],
   getShowcaseCode,
@@ -218,11 +217,11 @@ export const popoverDocs: ComponentDocDefinition = {
   renderPreview: (settings) => <Preview settings={settings} />,
   usageCode: `<Popover>
   <PopoverTrigger render={<Button variant="outline" />}>
-    Open Popover
+    Open popover
   </PopoverTrigger>
   <PopoverContent>
     <PopoverHeader>
-      <PopoverTitle>Popover Title</PopoverTitle>
+      <PopoverTitle>Quick note</PopoverTitle>
       <PopoverDescription>Supporting detail.</PopoverDescription>
     </PopoverHeader>
   </PopoverContent>

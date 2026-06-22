@@ -81,14 +81,13 @@ function VolumeExample() {
 }
 
 export const sliderDocs: ComponentDocDefinition = {
-  description:
-    "A precise draggable control for selecting a numeric value or range.",
+  description: "A draggable control for numeric value or range selection.",
   examples: [
     {
       code: volumeCode,
       preview: <VolumeExample />,
       resetKey: "slider-volume-example",
-      title: "Controlled Volume",
+      title: "Volume control",
     },
   ],
   getShowcaseCode,

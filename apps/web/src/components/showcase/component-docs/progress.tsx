@@ -20,7 +20,7 @@ export function ProgressDemo() {
       progress?.showLabel === false
         ? ""
         : `
-      <ProgressLabel>Uploading Assets</ProgressLabel>
+      <ProgressLabel>Uploading assets</ProgressLabel>
       <ProgressValue />`
     }
     </Progress>
@@ -43,7 +43,7 @@ export function ControlledProgress() {
   return (
     <div className="grid w-full max-w-sm gap-4">
       <Progress value={value}>
-        <ProgressLabel>Project Setup</ProgressLabel>
+        <ProgressLabel>Project setup</ProgressLabel>
         <ProgressValue />
       </Progress>
       <Button
@@ -52,7 +52,7 @@ export function ControlledProgress() {
         size="sm"
         variant="outline"
       >
-        Advance Progress
+        Advance
       </Button>
     </div>
   );
@@ -66,7 +66,7 @@ const indeterminateCode = `import {
 export function IndeterminateProgress() {
   return (
     <Progress className="w-full max-w-sm" value={null}>
-      <ProgressLabel>Preparing Deployment</ProgressLabel>
+      <ProgressLabel>Preparing deployment</ProgressLabel>
     </Progress>
   );
 }`;
@@ -78,7 +78,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
     <Progress className="max-w-sm" value={progress?.indeterminate ? null : 64}>
       {progress?.showLabel === false ? null : (
         <>
-          <ProgressLabel>Uploading Assets</ProgressLabel>
+          <ProgressLabel>Uploading assets</ProgressLabel>
           <ProgressValue />
         </>
       )}
@@ -92,7 +92,7 @@ function ControlledExample() {
   return (
     <div className="grid w-full max-w-sm gap-4">
       <Progress value={value}>
-        <ProgressLabel>Project Setup</ProgressLabel>
+        <ProgressLabel>Project setup</ProgressLabel>
         <ProgressValue />
       </Progress>
       <Button
@@ -103,7 +103,7 @@ function ControlledExample() {
         size="sm"
         variant="outline"
       >
-        Advance Progress
+        Advance
       </Button>
     </div>
   );
@@ -112,26 +112,25 @@ function ControlledExample() {
 function IndeterminateExample() {
   return (
     <Progress className="w-full max-w-sm" value={null}>
-      <ProgressLabel>Preparing Deployment</ProgressLabel>
+      <ProgressLabel>Preparing deployment</ProgressLabel>
     </Progress>
   );
 }
 
 export const progressDocs: ComponentDocDefinition = {
-  description:
-    "A determinate or indeterminate indicator for task and process completion.",
+  description: "An indicator for task and process completion.",
   examples: [
     {
       code: controlledCode,
       preview: <ControlledExample />,
       resetKey: "progress-controlled-example",
-      title: "Controlled Progress",
+      title: "Upload progress",
     },
     {
       code: indeterminateCode,
       preview: <IndeterminateExample />,
       resetKey: "progress-indeterminate-example",
-      title: "Indeterminate Progress",
+      title: "Indeterminate progress",
     },
   ],
   getShowcaseCode,

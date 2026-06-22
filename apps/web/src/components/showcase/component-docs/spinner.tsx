@@ -46,13 +46,13 @@ function InlineStatusExample() {
 }
 
 export const spinnerDocs: ComponentDocDefinition = {
-  description: "A compact animated indicator for indeterminate loading states.",
+  description: "An animated indicator for loading states.",
   examples: [
     {
       code: inlineStatusCode,
       preview: <InlineStatusExample />,
-      resetKey: "spinner-inline-status-example",
-      title: "Inline Status",
+      resetKey: "spinner-inline-loading-example",
+      title: "Inline loading",
     },
   ],
   getShowcaseCode,

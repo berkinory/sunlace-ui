@@ -135,14 +135,13 @@ function AvailabilityExample() {
 }
 
 export const calendarDocs: ComponentDocDefinition = {
-  description:
-    "A precise date picker for single dates, ranges, and availability rules.",
+  description: "A date picker for single dates and ranges.",
   examples: [
     {
       code: bookedDatesCode,
       preview: <AvailabilityExample />,
       resetKey: "calendar-availability-example",
-      title: "Booked Dates",
+      title: "Booked dates",
     },
   ],
   getShowcaseCode,

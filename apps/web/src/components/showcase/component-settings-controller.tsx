@@ -8,6 +8,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
   Switch,
+  Toaster,
 } from "@sunlace/ui";
 import { useState, type ReactNode } from "react";
 
@@ -1200,6 +1201,100 @@ function ShapeControl({
   );
 }
 
+function SonnerSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["sonner"]>
+  >({
+    closeButton: false,
+    expand: false,
+    position: "bottom-right",
+  });
+
+  const controls = (
+    <SettingsShell title="Sonner">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Position
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={settingsSelectTriggerClass}
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.position
+              .split("-")
+              .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+              .join(" ")}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(position) => {
+                setSettings((current) => ({
+                  ...current,
+                  position: position as NonNullable<
+                    ComponentSettings["sonner"]
+                  >["position"],
+                }));
+              }}
+              value={settings.position}
+            >
+              <DropdownMenuRadioItem value="bottom-left">
+                Bottom Left
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="bottom-center">
+                Bottom Center
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="bottom-right">
+                Bottom Right
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top-left">
+                Top Left
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top-center">
+                Top Center
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="top-right">
+                Top Right
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Expand
+        <Switch
+          checked={settings.expand}
+          onCheckedChange={(expand) => {
+            setSettings((current) => ({ ...current, expand }));
+          }}
+          size="sm"
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Close Button
+        <Switch
+          checked={settings.closeButton}
+          onCheckedChange={(closeButton) => {
+            setSettings((current) => ({ ...current, closeButton }));
+          }}
+          size="sm"
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return (
+    <>
+      <Toaster
+        closeButton={settings.closeButton}
+        expand={settings.expand}
+        position={settings.position}
+      />
+      {children({ controls, settings: { sonner: settings } })}
+    </>
+  );
+}
+
 function ComponentSettingsController({
   children,
   component,
@@ -1233,6 +1328,8 @@ function ComponentSettingsController({
       return <SkeletonSettings>{children}</SkeletonSettings>;
     case "slider":
       return <SliderSettings>{children}</SliderSettings>;
+    case "sonner":
+      return <SonnerSettings>{children}</SonnerSettings>;
     case "spinner":
       return <SpinnerSettings>{children}</SpinnerSettings>;
     case "tooltip":

@@ -26,6 +26,7 @@ export type ComponentDocDefinition = {
   examples?: ComponentDocExample[];
   getShowcaseCode: (settings?: ComponentSettings) => string;
   importCode: string;
+  primitiveName?: string;
   primitiveDocsUrl?: string;
   props?: ComponentPropGroup[];
   renderPreview: (settings?: ComponentSettings) => ReactNode;
