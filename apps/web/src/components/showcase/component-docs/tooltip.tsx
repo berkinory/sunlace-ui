@@ -23,7 +23,7 @@ import {
 
 export function TooltipDemo() {
   return (
-    <TooltipProvider>
+    <TooltipProvider delay={80}>
       <Tooltip>
         <TooltipTrigger render={<Button variant="outline" />}>Hover Me</TooltipTrigger>
         <TooltipContent${tooltip?.side && tooltip.side !== "top" ? ` side="${tooltip.side}"` : ""}${tooltip?.showArrow === false ? " showArrow={false}" : ""}>
@@ -46,7 +46,7 @@ import {
 
 export function FormTooltip() {
   return (
-    <TooltipProvider>
+    <TooltipProvider delay={80}>
       <div className="grid w-72 gap-2">
         <label className="text-sm font-medium" htmlFor="workspace">
           Workspace Slug
@@ -69,7 +69,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
   const tooltip = settings?.tooltip;
 
   return (
-    <TooltipProvider>
+    <TooltipProvider delay={80}>
       <Tooltip>
         <TooltipTrigger render={<Button variant="outline" />}>
           Hover Me
@@ -84,7 +84,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
 
 function FormExample() {
   return (
-    <TooltipProvider>
+    <TooltipProvider delay={80}>
       <div className="grid w-72 gap-2">
         <label className="font-medium text-sm" htmlFor="workspace">
           Workspace Slug
@@ -178,7 +178,7 @@ export const tooltipDocs: ComponentDocDefinition = {
     },
   ],
   renderPreview: (settings) => <Preview settings={settings} />,
-  usageCode: `<TooltipProvider>
+  usageCode: `<TooltipProvider delay={80}>
   <Tooltip>
     <TooltipTrigger render={<Button variant="outline" />}>
       Hover Me

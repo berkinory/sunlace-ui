@@ -1,6 +1,7 @@
 export {
   componentBySlug,
   componentItems,
+  componentNavGroups,
   defaultComponentSlug,
   isComponentSlug,
   toPascalCase,

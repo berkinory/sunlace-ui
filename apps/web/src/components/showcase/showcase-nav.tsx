@@ -1,4 +1,8 @@
-import { BookOpen01Icon, Layers01Icon } from "@hugeicons/core-free-icons";
+import {
+  BookOpen01Icon,
+  Layers01Icon,
+  Loading03Icon,
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { DrawerClose } from "@sunlace/ui/components";
 import { Link, useRouterState } from "@tanstack/react-router";
@@ -11,7 +15,7 @@ import {
   useState,
 } from "react";
 
-import { componentItems, type ComponentSlug } from "./component-registry";
+import { componentNavGroups, type ComponentSlug } from "./component-registry";
 
 type ShowcaseNavProps = {
   activeSlug: ComponentSlug;
@@ -21,6 +25,11 @@ type ShowcaseNavProps = {
 const indicatorHeight = 14;
 let desktopNavScrollTop = 0;
 let desktopIndicatorTop: number | null = null;
+
+const navGroupIcons = {
+  Components: Layers01Icon,
+  Spinners: Loading03Icon,
+};
 
 export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
   const { hash } = useRouterState({
@@ -205,29 +214,31 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <p className={sectionLabelClass}>
-            <HugeiconsIcon
-              aria-hidden
-              icon={Layers01Icon}
-              size={14}
-              strokeWidth={2}
-            />
-            Components
-          </p>
-          <div>
-            {componentItems.map((item) => (
-              <Fragment key={item.slug}>
-                {renderNavLink({
-                  children: item.label,
-                  component: item.slug,
-                  itemKey: item.slug,
-                  isActive: activeKey === item.slug,
-                })}
-              </Fragment>
-            ))}
+        {componentNavGroups.map((group) => (
+          <div className="space-y-2" key={group.label}>
+            <p className={sectionLabelClass}>
+              <HugeiconsIcon
+                aria-hidden
+                icon={navGroupIcons[group.label] ?? Layers01Icon}
+                size={14}
+                strokeWidth={2}
+              />
+              {group.label}
+            </p>
+            <div>
+              {group.items.map((item) => (
+                <Fragment key={item.slug}>
+                  {renderNavLink({
+                    children: item.label,
+                    component: item.slug,
+                    itemKey: item.slug,
+                    isActive: activeKey === item.slug,
+                  })}
+                </Fragment>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </nav>
   );

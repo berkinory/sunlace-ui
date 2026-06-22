@@ -1,22 +1,34 @@
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { cn } from "@sunlace/ui/lib/utils";
+import * as React from "react";
 
-function TooltipProvider({
-  delay = 0,
-  ...props
-}: TooltipPrimitive.Provider.Props) {
+function TooltipProvider({ ...props }: TooltipPrimitive.Provider.Props) {
+  return <TooltipPrimitive.Provider data-slot="tooltip-provider" {...props} />;
+}
+
+function Tooltip({ onOpenChange, ...props }: TooltipPrimitive.Root.Props) {
+  const [open, setOpen] = React.useState(props.defaultOpen ?? false);
+  const isControlled = props.open !== undefined;
+  const currentOpen = isControlled ? props.open : open;
+
   return (
-    <TooltipPrimitive.Provider
-      data-slot="tooltip-provider"
-      delay={delay}
-      {...props}
-    />
+    <TooltipOpenContext value={currentOpen ?? false}>
+      <TooltipPrimitive.Root
+        data-slot="tooltip"
+        {...props}
+        onOpenChange={(nextOpen, eventDetails) => {
+          if (!isControlled) {
+            setOpen(nextOpen);
+          }
+
+          onOpenChange?.(nextOpen, eventDetails);
+        }}
+      />
+    </TooltipOpenContext>
   );
 }
 
-function Tooltip({ ...props }: TooltipPrimitive.Root.Props) {
-  return <TooltipPrimitive.Root data-slot="tooltip" {...props} />;
-}
+const TooltipOpenContext = React.createContext(false);
 
 function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
@@ -38,8 +50,10 @@ function TooltipContent({
   > & {
     showArrow?: boolean;
   }) {
+  const open = React.use(TooltipOpenContext);
+
   return (
-    <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Portal keepMounted>
       <TooltipPrimitive.Positioner
         align={align}
         alignOffset={alignOffset}
@@ -50,10 +64,10 @@ function TooltipContent({
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(
-            "z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-lg bg-foreground px-3 py-2 text-xs text-background opacity-100 shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_2px_6px_0_rgb(0_0_0/0.05),0_4px_42px_0_rgb(0_0_0/0.06)] transition-[transform,opacity] duration-[var(--tooltip-open-dur)] ease-[var(--tooltip-ease)] will-change-[transform,opacity] data-[ending-style]:pointer-events-none data-[ending-style]:opacity-0 data-[ending-style]:duration-[var(--tooltip-close-dur)] data-[ending-style]:[transform:scale(var(--tooltip-closing-scale))] data-[starting-style]:opacity-0 data-[starting-style]:[transform:scale(var(--tooltip-pre-scale))] data-open:[transform:scale(1)] motion-reduce:transition-none",
-            "[--tooltip-close-dur:100ms] [--tooltip-closing-scale:0.99] [--tooltip-ease:cubic-bezier(0.22,1,0.36,1)] [--tooltip-open-dur:180ms] [--tooltip-pre-scale:0.98]",
+            "z-50 inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-lg bg-foreground px-3 py-2 text-xs text-background shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_2px_6px_0_rgb(0_0_0/0.05),0_4px_42px_0_rgb(0_0_0/0.06)] will-change-[transform,opacity] data-[state=closed]:pointer-events-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 motion-reduce:animate-none",
             className
           )}
+          data-state={open ? "open" : "closed"}
           {...props}
         >
           {children}

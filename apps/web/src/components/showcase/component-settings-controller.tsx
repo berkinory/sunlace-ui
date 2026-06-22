@@ -809,6 +809,72 @@ function PopoverSettings({
   return children({ controls, settings: { popover: settings } });
 }
 
+function InputSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["input"]>
+  >({
+    clearable: false,
+    disabled: false,
+    invalid: false,
+    revealable: false,
+    startIcon: true,
+  });
+
+  const controls = (
+    <SettingsShell title="Input">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Start Icon
+        <Switch
+          checked={settings.startIcon}
+          onCheckedChange={(startIcon) => {
+            setSettings((current) => ({ ...current, startIcon }));
+          }}
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Clearable
+        <Switch
+          checked={settings.clearable}
+          onCheckedChange={(clearable) => {
+            setSettings((current) => ({ ...current, clearable }));
+          }}
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Password Reveal
+        <Switch
+          checked={settings.revealable}
+          onCheckedChange={(revealable) => {
+            setSettings((current) => ({ ...current, revealable }));
+          }}
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Invalid
+        <Switch
+          checked={settings.invalid}
+          onCheckedChange={(invalid) => {
+            setSettings((current) => ({ ...current, invalid }));
+          }}
+        />
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Disabled
+        <Switch
+          checked={settings.disabled}
+          onCheckedChange={(disabled) => {
+            setSettings((current) => ({ ...current, disabled }));
+          }}
+        />
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { input: settings } });
+}
+
 function TooltipSettings({
   children,
 }: Pick<ComponentSettingsControllerProps, "children">) {
@@ -1079,6 +1145,8 @@ function ComponentSettingsController({
       return <DropdownMenuSettings>{children}</DropdownMenuSettings>;
     case "drawer":
       return <DrawerSettings>{children}</DrawerSettings>;
+    case "input":
+      return <InputSettings>{children}</InputSettings>;
     case "popover":
       return <PopoverSettings>{children}</PopoverSettings>;
     case "progress":
