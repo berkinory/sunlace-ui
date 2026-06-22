@@ -5,6 +5,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Fragment,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -18,6 +19,8 @@ type ShowcaseNavProps = {
 };
 
 const indicatorHeight = 14;
+let desktopNavScrollTop = 0;
+let desktopIndicatorTop: number | null = null;
 
 export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
   const { hash } = useRouterState({
@@ -28,7 +31,9 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
   const activeKey = activeGetStartedKey ?? activeSlug;
   const navRef = useRef<HTMLElement>(null);
   const linkRefs = useRef(new Map<string, HTMLAnchorElement>());
-  const [indicatorTop, setIndicatorTop] = useState<number | null>(null);
+  const [indicatorTop, setIndicatorTop] = useState<number | null>(
+    desktopIndicatorTop
+  );
 
   const linkClass = mobile
     ? "relative -ml-2 block w-[calc(100%+0.5rem)] rounded-md py-1.5 pr-2 pl-2 text-sm capitalize text-foreground/65 transition-colors before:absolute before:top-1/2 before:left-0 before:h-[1em] before:w-px before:-translate-y-1/2 before:rounded-full before:bg-transparent hover:text-foreground data-active:text-primary data-active:before:bg-primary"
@@ -54,14 +59,17 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
     return linkRect.top - navRect.top + (linkRect.height - indicatorHeight) / 2;
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (mobile) {
       setIndicatorTop(null);
       return;
     }
 
     const updateIndicators = () => {
-      setIndicatorTop(getIndicatorTop(activeKey));
+      const nextIndicatorTop = getIndicatorTop(activeKey);
+
+      desktopIndicatorTop = nextIndicatorTop;
+      setIndicatorTop(nextIndicatorTop);
     };
 
     updateIndicators();
@@ -71,6 +79,31 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
       window.removeEventListener("resize", updateIndicators);
     };
   }, [activeKey, getIndicatorTop, mobile]);
+
+  useLayoutEffect(() => {
+    if (mobile) {
+      return;
+    }
+
+    const scrollRoot = navRef.current?.parentElement;
+
+    if (!(scrollRoot instanceof HTMLElement)) {
+      return;
+    }
+
+    scrollRoot.scrollTop = desktopNavScrollTop;
+
+    const saveScrollTop = () => {
+      desktopNavScrollTop = scrollRoot.scrollTop;
+    };
+
+    scrollRoot.addEventListener("scroll", saveScrollTop, { passive: true });
+
+    return () => {
+      saveScrollTop();
+      scrollRoot.removeEventListener("scroll", saveScrollTop);
+    };
+  }, [mobile]);
 
   function renderNavLink({
     children,
@@ -103,6 +136,12 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
         onClick={() => {
           if (mobile) {
             return;
+          }
+
+          const scrollRoot = navRef.current?.parentElement;
+
+          if (scrollRoot instanceof HTMLElement) {
+            desktopNavScrollTop = scrollRoot.scrollTop;
           }
 
           setIndicatorTop(getIndicatorTop(itemKey));
