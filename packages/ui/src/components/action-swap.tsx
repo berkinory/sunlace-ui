@@ -7,8 +7,7 @@ import {
   type ReactNode,
 } from "react";
 
-import { Button, type buttonVariants } from "./button";
-import type { VariantProps } from "class-variance-authority";
+import { Button } from "./button";
 
 type ActionSwapItem = {
   id: string;
@@ -36,16 +35,15 @@ type ActionSwapIconProps = {
 type ActionSwapButtonProps = Omit<
   React.ComponentProps<typeof Button>,
   "children"
-> &
-  VariantProps<typeof buttonVariants> & {
-    items: ActionSwapItem[];
-    value?: string;
-    defaultValue?: string;
-    onValueChange?: (value: string, item: ActionSwapItem) => void;
-    animation?: ActionSwapAnimation;
-    iconOnly?: boolean;
-    cycle?: boolean;
-  };
+> & {
+  items: ActionSwapItem[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string, item: ActionSwapItem) => void;
+  animation?: ActionSwapAnimation;
+  iconOnly?: boolean;
+  cycle?: boolean;
+};
 
 const SWAP_DURATIONS: Record<ActionSwapAnimation, number> = {
   blur: 200,
@@ -280,8 +278,7 @@ function ActionSwapText({
     reduceMotion
   );
   const label = typeof children === "string" ? children : null;
-  const cascade =
-    animation === "cascade" && label !== null && !reduceMotion;
+  const cascade = animation === "cascade" && label !== null && !reduceMotion;
   const coreAnimation: "blur" | "roll" =
     animation === "cascade" ? "roll" : animation;
 

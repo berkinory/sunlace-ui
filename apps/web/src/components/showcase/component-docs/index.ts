@@ -1,5 +1,6 @@
 import type { ComponentSlug } from "../component-registry";
 import { accordionDocs } from "./accordion";
+import { actionSwapDocs } from "./action-swap";
 import { badgeDocs } from "./badge";
 import { buttonDocs } from "./button";
 import { calendarDocs } from "./calendar";
@@ -30,6 +31,7 @@ import type { ComponentDocDefinition } from "./types";
 
 const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   accordion: accordionDocs,
+  "action-swap": actionSwapDocs,
   badge: badgeDocs,
   button: buttonDocs,
   calendar: calendarDocs,
