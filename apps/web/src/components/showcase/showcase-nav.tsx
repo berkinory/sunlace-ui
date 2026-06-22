@@ -1,8 +1,4 @@
-import {
-  BookOpen01Icon,
-  Layers01Icon,
-  Loading03Icon,
-} from "@hugeicons/core-free-icons";
+import { BookOpen01Icon, Layers01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { DrawerClose } from "@sunlace/ui/components";
 import { Link, useRouterState } from "@tanstack/react-router";
@@ -28,7 +24,6 @@ let desktopIndicatorTop: number | null = null;
 
 const navGroupIcons = {
   Components: Layers01Icon,
-  Spinners: Loading03Icon,
 };
 
 export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {

@@ -18,20 +18,16 @@ export const componentItems = [
   { slug: "skeleton", label: "Skeleton" },
   { slug: "slider", label: "Slider" },
   { slug: "sonner", label: "Sonner" },
+  { slug: "spinner", label: "Spinner" },
   { slug: "switch", label: "Switch" },
   { slug: "tabs", label: "Tabs" },
   { slug: "tooltip", label: "Tooltip" },
-  { slug: "spinner", label: "Spinner" },
 ] as const;
 
 export const componentNavGroups = [
   {
     label: "Components",
-    items: componentItems.filter((item) => item.slug !== "spinner"),
-  },
-  {
-    label: "Spinners",
-    items: componentItems.filter((item) => item.slug === "spinner"),
+    items: componentItems,
   },
 ] as const;
 
@@ -110,6 +106,10 @@ export type ComponentSettings = {
     disabled: boolean;
     orientation: "horizontal" | "vertical";
     range: boolean;
+  };
+  spinner?: {
+    speed: "fast" | "normal" | "slow";
+    variant: "icon" | "ring";
   };
   tooltip?: {
     showArrow: boolean;

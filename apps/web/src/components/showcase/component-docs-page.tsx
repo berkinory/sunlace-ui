@@ -196,7 +196,7 @@ function PropsFootnote({
   primitiveDocsUrl?: string;
   title: string;
 }) {
-  if (component === "badge") {
+  if (component === "badge" || component === "spinner") {
     return (
       <p className="mt-3 text-sm text-muted-foreground">
         Also supports{" "}

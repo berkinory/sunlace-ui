@@ -1088,6 +1088,82 @@ function ProgressSettings({
   return children({ controls, settings: { progress: settings } });
 }
 
+function SpinnerSettings({
+  children,
+}: Pick<ComponentSettingsControllerProps, "children">) {
+  const [settings, setSettings] = useState<
+    NonNullable<ComponentSettings["spinner"]>
+  >({
+    speed: "normal",
+    variant: "icon",
+  });
+
+  const controls = (
+    <SettingsShell title="Spinner">
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Variant
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={settingsSelectTriggerClass}
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.variant.charAt(0).toUpperCase() +
+              settings.variant.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(variant) => {
+                setSettings((current) => ({
+                  ...current,
+                  variant: variant as NonNullable<
+                    ComponentSettings["spinner"]
+                  >["variant"],
+                }));
+              }}
+              value={settings.variant}
+            >
+              <DropdownMenuRadioItem value="ring">Ring</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="icon">Icon</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+      <label className="flex items-center justify-between gap-3 text-muted-foreground">
+        Speed
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={settingsSelectTriggerClass}
+            render={<Button size="sm" variant="outline" />}
+          >
+            {settings.speed.charAt(0).toUpperCase() + settings.speed.slice(1)}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup
+              onValueChange={(speed) => {
+                setSettings((current) => ({
+                  ...current,
+                  speed: speed as NonNullable<
+                    ComponentSettings["spinner"]
+                  >["speed"],
+                }));
+              }}
+              value={settings.speed}
+            >
+              <DropdownMenuRadioItem value="slow">Slow</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="normal">
+                Normal
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="fast">Fast</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </label>
+    </SettingsShell>
+  );
+
+  return children({ controls, settings: { spinner: settings } });
+}
+
 function ShapeControl({
   onChange,
   value,
@@ -1157,6 +1233,8 @@ function ComponentSettingsController({
       return <SkeletonSettings>{children}</SkeletonSettings>;
     case "slider":
       return <SliderSettings>{children}</SliderSettings>;
+    case "spinner":
+      return <SpinnerSettings>{children}</SpinnerSettings>;
     case "tooltip":
       return <TooltipSettings>{children}</TooltipSettings>;
     default:
