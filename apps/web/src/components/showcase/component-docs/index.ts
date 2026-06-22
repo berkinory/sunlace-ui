@@ -21,6 +21,7 @@ import { sonnerDocs } from "./sonner";
 import { spinnerDocs } from "./spinner";
 import { switchDocs } from "./switch";
 import { tabsDocs } from "./tabs";
+import { toggleDocs } from "./toggle";
 import { tooltipDocs } from "./tooltip";
 import type { ComponentDocDefinition } from "./types";
 
@@ -47,6 +48,7 @@ const componentDocs: Record<ComponentSlug, ComponentDocDefinition> = {
   spinner: spinnerDocs,
   switch: switchDocs,
   tabs: tabsDocs,
+  toggle: toggleDocs,
   tooltip: tooltipDocs,
 };
 

@@ -21,6 +21,7 @@ export const componentItems = [
   { slug: "spinner", label: "Spinner" },
   { slug: "switch", label: "Switch" },
   { slug: "tabs", label: "Tabs" },
+  { slug: "toggle", label: "Toggle" },
   { slug: "tooltip", label: "Tooltip" },
 ] as const;
 
