@@ -12,7 +12,7 @@ function getShowcaseCode(settings?: ComponentSettings) {
 
 export function SkeletonDemo() {
   return (
-    <div className="flex w-full max-w-sm items-center gap-3">
+    <div className="mx-auto flex max-w-sm items-center gap-3">
       <Skeleton className="size-10 rounded-full"${animationProp} />
       <div className="flex-1 space-y-2">
         <Skeleton className="h-3.5 w-32"${animationProp} />
@@ -27,7 +27,7 @@ const tableCode = `import { Skeleton } from "@/components/ui/skeleton";
 
 export function TableSkeleton() {
   return (
-    <div className="w-full max-w-md divide-y rounded-lg border">
+    <div className="mx-auto w-full max-w-md divide-y rounded-lg border">
       {[0, 1, 2, 3].map((row) => (
         <div className="grid grid-cols-[1fr_6rem] gap-4 p-3" key={row}>
           <div className="space-y-2">
@@ -45,7 +45,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
   const animation = settings?.skeleton?.animation;
 
   return (
-    <div className="flex w-full max-w-sm items-center gap-3">
+    <div className="mx-auto flex max-w-sm items-center gap-3">
       <Skeleton animation={animation} className="size-10 rounded-full" />
       <div className="flex-1 space-y-2">
         <Skeleton animation={animation} className="h-3.5 w-32" />
@@ -57,7 +57,7 @@ function Preview({ settings }: { settings?: ComponentSettings }) {
 
 function TableExample() {
   return (
-    <div className="w-full max-w-md divide-y rounded-lg border">
+    <div className="mx-auto w-full max-w-md divide-y rounded-lg border">
       {[0, 1, 2, 3].map((row) => (
         <div className="grid grid-cols-[1fr_6rem] gap-4 p-3" key={row}>
           <div className="space-y-2">
