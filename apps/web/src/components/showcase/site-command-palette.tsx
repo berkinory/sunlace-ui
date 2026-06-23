@@ -1,15 +1,15 @@
 import {
-  Add01Icon,
-  File02Icon,
+  BookOpen01Icon,
+  CommandLineIcon,
   Home05Icon,
-  Settings03Icon,
-  UserIcon,
+  Layers01Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   CommandPalette,
   type CommandPaletteItem,
 } from "@sunlace/ui/components";
+import { useNavigate } from "@tanstack/react-router";
 import {
   createContext,
   useContext,
@@ -18,46 +18,67 @@ import {
   type ReactNode,
 } from "react";
 
+import { componentItems, defaultComponentSlug } from "./component-registry";
+
 export const siteCommandPaletteItems: CommandPaletteItem[] = [
   {
     id: "home",
     group: "Navigation",
     hint: "G H",
     icon: <HugeiconsIcon icon={Home05Icon} strokeWidth={2} />,
-    label: "Go to Home",
+    label: "Home",
     onSelect: () => {},
   },
   {
-    id: "profile",
-    group: "Navigation",
-    hint: "G P",
-    icon: <HugeiconsIcon icon={UserIcon} strokeWidth={2} />,
-    label: "Open profile",
+    id: "installation",
+    group: "Get Started",
+    hint: "G I",
+    icon: <HugeiconsIcon icon={BookOpen01Icon} strokeWidth={2} />,
+    keywords: [
+      "react",
+      "nextjs",
+      "next.js",
+      "vite",
+      "npm",
+      "bun",
+      "pnpm",
+      "install",
+      "setup",
+    ],
+    label: "Installation",
     onSelect: () => {},
   },
   {
-    id: "settings",
-    group: "Navigation",
-    icon: <HugeiconsIcon icon={Settings03Icon} strokeWidth={2} />,
-    label: "Settings",
+    id: "cli",
+    group: "Get Started",
+    hint: "G C",
+    icon: <HugeiconsIcon icon={CommandLineIcon} strokeWidth={2} />,
+    keywords: [
+      "react",
+      "nextjs",
+      "next.js",
+      "vite",
+      "npm",
+      "bun",
+      "pnpm",
+      "command",
+      "terminal",
+      "shadcn",
+    ],
+    label: "CLI",
     onSelect: () => {},
   },
-  {
-    id: "new-doc",
-    group: "Actions",
-    hint: "⌘ N",
-    icon: <HugeiconsIcon icon={File02Icon} strokeWidth={2} />,
-    label: "Create document",
+  ...componentItems.map((item) => ({
+    id: item.slug,
+    group: "Components",
+    icon: <HugeiconsIcon icon={Layers01Icon} strokeWidth={2} />,
+    keywords:
+      item.slug === "sonner"
+        ? ["toast", "notification", "feedback"]
+        : undefined,
+    label: item.label,
     onSelect: () => {},
-  },
-  {
-    id: "new-project",
-    group: "Actions",
-    hint: "⌘ ⇧ N",
-    icon: <HugeiconsIcon icon={Add01Icon} strokeWidth={2} />,
-    label: "New project",
-    onSelect: () => {},
-  },
+  })),
 ];
 
 type SiteCommandPaletteContextValue = {
@@ -86,16 +107,46 @@ export function SiteCommandPaletteProvider({
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const items = useMemo<CommandPaletteItem[]>(() => {
+    return siteCommandPaletteItems.map((item) => {
+      let onSelect = item.onSelect;
+
+      if (item.id === "home") {
+        onSelect = () => navigate({ to: "/" });
+      } else if (item.id === "installation") {
+        onSelect = () =>
+          navigate({
+            hash: "installation",
+            params: { component: defaultComponentSlug },
+            to: "/ui/$component",
+          });
+      } else if (item.id === "cli") {
+        onSelect = () =>
+          navigate({
+            hash: "cli",
+            params: { component: defaultComponentSlug },
+            to: "/ui/$component",
+          });
+      } else {
+        onSelect = () =>
+          navigate({
+            params: { component: item.id },
+            to: "/ui/$component",
+          });
+      }
+
+      return { ...item, onSelect };
+    });
+  }, [navigate]);
+
   const value = useMemo(() => ({ open, setOpen }), [open]);
 
   return (
     <SiteCommandPaletteContext.Provider value={value}>
       {children}
-      <CommandPalette
-        items={siteCommandPaletteItems}
-        open={open}
-        onOpenChange={setOpen}
-      />
+      <CommandPalette items={items} onOpenChange={setOpen} open={open} />
     </SiteCommandPaletteContext.Provider>
   );
 }
