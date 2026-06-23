@@ -2,17 +2,28 @@ import type { ComponentDocDefinition } from "./component-docs/types";
 import type { ComponentDocExample } from "./component-docs/types";
 import { getInstallInfo } from "./install-info";
 
+const utilsCode = `import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}`;
+
+export type ComponentMarkdownInput = {
+  slug: string;
+  title: string;
+  docs: ComponentDocDefinition;
+  examples: ComponentDocExample[];
+  componentSource?: string;
+};
+
 export function generateComponentMarkdown({
   slug,
   title,
   docs,
   examples,
-}: {
-  slug: string;
-  title: string;
-  docs: ComponentDocDefinition;
-  examples: ComponentDocExample[];
-}): string {
+  componentSource,
+}: ComponentMarkdownInput): string {
   const info = getInstallInfo(slug);
   const sections: string[] = [];
 
@@ -24,6 +35,7 @@ export function generateComponentMarkdown({
 
   sections.push(`## Installation\n`);
   if (info) {
+    sections.push("### CLI\n");
     sections.push("```bash");
     sections.push(info.cliCommands.npm);
     sections.push("```\n");
@@ -40,6 +52,29 @@ export function generateComponentMarkdown({
         .join(", ");
       sections.push(`**Sunlace Dependencies:** ${depLinks}\n`);
     }
+
+    sections.push("### Manual\n");
+    const manualDeps = info.hasUtils
+      ? [...info.npmDeps, "clsx", "tailwind-merge"]
+      : info.npmDeps;
+
+    if (manualDeps.length > 0) {
+      sections.push("```bash");
+      sections.push(`npm install ${manualDeps.join(" ")}`);
+      sections.push("```\n");
+    }
+
+    if (info.hasUtils) {
+      sections.push("Create `lib/utils.ts`:\n");
+      sections.push("```ts");
+      sections.push(utilsCode);
+      sections.push("```\n");
+    }
+
+    sections.push(`Create \`components/ui/${slug}.tsx\`:\n`);
+    sections.push("```tsx");
+    sections.push(componentSource ?? "Source not found.");
+    sections.push("```\n");
   }
 
   sections.push(`## Usage\n`);

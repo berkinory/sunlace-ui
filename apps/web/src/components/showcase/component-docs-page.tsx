@@ -12,6 +12,18 @@ import { InstallationSection } from "./installation-section";
 import { CodeBlock, ShowcaseExample } from "./showcase-example";
 import { ShowcaseLayout } from "./showcase-layout";
 
+const componentSources = import.meta.glob(
+  "../../../../../packages/ui/src/components/*.tsx",
+  { query: "?raw", eager: true, import: "default" }
+) as Record<string, string>;
+
+function getComponentSource(slug: string): string | undefined {
+  const key = Object.keys(componentSources).find((k) =>
+    k.endsWith(`/${slug}.tsx`)
+  );
+  return key ? componentSources[key] : undefined;
+}
+
 const tocItems = [
   { id: "showcase", label: "Showcase" },
   { id: "installation", label: "Installation" },
@@ -45,6 +57,7 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
 
         function copyMarkdown() {
           const md = generateComponentMarkdown({
+            componentSource: getComponentSource(component),
             docs,
             examples,
             slug: component,

@@ -1,0 +1,49 @@
+# Sunlace UI
+
+> A minimal, modern React component library built on Base UI and Hugeicons.
+
+Sunlace components are installed via the shadcn CLI. Source files use
+canonical imports (`@/lib/utils`, `@/components/ui/*`) and are meant to be
+edited in place.
+
+## Components
+
+- [Accordion](https://sunlace.dev/llms/ui/accordion.md): A stack of collapsible sections.
+- [Action Swap](https://sunlace.dev/llms/ui/action-swap.md): Animated label and icon slots for buttons that swap state with blur, roll, or cascade motion.
+- [Badge](https://sunlace.dev/llms/ui/badge.md): A compact label for status and metadata.
+- [Button](https://sunlace.dev/llms/ui/button.md): An action control with hierarchy, intent, and sizing variants.
+- [Calendar](https://sunlace.dev/llms/ui/calendar.md): A date picker for single dates and ranges.
+- [Card](https://sunlace.dev/llms/ui/card.md): A bordered surface for grouped content.
+- [Checkbox](https://sunlace.dev/llms/ui/checkbox.md): A binary or mixed-state selection control.
+- [Combobox](https://sunlace.dev/llms/ui/combobox.md): A searchable selection control with filtering and keyboard navigation.
+- [Command Palette](https://sunlace.dev/llms/ui/command-palette.md): A searchable command surface with fuzzy filter and keyboard navigation.
+- [Dialog](https://sunlace.dev/llms/ui/dialog.md): A modal surface for forms and confirmations.
+- [Dither Avatar](https://sunlace.dev/llms/ui/dither-avatar.md): A deterministic avatar generated from any string.
+- [Dock](https://sunlace.dev/llms/ui/dock.md): A macOS-style dock with a gliding active pill.
+- [Drawer](https://sunlace.dev/llms/ui/drawer.md): A gesture-driven sheet for mobile actions and forms.
+- [Dropdown Menu](https://sunlace.dev/llms/ui/dropdown-menu.md): A compact action menu with navigation and selection controls.
+- [Input](https://sunlace.dev/llms/ui/input.md): A text field with validation, icons, and clear controls.
+- [Number Pop](https://sunlace.dev/llms/ui/number-pop.md): An animated number that pops in with staggered digits.
+- [Popover](https://sunlace.dev/llms/ui/popover.md): A floating surface for contextual content and controls.
+- [Progress](https://sunlace.dev/llms/ui/progress.md): An indicator for task and process completion.
+- [Radio](https://sunlace.dev/llms/ui/radio.md): A single-choice selection from a list of options.
+- [Select](https://sunlace.dev/llms/ui/select.md): A single-value selection control with grouped options.
+- [Shimmer Text](https://sunlace.dev/llms/ui/shimmer-text.md): An animated text shimmer for loading and progress states.
+- [Skeleton](https://sunlace.dev/llms/ui/skeleton.md): A placeholder for loading content.
+- [Slider](https://sunlace.dev/llms/ui/slider.md): A draggable control for numeric value or range selection.
+- [Sonner](https://sunlace.dev/llms/ui/sonner.md): A toast system for transient feedback and notifications.
+- [Spinner](https://sunlace.dev/llms/ui/spinner.md): An animated indicator for loading states.
+- [Switch](https://sunlace.dev/llms/ui/switch.md): A toggle for binary on/off states.
+- [Tabs](https://sunlace.dev/llms/ui/tabs.md): A set of panels switched by a shared tab list.
+- [Toggle](https://sunlace.dev/llms/ui/toggle.md): A two-state button for toggling a single condition on or off.
+- [Tooltip](https://sunlace.dev/llms/ui/tooltip.md): A label that appears on hover or focus.
+
+## Registry
+
+Each component is available as a shadcn registry item at
+`https://sunlace.dev/r/<slug>.json`.
+
+Install with:
+```bash
+npx shadcn@latest add https://sunlace.dev/r/<slug>.json
+```
