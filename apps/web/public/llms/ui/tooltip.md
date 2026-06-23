@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -94,7 +94,6 @@ function TooltipContent({
 }
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
-
 ```
 
 ## Usage
@@ -143,7 +142,9 @@ export function FormTooltip() {
         <div className="flex gap-2">
           <Input id="workspace" placeholder="sunlace" />
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline" />}>?</TooltipTrigger>
+            <TooltipTrigger render={<Button variant="outline" />}>
+              ?
+            </TooltipTrigger>
             <TooltipContent showArrow={false} side="right">
               Used in project URLs.
             </TooltipContent>
@@ -159,23 +160,25 @@ export function FormTooltip() {
 
 ### Tooltip
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `open` | `boolean` | `-` | Controls whether the tooltip is open. |
-| `defaultOpen` | `boolean` | `false` | Sets the initial uncontrolled open state. |
-| `onOpenChange` | `(open: boolean) => void` | `-` | Runs when the open state changes. |
+| Prop           | Type                      | Default | Description                               |
+| -------------- | ------------------------- | ------- | ----------------------------------------- |
+| `open`         | `boolean`                 | `-`     | Controls whether the tooltip is open.     |
+| `defaultOpen`  | `boolean`                 | `false` | Sets the initial uncontrolled open state. |
+| `onOpenChange` | `(open: boolean) => void` | `-`     | Runs when the open state changes.         |
 
 ### TooltipContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `side` | `"top" | "right" | "bottom" | "left"` | `"top"` | Sets the preferred side of the trigger. |
-| `align` | `"start" | "center" | "end"` | `"center"` | Aligns the tooltip against its trigger. |
-| `sideOffset` | `number` | `8` | Sets the distance from the trigger. |
-| `showArrow` | `boolean` | `true` | Shows or hides the directional arrow. |
+| Prop         | Type      | Default  | Description                           |
+| ------------ | --------- | -------- | ------------------------------------- | ---------- | --------------------------------------- | --------------------------------------- |
+| `side`       | `"top"    | "right"  | "bottom"                              | "left"`    | `"top"`                                 | Sets the preferred side of the trigger. |
+| `align`      | `"start"  | "center" | "end"`                                | `"center"` | Aligns the tooltip against its trigger. |
+| `sideOffset` | `number`  | `8`      | Sets the distance from the trigger.   |
+| `showArrow`  | `boolean` | `true`   | Shows or hides the directional arrow. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Tooltip](https://base-ui.com/react/components/tooltip).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/tooltip)

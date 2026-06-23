@@ -23,11 +23,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -311,7 +311,6 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 };
-
 ```
 
 ## Usage
@@ -334,9 +333,7 @@ import {
     <DropdownMenuItem>Settings</DropdownMenuItem>
     <DropdownMenuItem>Duplicate</DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem variant="destructive">
-      Delete workspace
-    </DropdownMenuItem>
+    <DropdownMenuItem variant="destructive">Delete workspace</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 ```
@@ -418,10 +415,7 @@ export function WorkspaceMenuDemo() {
 ### View preferences
 
 ```tsx
-import {
-  Moon02Icon,
-  Sun03Icon,
-} from "@hugeicons/core-free-icons";
+import { Moon02Icon, Sun03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useState } from "react";
 
@@ -457,9 +451,7 @@ export function PreferencesMenuDemo() {
             <HugeiconsIcon icon={Moon02Icon} />
             Dark
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">
-            System
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
@@ -478,37 +470,39 @@ export function PreferencesMenuDemo() {
 
 ### DropdownMenu
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `open` | `boolean` | `-` | Controls whether the menu is open. |
-| `defaultOpen` | `boolean` | `false` | Sets the initial open state when uncontrolled. |
-| `onOpenChange` | `(open: boolean) => void` | `-` | Runs when the menu open state changes. |
+| Prop           | Type                      | Default | Description                                    |
+| -------------- | ------------------------- | ------- | ---------------------------------------------- |
+| `open`         | `boolean`                 | `-`     | Controls whether the menu is open.             |
+| `defaultOpen`  | `boolean`                 | `false` | Sets the initial open state when uncontrolled. |
+| `onOpenChange` | `(open: boolean) => void` | `-`     | Runs when the menu open state changes.         |
 
 ### DropdownMenuContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `side` | `"top" | "bottom" | "left" | "right"` | `"bottom"` | Sets the preferred side of the popup. |
-| `align` | `"start" | "center" | "end"` | `"start"` | Aligns the popup against its trigger. |
-| `sideOffset` | `number` | `4` | Sets the distance between trigger and popup. |
+| Prop         | Type     | Default  | Description                                  |
+| ------------ | -------- | -------- | -------------------------------------------- | --------- | ------------------------------------- | ------------------------------------- |
+| `side`       | `"top"   | "bottom" | "left"                                       | "right"`  | `"bottom"`                            | Sets the preferred side of the popup. |
+| `align`      | `"start" | "center" | "end"`                                       | `"start"` | Aligns the popup against its trigger. |
+| `sideOffset` | `number` | `4`      | Sets the distance between trigger and popup. |
 
 ### DropdownMenuItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"default" | "destructive"` | `"default"` | Controls the item intent and focus treatment. |
-| `inset` | `boolean` | `false` | Aligns text with items that include a leading icon. |
-| `disabled` | `boolean` | `false` | Prevents the item from receiving selection. |
+| Prop       | Type       | Default        | Description                                         |
+| ---------- | ---------- | -------------- | --------------------------------------------------- | --------------------------------------------- |
+| `variant`  | `"default" | "destructive"` | `"default"`                                         | Controls the item intent and focus treatment. |
+| `inset`    | `boolean`  | `false`        | Aligns text with items that include a leading icon. |
+| `disabled` | `boolean`  | `false`        | Prevents the item from receiving selection.         |
 
 ### DropdownMenuCheckboxItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `checked` | `boolean` | `false` | Controls the checked state. |
-| `onCheckedChange` | `(checked: boolean) => void` | `-` | Runs when the checked state changes. |
+| Prop              | Type                         | Default | Description                          |
+| ----------------- | ---------------------------- | ------- | ------------------------------------ |
+| `checked`         | `boolean`                    | `false` | Controls the checked state.          |
+| `onCheckedChange` | `(checked: boolean) => void` | `-`     | Runs when the checked state changes. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Dropdown Menu](https://base-ui.com/react/components/menu).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/dropdown-menu)

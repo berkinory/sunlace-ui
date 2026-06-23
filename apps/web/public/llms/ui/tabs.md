@@ -23,11 +23,11 @@ npm install @base-ui/react class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -126,18 +126,12 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
 }
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants };
-
 ```
 
 ## Usage
 
 ```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 ```
 
 ```tsx
@@ -157,12 +151,7 @@ import {
 
 ```tsx
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function ProjectTabs() {
   return (
@@ -198,35 +187,37 @@ export function ProjectTabs() {
 
 ### Tabs
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Controls the active tab. |
-| `defaultValue` | `string` | `-` | Sets the initial active tab when uncontrolled. |
-| `onValueChange` | `(value: string) => void` | `-` | Runs when the active tab changes. |
-| `orientation` | `"horizontal" | "vertical"` | `"horizontal"` | Sets the tab list direction. |
+| Prop            | Type                      | Default     | Description                                    |
+| --------------- | ------------------------- | ----------- | ---------------------------------------------- | ---------------------------- |
+| `value`         | `string`                  | `-`         | Controls the active tab.                       |
+| `defaultValue`  | `string`                  | `-`         | Sets the initial active tab when uncontrolled. |
+| `onValueChange` | `(value: string) => void` | `-`         | Runs when the active tab changes.              |
+| `orientation`   | `"horizontal"             | "vertical"` | `"horizontal"`                                 | Sets the tab list direction. |
 
 ### TabsList
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"default" | "line"` | `"default"` | Sets the list presentation. |
-| `activateOnFocus` | `boolean` | `false` | Activates tabs while moving keyboard focus. |
+| Prop              | Type       | Default | Description                                 |
+| ----------------- | ---------- | ------- | ------------------------------------------- | --------------------------- |
+| `variant`         | `"default" | "line"` | `"default"`                                 | Sets the list presentation. |
+| `activateOnFocus` | `boolean`  | `false` | Activates tabs while moving keyboard focus. |
 
 ### TabsTrigger
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Connects the trigger to its content panel. |
-| `disabled` | `boolean` | `false` | Prevents selecting the tab. |
+| Prop       | Type      | Default | Description                                |
+| ---------- | --------- | ------- | ------------------------------------------ |
+| `value`    | `string`  | `-`     | Connects the trigger to its content panel. |
+| `disabled` | `boolean` | `false` | Prevents selecting the tab.                |
 
 ### TabsContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Connects the panel to its trigger. |
+| Prop    | Type     | Default | Description                        |
+| ------- | -------- | ------- | ---------------------------------- |
+| `value` | `string` | `-`     | Connects the panel to its trigger. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Tabs](https://base-ui.com/react/components/tabs).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/tabs)

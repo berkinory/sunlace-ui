@@ -23,11 +23,11 @@ npm install @base-ui/react class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -160,7 +160,6 @@ function Badge({
 }
 
 export { Badge, badgeVariants };
-
 ```
 
 ## Usage
@@ -202,9 +201,10 @@ export function BadgeStatusDemo() {
 
 ### Badge
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "info" | "destructive" | "shine" | "animated-border" | "rotate-border"` | `"default"` | Controls the visual style and emphasis of the badge. |
+| Prop      | Type       | Default     | Description |
+| --------- | ---------- | ----------- | ----------- | ------- | ------ | --------- | --------- | ------ | ------------- | ------- | ----------------- | ---------------- | ----------- | ---------------------------------------------------- |
+| `variant` | `"default" | "secondary" | "outline"   | "ghost" | "link" | "success" | "warning" | "info" | "destructive" | "shine" | "animated-border" | "rotate-border"` | `"default"` | Controls the visual style and emphasis of the badge. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/badge)

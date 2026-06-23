@@ -23,11 +23,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -255,7 +255,6 @@ export {
   SelectTrigger,
   SelectValue,
 };
-
 ```
 
 ## Usage
@@ -350,9 +349,8 @@ export function StatusSelectDemo() {
         </SelectContent>
       </Select>
       <p className="w-48 text-center text-sm text-muted-foreground">
-        Status is <span className="text-foreground">
-          {current.label.toLowerCase()}
-        </span>.
+        Status is{" "}
+        <span className="text-foreground">{current.label.toLowerCase()}</span>.
       </p>
     </div>
   );
@@ -363,39 +361,41 @@ export function StatusSelectDemo() {
 
 ### Select
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `Value | null` | `-` | Controls the selected value. |
-| `defaultValue` | `Value | null` | `null` | Sets the initial value when uncontrolled. |
-| `onValueChange` | `(value: Value | null) => void` | `-` | Runs when the selected value changes. |
-| `name` | `string` | `-` | Identifies the field during form submission. |
-| `disabled` | `boolean` | `false` | Disables the trigger and selection interaction. |
+| Prop            | Type           | Default        | Description                                     |
+| --------------- | -------------- | -------------- | ----------------------------------------------- | ----------------------------------------- |
+| `value`         | `Value         | null`          | `-`                                             | Controls the selected value.              |
+| `defaultValue`  | `Value         | null`          | `null`                                          | Sets the initial value when uncontrolled. |
+| `onValueChange` | `(value: Value | null) => void` | `-`                                             | Runs when the selected value changes.     |
+| `name`          | `string`       | `-`            | Identifies the field during form submission.    |
+| `disabled`      | `boolean`      | `false`        | Disables the trigger and selection interaction. |
 
 ### SelectTrigger
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `size` | `"default" | "sm"` | `"default"` | Controls the trigger height and radius. |
-| `disabled` | `boolean` | `false` | Disables the trigger. |
+| Prop       | Type       | Default | Description           |
+| ---------- | ---------- | ------- | --------------------- | --------------------------------------- |
+| `size`     | `"default" | "sm"`   | `"default"`           | Controls the trigger height and radius. |
+| `disabled` | `boolean`  | `false` | Disables the trigger. |
 
 ### SelectContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `side` | `"top" | "bottom" | "left" | "right"` | `"bottom"` | Sets the preferred popup side. |
-| `align` | `"start" | "center" | "end"` | `"center"` | Aligns the popup against its trigger. |
-| `alignItemWithTrigger` | `boolean` | `false` | Overlaps the popup to align the selected item with the trigger text. |
-| `sideOffset` | `number` | `4` | Sets the distance between trigger and popup. |
+| Prop                   | Type      | Default  | Description                                                          |
+| ---------------------- | --------- | -------- | -------------------------------------------------------------------- | ---------- | ------------------------------------- | ------------------------------ |
+| `side`                 | `"top"    | "bottom" | "left"                                                               | "right"`   | `"bottom"`                            | Sets the preferred popup side. |
+| `align`                | `"start"  | "center" | "end"`                                                               | `"center"` | Aligns the popup against its trigger. |
+| `alignItemWithTrigger` | `boolean` | `false`  | Overlaps the popup to align the selected item with the trigger text. |
+| `sideOffset`           | `number`  | `4`      | Sets the distance between trigger and popup.                         |
 
 ### SelectItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `Value` | `-` | Sets the value represented by the item. |
-| `disabled` | `boolean` | `false` | Prevents the item from being selected. |
+| Prop       | Type      | Default | Description                             |
+| ---------- | --------- | ------- | --------------------------------------- |
+| `value`    | `Value`   | `-`     | Sets the value represented by the item. |
+| `disabled` | `boolean` | `false` | Prevents the item from being selected.  |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Select](https://base-ui.com/react/components/select).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/select)

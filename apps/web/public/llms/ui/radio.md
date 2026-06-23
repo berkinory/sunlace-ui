@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -75,16 +75,12 @@ function RadioItem({ className, ...props }: RadioPrimitive.Root.Props) {
 }
 
 export { Radio, RadioItem };
-
 ```
 
 ## Usage
 
 ```tsx
-import {
-  Radio,
-  RadioItem,
-} from "@/components/ui/radio";
+import { Radio, RadioItem } from "@/components/ui/radio";
 ```
 
 ```tsx
@@ -107,20 +103,14 @@ import {
 ```tsx
 import { useState } from "react";
 
-import {
-  Radio,
-  RadioItem,
-} from "@/components/ui/radio";
+import { Radio, RadioItem } from "@/components/ui/radio";
 
 export function ControlledRadio() {
   const [visibility, setVisibility] = useState("public");
 
   return (
     <div className="grid gap-3">
-      <Radio
-        onValueChange={(value) => setVisibility(value)}
-        value={visibility}
-      >
+      <Radio onValueChange={(value) => setVisibility(value)} value={visibility}>
         <label className="flex items-center gap-3">
           <RadioItem value="public" />
           Public
@@ -146,22 +136,24 @@ export function ControlledRadio() {
 
 ### Radio
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Controls the selected value. |
-| `defaultValue` | `string` | `-` | Sets the initial uncontrolled value. |
-| `onValueChange` | `(value: string) => void` | `-` | Runs when the selected value changes. |
-| `disabled` | `boolean` | `false` | Disables every item in the group. |
+| Prop            | Type                      | Default | Description                           |
+| --------------- | ------------------------- | ------- | ------------------------------------- |
+| `value`         | `string`                  | `-`     | Controls the selected value.          |
+| `defaultValue`  | `string`                  | `-`     | Sets the initial uncontrolled value.  |
+| `onValueChange` | `(value: string) => void` | `-`     | Runs when the selected value changes. |
+| `disabled`      | `boolean`                 | `false` | Disables every item in the group.     |
 
 ### RadioItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Identifies the item inside its group. |
-| `disabled` | `boolean` | `false` | Disables the individual item. |
+| Prop       | Type      | Default | Description                           |
+| ---------- | --------- | ------- | ------------------------------------- |
+| `value`    | `string`  | `-`     | Identifies the item inside its group. |
+| `disabled` | `boolean` | `false` | Disables the individual item.         |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Radio](https://base-ui.com/react/components/radio-group).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/radio)

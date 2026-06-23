@@ -25,11 +25,11 @@ npm install @hugeicons/core-free-icons @hugeicons/react react-day-picker clsx ta
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -373,7 +373,6 @@ function CalendarDayButton({
 }
 
 export { Calendar, CalendarDayButton };
-
 ```
 
 ## Usage
@@ -383,11 +382,7 @@ import { Calendar } from "@/components/ui/calendar";
 ```
 
 ```tsx
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-/>
+<Calendar mode="single" selected={date} onSelect={setDate} />
 ```
 
 ## Examples
@@ -423,16 +418,18 @@ export function AvailabilityCalendar() {
 
 ### Calendar
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `mode` | `"single" | "multiple" | "range"` | `-` | Sets the date selection behavior. |
-| `selected` | `Date | Date[] | DateRange` | `-` | Controls the selected date or dates. |
-| `showOutsideDays` | `boolean` | `true` | Shows days from adjacent months. |
-| `easyNavigation` | `boolean` | `false` | Uses Sunlace selects for direct month and year changes. |
-| `buttonVariant` | `Button variant` | `"ghost"` | Sets the previous and next button style. |
+| Prop              | Type             | Default    | Description                                             |
+| ----------------- | ---------------- | ---------- | ------------------------------------------------------- | --- | ------------------------------------ |
+| `mode`            | `"single"        | "multiple" | "range"`                                                | `-` | Sets the date selection behavior.    |
+| `selected`        | `Date            | Date[]     | DateRange`                                              | `-` | Controls the selected date or dates. |
+| `showOutsideDays` | `boolean`        | `true`     | Shows days from adjacent months.                        |
+| `easyNavigation`  | `boolean`        | `false`    | Uses Sunlace selects for direct month and year changes. |
+| `buttonVariant`   | `Button variant` | `"ghost"`  | Sets the previous and next button style.                |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Calendar](https://daypicker.dev/).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/calendar)

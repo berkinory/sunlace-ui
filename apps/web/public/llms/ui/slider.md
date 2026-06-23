@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -110,7 +110,6 @@ function Slider({
 }
 
 export { Slider };
-
 ```
 
 ## Usage
@@ -158,17 +157,19 @@ export function VolumeSlider() {
 
 ### Slider
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `number[]` | `-` | Controls the selected value or range. |
-| `defaultValue` | `number[]` | `-` | Sets the initial uncontrolled value or range. |
-| `min` | `number` | `0` | Sets the minimum value. |
-| `max` | `number` | `100` | Sets the maximum value. |
-| `step` | `number` | `1` | Sets the increment between values. |
-| `orientation` | `"horizontal" | "vertical"` | `"horizontal"` | Sets the slider direction. |
+| Prop           | Type          | Default     | Description                                   |
+| -------------- | ------------- | ----------- | --------------------------------------------- | -------------------------- |
+| `value`        | `number[]`    | `-`         | Controls the selected value or range.         |
+| `defaultValue` | `number[]`    | `-`         | Sets the initial uncontrolled value or range. |
+| `min`          | `number`      | `0`         | Sets the minimum value.                       |
+| `max`          | `number`      | `100`       | Sets the maximum value.                       |
+| `step`         | `number`      | `1`         | Sets the increment between values.            |
+| `orientation`  | `"horizontal" | "vertical"` | `"horizontal"`                                | Sets the slider direction. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Slider](https://base-ui.com/react/components/slider).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/slider)

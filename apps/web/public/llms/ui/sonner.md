@@ -23,11 +23,11 @@ npm install @hugeicons/core-free-icons @hugeicons/react next-themes sonner clsx 
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -165,7 +165,6 @@ const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { Toaster };
-
 ```
 
 ## Usage
@@ -215,17 +214,19 @@ export function SonnerActionDemo() {
 
 ### Toaster
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `position` | `"bottom-left" | "bottom-center" | "bottom-right" | "top-left" | "top-center" | "top-right"` | `"bottom-right"` | Where toasts anchor on the viewport. |
-| `expand` | `boolean` | `false` | Expands the stacked toast queue instead of collapsing it. |
-| `closeButton` | `boolean` | `false` | Renders an explicit close control on each toast. |
-| `duration` | `number` | `4000` | Milliseconds before a toast auto-dismisses. |
-| `richColors` | `boolean` | `false` | Uses sonner's saturated intent backgrounds. Sunlace ships token-driven tinted surfaces by default. |
-| `theme` | `"light" | "dark" | "system"` | `"system"` | Overrides the toast color theme. Defaults to next-themes. |
+| Prop          | Type           | Default         | Description                                                                                        |
+| ------------- | -------------- | --------------- | -------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------- | ------------ | ---------------- | ------------------------------------ |
+| `position`    | `"bottom-left" | "bottom-center" | "bottom-right"                                                                                     | "top-left" | "top-center"                                              | "top-right"` | `"bottom-right"` | Where toasts anchor on the viewport. |
+| `expand`      | `boolean`      | `false`         | Expands the stacked toast queue instead of collapsing it.                                          |
+| `closeButton` | `boolean`      | `false`         | Renders an explicit close control on each toast.                                                   |
+| `duration`    | `number`       | `4000`          | Milliseconds before a toast auto-dismisses.                                                        |
+| `richColors`  | `boolean`      | `false`         | Uses sonner's saturated intent backgrounds. Sunlace ships token-driven tinted surfaces by default. |
+| `theme`       | `"light"       | "dark"          | "system"`                                                                                          | `"system"` | Overrides the toast color theme. Defaults to next-themes. |
 
 ---
+
 Also supports sonner primitive props. See [sonner Sonner](https://sonner.emilkowal.ski/).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/sonner)

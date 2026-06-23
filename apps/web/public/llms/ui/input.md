@@ -23,11 +23,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -331,7 +331,6 @@ function InputDescription({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export { Input, InputDescription, InputField, InputLabel };
-
 ```
 
 ## Usage
@@ -362,7 +361,7 @@ export function ValidationInput() {
   const [shakeKey, setShakeKey] = useState(0);
 
   return (
-      <InputField className="max-w-xs">
+    <InputField className="max-w-xs">
       <InputLabel htmlFor="email">Email</InputLabel>
       <Input
         aria-invalid
@@ -390,7 +389,12 @@ export function ValidationInput() {
 ```tsx
 import { LockPasswordIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Input, InputDescription, InputField, InputLabel } from "@/components/ui/input";
+import {
+  Input,
+  InputDescription,
+  InputField,
+  InputLabel,
+} from "@/components/ui/input";
 
 export function PasswordInput() {
   return (
@@ -438,18 +442,20 @@ export function ClearableInput() {
 
 ### Input
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `startIcon` | `React.ReactNode` | `-` | Renders a leading icon inside the input shell. |
-| `endAddon` | `React.ReactNode` | `-` | Renders a trailing text addon such as a domain or unit. |
-| `clearable` | `boolean` | `false` | Shows a clear button when a controlled value is present. |
-| `onClear` | `() => void` | `-` | Runs when the clear button is pressed. |
-| `revealable` | `boolean` | `false` | Adds a show or hide button for password inputs. |
-| `error` | `React.ReactNode` | `-` | Renders an error message below the input. |
-| `shakeKey` | `React.Key` | `-` | Restarts the validation shake when the key changes. |
+| Prop         | Type              | Default | Description                                              |
+| ------------ | ----------------- | ------- | -------------------------------------------------------- |
+| `startIcon`  | `React.ReactNode` | `-`     | Renders a leading icon inside the input shell.           |
+| `endAddon`   | `React.ReactNode` | `-`     | Renders a trailing text addon such as a domain or unit.  |
+| `clearable`  | `boolean`         | `false` | Shows a clear button when a controlled value is present. |
+| `onClear`    | `() => void`      | `-`     | Runs when the clear button is pressed.                   |
+| `revealable` | `boolean`         | `false` | Adds a show or hide button for password inputs.          |
+| `error`      | `React.ReactNode` | `-`     | Renders an error message below the input.                |
+| `shakeKey`   | `React.Key`       | `-`     | Restarts the validation shake when the key changes.      |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Input](https://base-ui.com/react/components/input).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/input)

@@ -21,11 +21,11 @@ npm install clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -192,7 +192,6 @@ export {
   CardDescription,
   CardContent,
 };
-
 ```
 
 ## Usage
@@ -340,10 +339,11 @@ export function CardBillingDemo() {
 
 ### Card
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"default" | "shine" | "animated-border"` | `"default"` | Controls the card surface treatment. |
-| `size` | `"default" | "sm"` | `"default"` | Controls card padding and title scale. |
+| Prop      | Type       | Default | Description        |
+| --------- | ---------- | ------- | ------------------ | -------------------------------------- | ------------------------------------ |
+| `variant` | `"default" | "shine" | "animated-border"` | `"default"`                            | Controls the card surface treatment. |
+| `size`    | `"default" | "sm"`   | `"default"`        | Controls card padding and title scale. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/card)

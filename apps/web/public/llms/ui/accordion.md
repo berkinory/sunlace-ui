@@ -23,11 +23,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -125,7 +125,6 @@ function AccordionContent({
 }
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
-
 ```
 
 ## Usage
@@ -209,20 +208,22 @@ export function AccordionCardDemo() {
 
 ### Accordion
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `borders` | `boolean` | `false` | Wraps the accordion in a connected border treatment. |
+| Prop       | Type      | Default | Description                                              |
+| ---------- | --------- | ------- | -------------------------------------------------------- |
+| `borders`  | `boolean` | `false` | Wraps the accordion in a connected border treatment.     |
 | `multiple` | `boolean` | `false` | Allows more than one item to stay open at the same time. |
 
 ### AccordionTrigger
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `showArrow` | `boolean` | `true` | Shows or hides the trigger arrow icon. |
-| `underline` | `boolean` | `true` | Controls the trigger underline on hover. |
+| Prop        | Type      | Default | Description                              |
+| ----------- | --------- | ------- | ---------------------------------------- |
+| `showArrow` | `boolean` | `true`  | Shows or hides the trigger arrow icon.   |
+| `underline` | `boolean` | `true`  | Controls the trigger underline on hover. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Accordion](https://base-ui.com/react/components/accordion).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/accordion)

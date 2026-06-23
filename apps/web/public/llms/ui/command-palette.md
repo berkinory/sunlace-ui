@@ -23,11 +23,11 @@ npm install @hugeicons/core-free-icons @hugeicons/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -512,7 +512,6 @@ function CommandPalette({
 }
 
 export { CommandPalette, type CommandPaletteItem, type CommandPaletteProps };
-
 ```
 
 ## Usage
@@ -526,9 +525,7 @@ import {
 
 ```tsx
 <CommandPalette
-  items={[
-    { id: "home", label: "Go to Home", onSelect: () => {} },
-  ]}
+  items={[{ id: "home", label: "Go to Home", onSelect: () => {} }]}
   open={open}
   onOpenChange={setOpen}
 />
@@ -557,26 +554,27 @@ export function CommandPaletteDemo() {
 
 ### CommandPalette
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `items` | `CommandPaletteItem[]` | `-` | Commands to search and run. |
-| `open` | `boolean` | `-` | Controls whether the palette is open. |
-| `onOpenChange` | `(open: boolean) => void` | `-` | Runs when the open state changes. |
-| `shortcut` | `string` | `"k"` | Opens with Cmd/Ctrl plus this key. |
-| `shortcutEnabled` | `boolean` | `true` | Registers the global Cmd/Ctrl shortcut listener. |
-| `placeholder` | `string` | `"Type a command or search…"` | Search field placeholder. |
-| `emptyMessage` | `string` | `"No results found."` | Shown when the filter returns no items. |
+| Prop              | Type                      | Default                       | Description                                      |
+| ----------------- | ------------------------- | ----------------------------- | ------------------------------------------------ |
+| `items`           | `CommandPaletteItem[]`    | `-`                           | Commands to search and run.                      |
+| `open`            | `boolean`                 | `-`                           | Controls whether the palette is open.            |
+| `onOpenChange`    | `(open: boolean) => void` | `-`                           | Runs when the open state changes.                |
+| `shortcut`        | `string`                  | `"k"`                         | Opens with Cmd/Ctrl plus this key.               |
+| `shortcutEnabled` | `boolean`                 | `true`                        | Registers the global Cmd/Ctrl shortcut listener. |
+| `placeholder`     | `string`                  | `"Type a command or search…"` | Search field placeholder.                        |
+| `emptyMessage`    | `string`                  | `"No results found."`         | Shown when the filter returns no items.          |
 
 ### CommandPaletteItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | `-` | Stable item identifier. |
-| `label` | `string` | `-` | Visible command label. |
-| `group` | `string` | `-` | Optional section heading. |
-| `hint` | `string` | `-` | Optional keyboard hint badge. |
-| `keywords` | `string[]` | `-` | Extra fuzzy-match terms. |
-| `onSelect` | `() => void` | `-` | Runs when the item is chosen. |
+| Prop       | Type         | Default | Description                   |
+| ---------- | ------------ | ------- | ----------------------------- |
+| `id`       | `string`     | `-`     | Stable item identifier.       |
+| `label`    | `string`     | `-`     | Visible command label.        |
+| `group`    | `string`     | `-`     | Optional section heading.     |
+| `hint`     | `string`     | `-`     | Optional keyboard hint badge. |
+| `keywords` | `string[]`   | `-`     | Extra fuzzy-match terms.      |
+| `onSelect` | `() => void` | `-`     | Runs when the item is chosen. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/command-palette)

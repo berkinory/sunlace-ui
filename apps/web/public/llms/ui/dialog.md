@@ -25,11 +25,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -199,7 +199,6 @@ export {
   DialogTitle,
   DialogTrigger,
 };
-
 ```
 
 ## Usage
@@ -219,7 +218,9 @@ import {
 
 ```tsx
 <Dialog>
-  <DialogTrigger render={<Button variant="outline" />}>Open dialog</DialogTrigger>
+  <DialogTrigger render={<Button variant="outline" />}>
+    Open dialog
+  </DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Edit profile</DialogTitle>
@@ -264,7 +265,9 @@ export function DeleteProjectDialog() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+          <DialogClose render={<Button variant="outline" />}>
+            Cancel
+          </DialogClose>
           <Button variant="destructive">Delete project</Button>
         </DialogFooter>
       </DialogContent>
@@ -277,26 +280,28 @@ export function DeleteProjectDialog() {
 
 ### Dialog
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `open` | `boolean` | `-` | Controls whether the dialog is open. |
-| `defaultOpen` | `boolean` | `false` | Sets the initial uncontrolled open state. |
-| `onOpenChange` | `(open: boolean) => void` | `-` | Runs when the open state changes. |
+| Prop           | Type                      | Default | Description                               |
+| -------------- | ------------------------- | ------- | ----------------------------------------- |
+| `open`         | `boolean`                 | `-`     | Controls whether the dialog is open.      |
+| `defaultOpen`  | `boolean`                 | `false` | Sets the initial uncontrolled open state. |
+| `onOpenChange` | `(open: boolean) => void` | `-`     | Runs when the open state changes.         |
 
 ### DialogContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `showCloseButton` | `boolean` | `true` | Shows the close button in the top-right corner. |
+| Prop              | Type      | Default | Description                                     |
+| ----------------- | --------- | ------- | ----------------------------------------------- |
+| `showCloseButton` | `boolean` | `true`  | Shows the close button in the top-right corner. |
 
 ### DialogFooter
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
+| Prop              | Type      | Default | Description                           |
+| ----------------- | --------- | ------- | ------------------------------------- |
 | `showCloseButton` | `boolean` | `false` | Adds a default outlined close action. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Dialog](https://base-ui.com/react/components/dialog).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/dialog)

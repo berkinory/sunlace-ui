@@ -23,11 +23,11 @@ npm install clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -481,7 +481,6 @@ export {
   type ActionSwapItem,
   type ActionSwapTextProps,
 };
-
 ```
 
 ## Usage
@@ -511,7 +510,10 @@ import {
 ### Roll
 
 ```tsx
-import { ActionSwapButton, type ActionSwapItem } from "@/components/ui/action-swap";
+import {
+  ActionSwapButton,
+  type ActionSwapItem,
+} from "@/components/ui/action-swap";
 
 const items: ActionSwapItem[] = [
   { id: "idle", label: "Save" },
@@ -530,7 +532,10 @@ export function ActionSwapRollDemo() {
 ```tsx
 import { Copy01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ActionSwapButton, type ActionSwapItem } from "@/components/ui/action-swap";
+import {
+  ActionSwapButton,
+  type ActionSwapItem,
+} from "@/components/ui/action-swap";
 
 const items: ActionSwapItem[] = [
   {
@@ -605,21 +610,22 @@ export function ComposedActionSwap() {
 
 ### ActionSwapButton
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `items` | `ActionSwapItem[]` | `-` | States to cycle through on click. |
-| `animation` | `"blur" | "roll" | "cascade"` | `"blur"` | Sets the swap motion style. |
-| `value` | `string` | `-` | Controlled active item id. |
-| `onValueChange` | `(value, item) => void` | `-` | Runs when the active item changes. |
-| `cycle` | `boolean` | `true` | Cycles items on click when true. |
-| `iconOnly` | `boolean` | `false` | Shows only the icon slot. |
+| Prop            | Type                    | Default | Description                        |
+| --------------- | ----------------------- | ------- | ---------------------------------- | -------- | --------------------------- |
+| `items`         | `ActionSwapItem[]`      | `-`     | States to cycle through on click.  |
+| `animation`     | `"blur"                 | "roll"  | "cascade"`                         | `"blur"` | Sets the swap motion style. |
+| `value`         | `string`                | `-`     | Controlled active item id.         |
+| `onValueChange` | `(value, item) => void` | `-`     | Runs when the active item changes. |
+| `cycle`         | `boolean`               | `true`  | Cycles items on click when true.   |
+| `iconOnly`      | `boolean`               | `false` | Shows only the icon slot.          |
 
 ### ActionSwapText / ActionSwapIcon
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | `-` | Change this to replay the swap animation. |
-| `animation` | `"blur" | "roll" | "cascade"` | `"blur"` | Sets the swap motion style. |
+| Prop        | Type     | Default | Description                               |
+| ----------- | -------- | ------- | ----------------------------------------- | -------- | --------------------------- |
+| `value`     | `string` | `-`     | Change this to replay the swap animation. |
+| `animation` | `"blur"  | "roll"  | "cascade"`                                | `"blur"` | Sets the swap motion style. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/action-swap)

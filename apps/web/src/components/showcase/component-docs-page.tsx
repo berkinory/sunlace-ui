@@ -70,7 +70,11 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
 
         return (
           <ShowcaseLayout activeSlug={component} tocItems={tocItems}>
-            <article className="scroll-mt-7 pt-7 pb-10 lg:px-16" id="showcase">
+            <article
+              className="animate-page-enter scroll-mt-7 pt-7 pb-10 lg:px-16"
+              id="showcase"
+              key={component}
+            >
               <div className="text-sm font-medium text-muted-foreground">
                 Components <span className="px-2">›</span>
                 <span className="text-foreground">{title}</span>

@@ -23,11 +23,11 @@ npm install hashvatar clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -102,7 +102,6 @@ function DitherAvatar({
 }
 
 export { DitherAvatar };
-
 ```
 
 ## Usage
@@ -159,7 +158,11 @@ import { DitherAvatar } from "@/components/ui/dither-avatar";
 
 const wallets = [
   { hash: "medhy.eth", label: "medhy.eth", dotScale: 1 },
-  { hash: "0x742d35cc6634c0532925a3b844bc454e4438f44e", label: "0x742...44e", dotScale: 2 },
+  {
+    hash: "0x742d35cc6634c0532925a3b844bc454e4438f44e",
+    label: "0x742...44e",
+    dotScale: 2,
+  },
   { hash: "vitalik.eth", label: "vitalik.eth", dotScale: 3 },
 ];
 
@@ -185,13 +188,14 @@ export function DitherWalletListDemo() {
 
 ### DitherAvatar
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `hash` | `string` | `-` | Seed string used to generate the deterministic image. |
-| `shape` | `"circle" | "rounded" | "square"` | `"circle"` | Controls the avatar corner treatment. |
-| `size` | `"sm" | "default" | "lg"` | `"default"` | Controls the avatar dimensions. |
-| `dotScale` | `number` | `1` | Controls the dither cell size. |
-| `tones` | `HashvatarOptions['tones']` | `-` | Restricts generated colors to selected tone families. |
+| Prop       | Type                        | Default   | Description                                           |
+| ---------- | --------------------------- | --------- | ----------------------------------------------------- | ----------- | ------------------------------------- |
+| `hash`     | `string`                    | `-`       | Seed string used to generate the deterministic image. |
+| `shape`    | `"circle"                   | "rounded" | "square"`                                             | `"circle"`  | Controls the avatar corner treatment. |
+| `size`     | `"sm"                       | "default" | "lg"`                                                 | `"default"` | Controls the avatar dimensions.       |
+| `dotScale` | `number`                    | `1`       | Controls the dither cell size.                        |
+| `tones`    | `HashvatarOptions['tones']` | `-`       | Restricts generated colors to selected tone families. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/dither-avatar)

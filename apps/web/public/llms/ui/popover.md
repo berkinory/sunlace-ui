@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -129,7 +129,6 @@ export {
   PopoverTitle,
   PopoverTrigger,
 };
-
 ```
 
 ## Usage
@@ -207,22 +206,24 @@ export function PreferencesPopover() {
 
 ### Popover
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `open` | `boolean` | `-` | Controls whether the popover is open. |
-| `defaultOpen` | `boolean` | `false` | Sets the initial uncontrolled open state. |
-| `onOpenChange` | `(open: boolean) => void` | `-` | Runs when the open state changes. |
+| Prop           | Type                      | Default | Description                               |
+| -------------- | ------------------------- | ------- | ----------------------------------------- |
+| `open`         | `boolean`                 | `-`     | Controls whether the popover is open.     |
+| `defaultOpen`  | `boolean`                 | `false` | Sets the initial uncontrolled open state. |
+| `onOpenChange` | `(open: boolean) => void` | `-`     | Runs when the open state changes.         |
 
 ### PopoverContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `side` | `"top" | "right" | "bottom" | "left"` | `"bottom"` | Sets the preferred side of the trigger. |
-| `align` | `"start" | "center" | "end"` | `"center"` | Aligns the popover against its trigger. |
-| `sideOffset` | `number` | `4` | Sets the distance from the trigger. |
+| Prop         | Type     | Default  | Description                         |
+| ------------ | -------- | -------- | ----------------------------------- | ---------- | --------------------------------------- | --------------------------------------- |
+| `side`       | `"top"   | "right"  | "bottom"                            | "left"`    | `"bottom"`                              | Sets the preferred side of the trigger. |
+| `align`      | `"start" | "center" | "end"`                              | `"center"` | Aligns the popover against its trigger. |
+| `sideOffset` | `number` | `4`      | Sets the distance from the trigger. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Popover](https://base-ui.com/react/components/popover).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/popover)

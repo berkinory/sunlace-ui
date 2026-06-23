@@ -23,11 +23,11 @@ npm install class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -188,7 +188,6 @@ function NumberPop({ value, size, className, playKey }: NumberPopProps) {
 }
 
 export { NumberPop, numberPopVariants };
-
 ```
 
 ## Usage
@@ -243,11 +242,12 @@ export function RevenueCounter() {
 
 ### NumberPop
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `string | number` | `-` | The number to display. Replays the animation when it changes. |
-| `playKey` | `number | string` | `-` | Change this to force a replay without changing the value. |
-| `size` | `"default" | "sm" | "lg" | "xl"` | `"default"` | Controls the text size and weight. |
+| Prop      | Type       | Default | Description |
+| --------- | ---------- | ------- | ----------- | ------------------------------------------------------------- | ----------- | ---------------------------------- |
+| `value`   | `string    | number` | `-`         | The number to display. Replays the animation when it changes. |
+| `playKey` | `number    | string` | `-`         | Change this to force a replay without changing the value.     |
+| `size`    | `"default" | "sm"    | "lg"        | "xl"`                                                         | `"default"` | Controls the text size and weight. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/number-pop)

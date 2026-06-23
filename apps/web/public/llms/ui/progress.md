@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -130,7 +130,6 @@ export {
   ProgressLabel,
   ProgressValue,
 };
-
 ```
 
 ## Usage
@@ -189,10 +188,7 @@ export function ControlledProgress() {
 ### Indeterminate progress
 
 ```tsx
-import {
-  Progress,
-  ProgressLabel,
-} from "@/components/ui/progress";
+import { Progress, ProgressLabel } from "@/components/ui/progress";
 
 export function IndeterminateProgress() {
   return (
@@ -207,15 +203,17 @@ export function IndeterminateProgress() {
 
 ### Progress
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `value` | `number | null` | `null` | Sets progress or enables the indeterminate state. |
-| `min` | `number` | `0` | Sets the minimum progress value. |
-| `max` | `number` | `100` | Sets the maximum progress value. |
-| `size` | `"default" | "sm"` | `"default"` | Sets the track thickness. |
+| Prop    | Type       | Default | Description                      |
+| ------- | ---------- | ------- | -------------------------------- | ------------------------------------------------- |
+| `value` | `number    | null`   | `null`                           | Sets progress or enables the indeterminate state. |
+| `min`   | `number`   | `0`     | Sets the minimum progress value. |
+| `max`   | `number`   | `100`   | Sets the maximum progress value. |
+| `size`  | `"default" | "sm"`   | `"default"`                      | Sets the track thickness.                         |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Progress](https://base-ui.com/react/components/progress).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/progress)

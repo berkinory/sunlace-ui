@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -84,7 +84,6 @@ function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
 }
 
 export { Checkbox };
-
 ```
 
 ## Usage
@@ -182,18 +181,20 @@ export function CheckboxIndeterminateDemo() {
 
 ### Checkbox
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `checked` | `boolean` | `-` | Controls the checked state. |
-| `defaultChecked` | `boolean` | `false` | Sets the initial checked state when uncontrolled. |
-| `indeterminate` | `boolean` | `false` | Shows a mixed state when only some child options are selected. |
-| `onCheckedChange` | `(checked: boolean, eventDetails: CheckboxRoot.ChangeEventDetails) => void` | `-` | Runs when the checked state changes. |
-| `disabled` | `boolean` | `false` | Prevents interaction and lowers visual emphasis. |
-| `name` | `string` | `-` | Sets the submitted form field name. |
-| `required` | `boolean` | `false` | Marks the checkbox as required in a form. |
+| Prop              | Type                                                                        | Default | Description                                                    |
+| ----------------- | --------------------------------------------------------------------------- | ------- | -------------------------------------------------------------- |
+| `checked`         | `boolean`                                                                   | `-`     | Controls the checked state.                                    |
+| `defaultChecked`  | `boolean`                                                                   | `false` | Sets the initial checked state when uncontrolled.              |
+| `indeterminate`   | `boolean`                                                                   | `false` | Shows a mixed state when only some child options are selected. |
+| `onCheckedChange` | `(checked: boolean, eventDetails: CheckboxRoot.ChangeEventDetails) => void` | `-`     | Runs when the checked state changes.                           |
+| `disabled`        | `boolean`                                                                   | `false` | Prevents interaction and lowers visual emphasis.               |
+| `name`            | `string`                                                                    | `-`     | Sets the submitted form field name.                            |
+| `required`        | `boolean`                                                                   | `false` | Marks the checkbox as required in a form.                      |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Checkbox](https://base-ui.com/react/components/checkbox).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/checkbox)

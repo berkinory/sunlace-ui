@@ -23,11 +23,11 @@ npm install @base-ui/react class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -79,7 +79,6 @@ function Toggle({
 }
 
 export { Toggle, toggleVariants };
-
 ```
 
 ## Usage
@@ -135,17 +134,19 @@ export function FavoriteToggle() {
 
 ### Toggle
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `pressed` | `boolean` | `false` | Controls the pressed (on) state. |
-| `defaultPressed` | `boolean` | `false` | Sets the initial uncontrolled pressed state. |
-| `onPressedChange` | `(pressed: boolean) => void` | `-` | Runs when the pressed state changes. |
-| `variant` | `"default" | "outline"` | `"default"` | Controls the visual style of the toggle. |
-| `size` | `"default" | "sm" | "lg" | "icon"` | `"default"` | Controls the toggle height and padding. |
-| `disabled` | `boolean` | `false` | Prevents interaction and lowers visual emphasis. |
+| Prop              | Type                         | Default    | Description                                      |
+| ----------------- | ---------------------------- | ---------- | ------------------------------------------------ | ---------------------------------------- | ----------- | --------------------------------------- |
+| `pressed`         | `boolean`                    | `false`    | Controls the pressed (on) state.                 |
+| `defaultPressed`  | `boolean`                    | `false`    | Sets the initial uncontrolled pressed state.     |
+| `onPressedChange` | `(pressed: boolean) => void` | `-`        | Runs when the pressed state changes.             |
+| `variant`         | `"default"                   | "outline"` | `"default"`                                      | Controls the visual style of the toggle. |
+| `size`            | `"default"                   | "sm"       | "lg"                                             | "icon"`                                  | `"default"` | Controls the toggle height and padding. |
+| `disabled`        | `boolean`                    | `false`    | Prevents interaction and lowers visual emphasis. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Toggle](https://base-ui.com/react/components/toggle).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/toggle)

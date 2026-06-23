@@ -23,11 +23,11 @@ npm install class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -115,7 +115,6 @@ function ShimmerText({
 }
 
 export { ShimmerText, shimmerTextVariants };
-
 ```
 
 ## Usage
@@ -149,11 +148,12 @@ export function InlineShimmer() {
 
 ### ShimmerText
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `text` | `string` | `-` | The text to display. Also feeds the shimmer layer via data-text. |
-| `variant` | `"muted" | "primary"` | `"muted"` | Sets the base and highlight color pair. |
-| `size` | `"default" | "sm" | "lg" | "xl"` | `"default"` | Controls the text size and weight. |
+| Prop      | Type       | Default    | Description                                                      |
+| --------- | ---------- | ---------- | ---------------------------------------------------------------- | --------------------------------------- | ----------- | ---------------------------------- |
+| `text`    | `string`   | `-`        | The text to display. Also feeds the shimmer layer via data-text. |
+| `variant` | `"muted"   | "primary"` | `"muted"`                                                        | Sets the base and highlight color pair. |
+| `size`    | `"default" | "sm"       | "lg"                                                             | "xl"`                                   | `"default"` | Controls the text size and weight. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/shimmer-text)

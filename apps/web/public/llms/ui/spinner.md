@@ -23,11 +23,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -92,7 +92,6 @@ function Spinner({
 }
 
 export { Spinner };
-
 ```
 
 ## Usage
@@ -126,10 +125,11 @@ export function InlineStatus() {
 
 ### Spinner
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"ring" | "icon"` | `"icon"` | Sets the spinner visual style. |
-| `speed` | `"slow" | "normal" | "fast"` | `"normal"` | Sets the spin duration from the design system scale. |
+| Prop      | Type    | Default  | Description |
+| --------- | ------- | -------- | ----------- | ------------------------------ | ---------------------------------------------------- |
+| `variant` | `"ring" | "icon"`  | `"icon"`    | Sets the spinner visual style. |
+| `speed`   | `"slow" | "normal" | "fast"`     | `"normal"`                     | Sets the spin duration from the design system scale. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/spinner)

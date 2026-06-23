@@ -25,11 +25,11 @@ npm install @base-ui/react @hugeicons/core-free-icons @hugeicons/react clsx tail
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -359,7 +359,6 @@ export {
   ComboboxValue,
   useComboboxAnchor,
 };
-
 ```
 
 ## Usage
@@ -484,10 +483,7 @@ const people = [
 
 export function PeopleComboboxDemo() {
   return (
-    <Combobox
-      items={people}
-      itemToStringLabel={(person) => person.label}
-    >
+    <Combobox items={people} itemToStringLabel={(person) => person.label}>
       <ComboboxInput className="w-64" placeholder="Search people" />
       <ComboboxContent>
         <ComboboxList>
@@ -513,40 +509,42 @@ export function PeopleComboboxDemo() {
 
 ### Combobox
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `items` | `Item[]` | `[]` | Provides the collection used for rendering and automatic filtering. |
-| `multiple` | `boolean` | `false` | Allows more than one item to be selected. |
-| `autoHighlight` | `boolean` | `false` | Highlights the first matching item while filtering. |
-| `value` | `Item | Item[] | null` | `-` | Controls the selected item or items. |
-| `onValueChange` | `(value: Item | Item[] | null) => void` | `-` | Runs when the selection changes. |
-| `itemToStringLabel` | `(item: Item) => string` | `-` | Returns the text displayed for an object item. |
-| `disabled` | `boolean` | `false` | Prevents input, selection, and popup interaction. |
+| Prop                | Type                     | Default | Description                                                         |
+| ------------------- | ------------------------ | ------- | ------------------------------------------------------------------- | --- | ------------------------------------ |
+| `items`             | `Item[]`                 | `[]`    | Provides the collection used for rendering and automatic filtering. |
+| `multiple`          | `boolean`                | `false` | Allows more than one item to be selected.                           |
+| `autoHighlight`     | `boolean`                | `false` | Highlights the first matching item while filtering.                 |
+| `value`             | `Item                    | Item[]  | null`                                                               | `-` | Controls the selected item or items. |
+| `onValueChange`     | `(value: Item            | Item[]  | null) => void`                                                      | `-` | Runs when the selection changes.     |
+| `itemToStringLabel` | `(item: Item) => string` | `-`     | Returns the text displayed for an object item.                      |
+| `disabled`          | `boolean`                | `false` | Prevents input, selection, and popup interaction.                   |
 
 ### ComboboxInput
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `showTrigger` | `boolean` | `true` | Shows the popup trigger inside the input. |
-| `showClear` | `boolean` | `false` | Shows a clear action when a value is selected. |
-| `disabled` | `boolean` | `false` | Disables the input and its inline actions. |
+| Prop          | Type      | Default | Description                                    |
+| ------------- | --------- | ------- | ---------------------------------------------- |
+| `showTrigger` | `boolean` | `true`  | Shows the popup trigger inside the input.      |
+| `showClear`   | `boolean` | `false` | Shows a clear action when a value is selected. |
+| `disabled`    | `boolean` | `false` | Disables the input and its inline actions.     |
 
 ### ComboboxContent
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `side` | `"top" | "bottom" | "left" | "right"` | `"bottom"` | Sets the preferred side of the popup. |
-| `align` | `"start" | "center" | "end"` | `"start"` | Aligns the popup against its anchor. |
-| `sideOffset` | `number` | `6` | Sets the distance between the input and popup. |
+| Prop         | Type     | Default  | Description                                    |
+| ------------ | -------- | -------- | ---------------------------------------------- | --------- | ------------------------------------ | ------------------------------------- |
+| `side`       | `"top"   | "bottom" | "left"                                         | "right"`  | `"bottom"`                           | Sets the preferred side of the popup. |
+| `align`      | `"start" | "center" | "end"`                                         | `"start"` | Aligns the popup against its anchor. |
+| `sideOffset` | `number` | `6`      | Sets the distance between the input and popup. |
 
 ### ComboboxChip
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `showRemove` | `boolean` | `true` | Shows the chip remove action. |
+| Prop         | Type      | Default | Description                   |
+| ------------ | --------- | ------- | ----------------------------- |
+| `showRemove` | `boolean` | `true`  | Shows the chip remove action. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Combobox](https://base-ui.com/react/components/combobox).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/combobox)

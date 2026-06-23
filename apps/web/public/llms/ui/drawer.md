@@ -23,11 +23,11 @@ npm install vaul clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -173,7 +173,6 @@ export {
   DrawerTitle,
   DrawerDescription,
 };
-
 ```
 
 ## Usage
@@ -248,7 +247,10 @@ export function ActivityDrawer() {
         </DrawerHeader>
         <div className="flex-1 space-y-1 overflow-y-auto px-3 pb-5">
           {activity.map((item) => (
-            <div className="rounded-lg px-2 py-3 hover:bg-muted/50" key={item.event}>
+            <div
+              className="rounded-lg px-2 py-3 hover:bg-muted/50"
+              key={item.event}
+            >
               <p className="font-medium">{item.event}</p>
               <p className="text-xs text-muted-foreground">{item.time}</p>
             </div>
@@ -269,15 +271,17 @@ export function ActivityDrawer() {
 
 ### Drawer
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `direction` | `"top" | "right" | "bottom" | "left"` | `"bottom"` | Sets the edge the drawer enters from. |
-| `snapPoints` | `(number | string)[]` | `-` | Defines the draggable resting positions. |
-| `dismissible` | `boolean` | `true` | Allows dragging or interacting outside to dismiss. |
-| `modal` | `boolean` | `true` | Traps focus and blocks interaction behind the drawer. |
+| Prop          | Type      | Default    | Description                                           |
+| ------------- | --------- | ---------- | ----------------------------------------------------- | ---------------------------------------- | ---------- | ------------------------------------- |
+| `direction`   | `"top"    | "right"    | "bottom"                                              | "left"`                                  | `"bottom"` | Sets the edge the drawer enters from. |
+| `snapPoints`  | `(number  | string)[]` | `-`                                                   | Defines the draggable resting positions. |
+| `dismissible` | `boolean` | `true`     | Allows dragging or interacting outside to dismiss.    |
+| `modal`       | `boolean` | `true`     | Traps focus and blocks interaction behind the drawer. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Drawer](https://vaul.emilkowal.ski/).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/drawer)

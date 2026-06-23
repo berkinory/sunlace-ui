@@ -23,11 +23,11 @@ npm install @base-ui/react clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -64,7 +64,6 @@ function Switch({
 }
 
 export { Switch };
-
 ```
 
 ## Usage
@@ -134,19 +133,21 @@ export function NotificationPreferences() {
 
 ### Switch
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `checked` | `boolean` | `-` | Controls the checked state. |
-| `defaultChecked` | `boolean` | `false` | Sets the initial checked state when uncontrolled. |
-| `onCheckedChange` | `(checked: boolean, eventDetails: SwitchRoot.ChangeEventDetails) => void` | `-` | Runs when the checked state changes. |
-| `disabled` | `boolean` | `false` | Prevents interaction and lowers visual emphasis. |
-| `readOnly` | `boolean` | `false` | Prevents changes while preserving focus behavior. |
-| `required` | `boolean` | `false` | Marks the switch as required in a form. |
-| `name` | `string` | `-` | Sets the submitted form field name. |
-| `size` | `"sm" | "default"` | `"default"` | Sets the switch dimensions. |
+| Prop              | Type                                                                      | Default    | Description                                       |
+| ----------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------- | --------------------------- |
+| `checked`         | `boolean`                                                                 | `-`        | Controls the checked state.                       |
+| `defaultChecked`  | `boolean`                                                                 | `false`    | Sets the initial checked state when uncontrolled. |
+| `onCheckedChange` | `(checked: boolean, eventDetails: SwitchRoot.ChangeEventDetails) => void` | `-`        | Runs when the checked state changes.              |
+| `disabled`        | `boolean`                                                                 | `false`    | Prevents interaction and lowers visual emphasis.  |
+| `readOnly`        | `boolean`                                                                 | `false`    | Prevents changes while preserving focus behavior. |
+| `required`        | `boolean`                                                                 | `false`    | Marks the switch as required in a form.           |
+| `name`            | `string`                                                                  | `-`        | Sets the submitted form field name.               |
+| `size`            | `"sm"                                                                     | "default"` | `"default"`                                       | Sets the switch dimensions. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Switch](https://base-ui.com/react/components/switch).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/switch)

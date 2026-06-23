@@ -23,11 +23,11 @@ npm install @base-ui/react class-variance-authority clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -197,7 +197,6 @@ function Button({
 }
 
 export { Button, buttonVariants };
-
 ```
 
 ## Usage
@@ -261,14 +260,16 @@ export function ButtonDeployDemo() {
 
 ### Button
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `"default" | "secondary" | "outline" | "ghost" | "link" | "success" | "warning" | "info" | "destructive" | "shine" | "animated-border" | "rotate-border"` | `"default"` | Controls the visual style and emphasis of the button. |
-| `size` | `"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"` | `"default"` | Controls the button height, padding, and icon dimensions. |
-| `disabled` | `boolean` | `false` | Prevents interaction and lowers visual emphasis. |
+| Prop       | Type       | Default     | Description                                      |
+| ---------- | ---------- | ----------- | ------------------------------------------------ | ------- | ------ | --------- | --------- | ---------- | ------------- | --------------------------------------------------------- | ----------------- | ---------------- | ----------- | ----------------------------------------------------- |
+| `variant`  | `"default" | "secondary" | "outline"                                        | "ghost" | "link" | "success" | "warning" | "info"     | "destructive" | "shine"                                                   | "animated-border" | "rotate-border"` | `"default"` | Controls the visual style and emphasis of the button. |
+| `size`     | `"default" | "xs"        | "sm"                                             | "lg"    | "icon" | "icon-xs" | "icon-sm" | "icon-lg"` | `"default"`   | Controls the button height, padding, and icon dimensions. |
+| `disabled` | `boolean`  | `false`     | Prevents interaction and lowers visual emphasis. |
 
 ---
+
 Also supports Base UI primitive props. See [Base UI Button](https://base-ui.com/react/components/button).
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/button)

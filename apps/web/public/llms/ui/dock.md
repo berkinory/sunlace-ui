@@ -21,11 +21,11 @@ npm install clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -195,7 +195,6 @@ function DockSeparator({ className }: { className?: string }) {
 }
 
 export { Dock, DockItem, DockSeparator };
-
 ```
 
 ## Usage
@@ -297,18 +296,19 @@ export function EditorToolbar() {
 
 ### Dock
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `size` | `number` | `44` | Size of each dock item in pixels. |
-| `defaultActiveId` | `string` | `-` | Sets the initially active item. |
+| Prop              | Type     | Default | Description                       |
+| ----------------- | -------- | ------- | --------------------------------- |
+| `size`            | `number` | `44`    | Size of each dock item in pixels. |
+| `defaultActiveId` | `string` | `-`     | Sets the initially active item.   |
 
 ### DockItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | `-` | Unique identifier for the active pill tracking. |
-| `active` | `boolean` | `false` | Shows the active pill behind this item. |
-| `onClick` | `() => void` | `-` | When set, the item renders as a button and triggers the active pill. |
+| Prop      | Type         | Default | Description                                                          |
+| --------- | ------------ | ------- | -------------------------------------------------------------------- |
+| `id`      | `string`     | `-`     | Unique identifier for the active pill tracking.                      |
+| `active`  | `boolean`    | `false` | Shows the active pill behind this item.                              |
+| `onClick` | `() => void` | `-`     | When set, the item renders as a button and triggers the active pill. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/dock)

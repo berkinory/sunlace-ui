@@ -21,11 +21,11 @@ npm install clsx tailwind-merge
 Create `lib/utils.ts`:
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 ```
 
@@ -117,7 +117,6 @@ export {
   SkeletonRevealContent,
   SkeletonRevealSkeleton,
 };
-
 ```
 
 ## Usage
@@ -158,15 +157,16 @@ export function TableSkeleton() {
 
 ### Skeleton
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `animation` | `"shimmer" | "pulse" | "none"` | `"shimmer"` | Sets the loading animation style. |
+| Prop        | Type       | Default | Description |
+| ----------- | ---------- | ------- | ----------- | ----------- | --------------------------------- |
+| `animation` | `"shimmer" | "pulse" | "none"`     | `"shimmer"` | Sets the loading animation style. |
 
 ### SkeletonReveal
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
+| Prop       | Type      | Default | Description                                               |
+| ---------- | --------- | ------- | --------------------------------------------------------- |
 | `revealed` | `boolean` | `false` | Cross-fades from the skeleton layer to the content layer. |
 
 ---
+
 [Sunlace UI](https://sunlace.dev) · [View on web](https://sunlace.dev/ui/skeleton)
