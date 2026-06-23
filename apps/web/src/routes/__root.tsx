@@ -56,6 +56,62 @@ const RootComponent = () => (
 export const Route = createRootRouteWithContext<RouterAppContext>()({
   component: RootComponent,
   head: () => ({
-    meta: [{ title: "Sunlace" }],
+    meta: [
+      { title: "Sunlace | React Component Library" },
+      {
+        name: "description",
+        content:
+          "Quiet, precise React components built on Base UI and Hugeicons. Own the source.",
+      },
+      { name: "theme-color", content: "#0c0c0c" },
+
+      // Open Graph
+      { property: "og:title", content: "Sunlace | React Component Library" },
+      {
+        property: "og:description",
+        content:
+          "Quiet, precise React components built on Base UI and Hugeicons. Own the source.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://sunlace.dev" },
+      { property: "og:image", content: "https://sunlace.dev/og-card.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:site_name", content: "Sunlace" },
+
+      // Twitter
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Sunlace — React Component Library",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Quiet, precise React components built on Base UI and Hugeicons. Own the source.",
+      },
+      { name: "twitter:image", content: "https://sunlace.dev/og-card.png" },
+
+      // Icons
+      { link: { rel: "icon", href: "/favicon.ico", sizes: "32x32" } },
+      {
+        link: {
+          rel: "apple-touch-icon",
+          href: "/apple-touch-icon.png",
+        },
+      },
+    ],
+    links: [
+      { rel: "canonical", href: "https://sunlace.dev" },
+      {
+        rel: "alternate",
+        type: "text/plain",
+        href: "https://sunlace.dev/llms.txt",
+        title: "LLM-readable documentation",
+      },
+    ],
   }),
 });
