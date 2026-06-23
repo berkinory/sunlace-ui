@@ -65,7 +65,7 @@ function ShowcaseHeader({ activeSlug }: ShowcaseHeaderProps) {
         <CommandPaletteTrigger className="hidden h-8 gap-2 text-muted-foreground lg:flex" />
         <a
           className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
-          href="https://github.com/berkinory/sunlace"
+          href="https://github.com/berkinory/sunlace-ui"
           rel="noreferrer"
           target="_blank"
         >
@@ -80,7 +80,7 @@ function ShowcaseHeader({ activeSlug }: ShowcaseHeaderProps) {
         />
         <a
           className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
-          href="https://github.com/berkinory/sunlace"
+          href="https://github.com/berkinory/sunlace-ui"
           rel="noreferrer"
           target="_blank"
         >

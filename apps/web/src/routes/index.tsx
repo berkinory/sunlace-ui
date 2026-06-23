@@ -93,7 +93,7 @@ function HomeComponent() {
             <Button
               render={
                 <a
-                  href="https://github.com/berkinory/sunlace"
+                  href="https://github.com/berkinory/sunlace-ui"
                   rel="noreferrer"
                   target="_blank"
                 />
