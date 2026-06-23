@@ -5,6 +5,7 @@ import { componentDocs } from "./component-docs";
 import type { ComponentProp } from "./component-docs/types";
 import { type ComponentSlug, componentBySlug } from "./component-registry";
 import { ComponentSettingsController } from "./component-settings-controller";
+import { InstallationSection } from "./installation-section";
 import { CodeBlock, ShowcaseExample } from "./showcase-example";
 import { ShowcaseLayout } from "./showcase-layout";
 
@@ -69,9 +70,7 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
               </div>
 
               <Section id="installation" title="Installation">
-                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/30 p-6 font-mono text-sm text-muted-foreground">
-                  <code>{`bunx --bun shadcn@latest add ${component} --cwd packages/ui`}</code>
-                </pre>
+                <InstallationSection slug={component} />
               </Section>
 
               <Section id="usage" title="Usage">

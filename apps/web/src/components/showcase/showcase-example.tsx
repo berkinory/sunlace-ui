@@ -18,7 +18,7 @@ const tokenClassByType = {
   prop: "text-violet-700 dark:text-violet-300",
 };
 
-function highlightLine(line: string) {
+export function highlightLine(line: string) {
   const tokens =
     line.match(
       /("[^"]*"|'[^']*'|`[^`]*`|\b(?:import|from|export|function|return|const|let|type)\b|<\/?[A-Z][A-Za-z0-9.]*|[A-Za-z-]+(?==)|[{}()[\],=<>/])/g

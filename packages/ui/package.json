@@ -7,6 +7,7 @@
     ".": "./src/index.ts",
     "./components": "./src/components/index.ts",
     "./components/*": "./src/components/*.tsx",
+    "./install-info": "./src/install-info.ts",
     "./lib/utils": "./src/lib/utils.ts"
   },
   "dependencies": {
