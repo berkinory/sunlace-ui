@@ -1,10 +1,13 @@
-import { Button } from "@sunlace/ui";
-import type { ReactNode } from "react";
+import { Copy02Icon, Tick01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ActionSwapButton } from "@sunlace/ui";
+import { useState, type ReactNode } from "react";
 
 import { componentDocs } from "./component-docs";
 import type { ComponentProp } from "./component-docs/types";
 import { type ComponentSlug, componentBySlug } from "./component-registry";
 import { ComponentSettingsController } from "./component-settings-controller";
+import { generateComponentMarkdown } from "./generate-markdown";
 import { InstallationSection } from "./installation-section";
 import { CodeBlock, ShowcaseExample } from "./showcase-example";
 import { ShowcaseLayout } from "./showcase-layout";
@@ -19,6 +22,7 @@ const tocItems = [
 
 function ComponentDocsPage({ component }: { component: ComponentSlug }) {
   const metadata = componentBySlug.get(component);
+  const [markdownCopied, setMarkdownCopied] = useState(false);
 
   if (!metadata) {
     throw new Error(`component metadata is missing for ${component}`);
@@ -39,6 +43,18 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
           },
         ];
 
+        function copyMarkdown() {
+          const md = generateComponentMarkdown({
+            docs,
+            examples,
+            slug: component,
+            title,
+          });
+          void navigator.clipboard.writeText(md);
+          setMarkdownCopied(true);
+          setTimeout(() => setMarkdownCopied(false), 2000);
+        }
+
         return (
           <ShowcaseLayout activeSlug={component} tocItems={tocItems}>
             <article className="scroll-mt-7 pt-7 pb-10 lg:px-16" id="showcase">
@@ -55,8 +71,38 @@ function ComponentDocsPage({ component }: { component: ComponentSlug }) {
                   {docs.description}
                 </p>
                 <div className="flex gap-2">
-                  <Button variant="outline">Docs</Button>
-                  <Button variant="outline">Component API</Button>
+                  <ActionSwapButton
+                    animation="roll"
+                    items={[
+                      {
+                        icon: (
+                          <HugeiconsIcon
+                            icon={Copy02Icon}
+                            size={16}
+                            strokeWidth={2}
+                          />
+                        ),
+                        id: "copy",
+                        label: "Copy Markdown",
+                      },
+                      {
+                        icon: (
+                          <HugeiconsIcon
+                            icon={Tick01Icon}
+                            size={16}
+                            strokeWidth={2}
+                          />
+                        ),
+                        id: "copied",
+                        label: "Copied!",
+                      },
+                    ]}
+                    onValueChange={(value) => {
+                      if (value === "copied") copyMarkdown();
+                    }}
+                    value={markdownCopied ? "copied" : "copy"}
+                    variant="outline"
+                  />
                 </div>
               </div>
 
