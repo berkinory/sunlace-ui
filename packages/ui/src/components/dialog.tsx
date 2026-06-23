@@ -1,10 +1,10 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { Cancel01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
 
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const dialogTransitionVars =
   "[--modal-close-dur:280ms] [--modal-ease:cubic-bezier(0.22,1,0.36,1)] [--modal-open-dur:280ms]";

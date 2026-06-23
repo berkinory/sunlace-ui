@@ -1,8 +1,9 @@
 import { Search01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
 import { createPortal } from "react-dom";
+
+import { cn } from "@/lib/utils";
 
 type CommandPaletteItem = {
   id: string;

@@ -2,7 +2,8 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { Loading03Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
+
+import { cn } from "@/lib/utils";
 
 type SpinnerSpeed = "fast" | "normal" | "slow";
 type SpinnerVariant = "icon" | "ring";

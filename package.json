@@ -22,7 +22,8 @@
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules bun.lock",
     "dev": "bun run --cwd apps/web dev",
     "build": "bun run --cwd apps/web build",
-    "docker:up": "docker compose -f docker-compose.dev.yml up"
+    "docker:up": "docker compose -f docker-compose.dev.yml up",
+    "registry:build": "shadcn build registry.json --cwd packages/ui --output ../../apps/web/public/r"
   },
   "devDependencies": {
     "@sunlace/config": "workspace:*",

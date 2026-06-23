@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "Slider",
+  "dependencies": ["@base-ui/react"],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "src/components/slider.tsx",
+      "content": "import { Slider as SliderPrimitive } from \"@base-ui/react/slider\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Slider({\n  className,\n  defaultValue,\n  value,\n  min = 0,\n  max = 100,\n  orientation = \"horizontal\",\n  thumbCollisionBehavior = \"none\",\n  ...props\n}: SliderPrimitive.Root.Props) {\n  const _values = Array.isArray(value)\n    ? value\n    : typeof value === \"number\"\n      ? [value]\n      : Array.isArray(defaultValue)\n        ? defaultValue\n        : typeof defaultValue === \"number\"\n          ? [defaultValue]\n          : [min];\n\n  return (\n    <SliderPrimitive.Root\n      className={cn(\n        orientation === \"horizontal\" ? \"w-full\" : \"h-full\",\n        className\n      )}\n      data-slot=\"slider\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      orientation={orientation}\n      thumbAlignment=\"center\"\n      thumbCollisionBehavior={thumbCollisionBehavior}\n      {...props}\n    >\n      <SliderPrimitive.Control\n        className={cn(\n          \"relative flex touch-none items-center select-none data-disabled:opacity-50\",\n          orientation === \"horizontal\"\n            ? \"h-5 w-full\"\n            : \"h-full min-h-40 w-5 flex-col\"\n        )}\n      >\n        <SliderPrimitive.Track\n          data-slot=\"slider-track\"\n          className={cn(\n            \"relative grow overflow-hidden rounded-full bg-muted ring-1 ring-foreground/5 select-none\",\n            orientation === \"horizontal\" ? \"h-1.5 w-full\" : \"h-full w-1.5\"\n          )}\n        >\n          <SliderPrimitive.Indicator\n            data-slot=\"slider-range\"\n            className={cn(\n              \"rounded-full bg-primary select-none\",\n              orientation === \"horizontal\" ? \"h-full\" : \"w-full\"\n            )}\n          />\n        </SliderPrimitive.Track>\n        {Array.from({ length: _values.length }, (_, index) => (\n          <SliderPrimitive.Thumb\n            data-slot=\"slider-thumb\"\n            key={index}\n            className=\"relative block size-4 shrink-0 rounded-full border border-primary bg-primary shadow-sm ring-ring/50 transition-[transform,box-shadow] duration-150 ease-out select-none after:absolute after:-inset-2 hover:scale-110 hover:ring-3 focus-visible:scale-110 focus-visible:ring-3 focus-visible:outline-hidden active:scale-95 active:ring-3 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none\"\n          />\n        ))}\n      </SliderPrimitive.Control>\n    </SliderPrimitive.Root>\n  );\n}\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

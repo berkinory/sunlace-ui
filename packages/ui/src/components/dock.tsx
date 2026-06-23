@@ -1,4 +1,3 @@
-import { cn } from "@sunlace/ui/lib/utils";
 import {
   createContext,
   useContext,
@@ -7,6 +6,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
+
+import { cn } from "@/lib/utils";
 
 type DockContextValue = {
   size: number;

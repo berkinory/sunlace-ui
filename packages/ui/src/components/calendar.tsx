@@ -4,7 +4,6 @@ import {
   ArrowDownIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
 import {
   DayPicker,
@@ -15,14 +14,15 @@ import {
   useDayPicker,
 } from "react-day-picker";
 
-import { Button, buttonVariants } from "./button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 function Calendar({
   className,

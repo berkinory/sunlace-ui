@@ -1,7 +1,8 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { cn } from "@sunlace/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
   "group/badge inline-flex h-8 w-fit shrink-0 items-center justify-center gap-1.5 overflow-hidden rounded-4xl border border-transparent bg-clip-padding px-3 text-sm font-medium whitespace-nowrap shadow-[0_1px_1px_rgb(0_0_0/0.08),0_3px_8px_rgb(0_0_0/0.06),inset_0_1px_rgb(255_255_255/0.16)] transition-[background-color,border-color,box-shadow,color,filter] duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:shadow-[0_1px_1px_rgb(0_0_0/0.35),0_4px_12px_rgb(0_0_0/0.28),inset_0_1px_rgb(255_255_255/0.10)] dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-4!",

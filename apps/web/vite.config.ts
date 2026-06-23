@@ -27,9 +27,17 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: [
+      {
+        find: /^@\/components\/ui\/(.+)/,
+        replacement: path.resolve(__dirname, "../../packages/ui/src/components/$1"),
+      },
+      {
+        find: "@/lib/utils",
+        replacement: path.resolve(__dirname, "../../packages/ui/src/lib/utils.ts"),
+      },
+      { find: "@", replacement: path.resolve(__dirname, "./src") },
+    ],
   },
   server: {
     port: 4002,

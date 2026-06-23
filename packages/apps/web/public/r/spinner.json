@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "title": "Spinner",
+  "dependencies": [
+    "@base-ui/react",
+    "@hugeicons/core-free-icons",
+    "@hugeicons/react"
+  ],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "src/components/spinner.tsx",
+      "content": "import { mergeProps } from \"@base-ui/react/merge-props\";\nimport { useRender } from \"@base-ui/react/use-render\";\nimport { Loading03Icon } from \"@hugeicons/core-free-icons\";\nimport { HugeiconsIcon } from \"@hugeicons/react\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype SpinnerSpeed = \"fast\" | \"normal\" | \"slow\";\ntype SpinnerVariant = \"icon\" | \"ring\";\n\nconst spinnerSpeedClassName: Record<SpinnerSpeed, string> = {\n  fast: \"[animation-duration:700ms]\",\n  normal: \"[animation-duration:1000ms]\",\n  slow: \"[animation-duration:1400ms]\",\n};\n\nfunction Spinner({\n  className,\n  \"aria-label\": ariaLabel = \"Loading\",\n  render,\n  speed = \"normal\",\n  variant = \"icon\",\n  ...props\n}: useRender.ComponentProps<\"span\"> & {\n  speed?: SpinnerSpeed;\n  variant?: SpinnerVariant;\n}) {\n  return useRender({\n    defaultTagName: \"span\",\n    props: mergeProps<\"span\">(\n      {\n        \"aria-label\": ariaLabel,\n        children:\n          variant === \"icon\" ? (\n            <HugeiconsIcon aria-hidden icon={Loading03Icon} strokeWidth={2} />\n          ) : null,\n        className: cn(\n          \"inline-block size-4 animate-spin\",\n          variant === \"icon\"\n            ? \"[&>svg]:size-full\"\n            : \"rounded-full border-2 border-foreground border-r-transparent\",\n          spinnerSpeedClassName[speed],\n          className\n        ),\n        role: \"status\",\n      },\n      props\n    ),\n    render,\n    state: {\n      slot: \"spinner\",\n      speed,\n      variant,\n    },\n  });\n}\n\nexport { Spinner };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,4 +1,3 @@
-import { cn } from "@sunlace/ui/lib/utils";
 import {
   useEffect,
   useLayoutEffect,
@@ -7,7 +6,8 @@ import {
   type ReactNode,
 } from "react";
 
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type ActionSwapItem = {
   id: string;

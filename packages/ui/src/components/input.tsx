@@ -5,8 +5,9 @@ import {
   ViewOffSlashIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
+
+import { cn } from "@/lib/utils";
 
 type InputProps = Omit<React.ComponentProps<"input">, "prefix"> & {
   clearable?: boolean;

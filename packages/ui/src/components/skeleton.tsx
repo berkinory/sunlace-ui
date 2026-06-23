@@ -1,4 +1,4 @@
-import { cn } from "@sunlace/ui/lib/utils";
+import { cn } from "@/lib/utils";
 
 function Skeleton({
   animation = "shimmer",

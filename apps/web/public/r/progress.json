@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "dependencies": ["@base-ui/react"],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "src/components/progress.tsx",
+      "content": "import { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Progress({\n  className,\n  children,\n  size = \"default\",\n  value,\n  ...props\n}: ProgressPrimitive.Root.Props & {\n  size?: \"default\" | \"sm\";\n}) {\n  return (\n    <>\n      <style>\n        {`@keyframes sunlace-progress-indeterminate{0%{transform:translateX(-100%)}100%{transform:translateX(500%)}}`}\n      </style>\n      <ProgressPrimitive.Root\n        value={value}\n        data-size={size}\n        data-slot=\"progress\"\n        className={cn(\n          \"group/progress grid w-full grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <ProgressTrack>\n          <ProgressIndicator />\n        </ProgressTrack>\n      </ProgressPrimitive.Root>\n    </>\n  );\n}\n\nfunction ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {\n  return (\n    <ProgressPrimitive.Track\n      className={cn(\n        \"relative col-span-full flex h-1.5 w-full items-center overflow-hidden rounded-full bg-muted ring-1 ring-foreground/5 group-data-[size=sm]/progress:h-1\",\n        className\n      )}\n      data-slot=\"progress-track\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressIndicator({\n  className,\n  ...props\n}: ProgressPrimitive.Indicator.Props) {\n  return (\n    <ProgressPrimitive.Indicator\n      data-slot=\"progress-indicator\"\n      className={cn(\n        \"h-full rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] data-indeterminate:w-1/5 data-indeterminate:animate-[sunlace-progress-indeterminate_1.4s_ease-in-out_infinite] motion-reduce:transition-none motion-reduce:data-indeterminate:animate-none\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {\n  return (\n    <ProgressPrimitive.Label\n      className={cn(\"text-sm font-medium\", className)}\n      data-slot=\"progress-label\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {\n  return (\n    <ProgressPrimitive.Value\n      className={cn(\n        \"ml-auto text-sm text-muted-foreground tabular-nums\",\n        className\n      )}\n      data-slot=\"progress-value\"\n      {...props}\n    />\n  );\n}\n\nexport {\n  Progress,\n  ProgressTrack,\n  ProgressIndicator,\n  ProgressLabel,\n  ProgressValue,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

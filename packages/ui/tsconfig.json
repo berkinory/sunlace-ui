@@ -5,8 +5,9 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "rootDirs": ["."],
     "paths": {
-      "@/*": ["./*"],
-      "@sunlace/ui/*": ["./src/*"]
+      "@sunlace/ui/*": ["./src/*"],
+      "@/lib/utils": ["./src/lib/utils.ts"],
+      "@/components/ui/*": ["./src/components/*"]
     }
   },
   "include": ["src"]

@@ -1,6 +1,7 @@
-import { cn } from "@sunlace/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
 
 const numberPopVariants = cva("t-digit-group", {
   variants: {

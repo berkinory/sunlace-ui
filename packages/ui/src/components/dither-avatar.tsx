@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@sunlace/ui/lib/utils";
 import { renderHashvatar, type HashvatarOptions } from "hashvatar";
 import * as React from "react";
+
+import { cn } from "@/lib/utils";
 
 type DitherAvatarShape = "circle" | "rounded" | "square";
 type DitherAvatarSize = "default" | "sm" | "lg";

@@ -7,16 +7,16 @@ import {
   Tick02Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
 
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "./input-group";
+} from "@/components/ui/input-group";
+import { cn } from "@/lib/utils";
 
 const Combobox = ComboboxPrimitive.Root;
 

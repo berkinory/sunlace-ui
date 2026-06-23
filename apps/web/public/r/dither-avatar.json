@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dither-avatar",
+  "title": "Dither Avatar",
+  "dependencies": ["hashvatar"],
+  "registryDependencies": ["utils"],
+  "files": [
+    {
+      "path": "src/components/dither-avatar.tsx",
+      "content": "\"use client\";\n\nimport { renderHashvatar, type HashvatarOptions } from \"hashvatar\";\nimport * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\ntype DitherAvatarShape = \"circle\" | \"rounded\" | \"square\";\ntype DitherAvatarSize = \"default\" | \"sm\" | \"lg\";\n\ntype DitherAvatarProps = React.ComponentProps<\"span\"> & {\n  hash: string;\n  shape?: DitherAvatarShape;\n  size?: DitherAvatarSize;\n  dotScale?: HashvatarOptions[\"dotScale\"];\n  tones?: HashvatarOptions[\"tones\"];\n};\n\nfunction DitherAvatar({\n  className,\n  dotScale,\n  hash,\n  shape = \"circle\",\n  size = \"default\",\n  tones,\n  ...props\n}: DitherAvatarProps) {\n  const canvasRef = React.useRef<HTMLCanvasElement>(null);\n\n  React.useEffect(() => {\n    const canvas = canvasRef.current;\n\n    if (!canvas) {\n      return;\n    }\n\n    return renderHashvatar(canvas, {\n      dotScale,\n      hash,\n      mode: \"dither\",\n      size: 96,\n      tones,\n    });\n  }, [dotScale, hash, tones]);\n\n  return (\n    <span\n      data-slot=\"dither-avatar\"\n      data-shape={shape}\n      data-size={size}\n      className={cn(\n        \"group/dither-avatar relative flex size-8 shrink-0 overflow-hidden rounded-full ring-1 ring-border select-none data-[shape=rounded]:rounded-lg data-[shape=square]:rounded-none data-[size=lg]:size-10 data-[size=sm]:size-6\",\n        className\n      )}\n      {...props}\n    >\n      <canvas\n        aria-hidden\n        className=\"block size-full scale-145 rounded-[inherit] group-data-[shape=rounded]/dither-avatar:scale-125 group-data-[shape=square]/dither-avatar:scale-100\"\n        height={96}\n        ref={canvasRef}\n        width={96}\n      />\n    </span>\n  );\n}\n\nexport { DitherAvatar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

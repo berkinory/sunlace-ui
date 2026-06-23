@@ -1,5 +1,6 @@
-import { cn } from "@sunlace/ui/lib/utils";
 import * as React from "react";
+
+import { cn } from "@/lib/utils";
 
 type CardVariant = "default" | "shine" | "animated-border";
 
