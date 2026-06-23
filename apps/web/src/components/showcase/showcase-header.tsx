@@ -65,14 +65,14 @@ function ShowcaseHeader({
       ? "font-medium text-foreground"
       : "font-medium text-muted-foreground transition-colors hover:text-foreground";
 
-  const actionsClass = "flex items-center gap-3";
+  const actionsClass = "flex items-center gap-4";
 
   return (
     <header className="flex h-16 items-center justify-between lg:px-5">
       <Link to="/" className="text-xl font-semibold tracking-tight">
         sunlace
       </Link>
-      <nav className="hidden items-center gap-3 text-sm lg:flex">
+      <nav className="hidden items-center gap-4 text-sm lg:flex">
         <Link
           className={navLinkClass(isGetStartedActive)}
           hash="installation"
