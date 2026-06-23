@@ -1,7 +1,7 @@
-import { BookOpen01Icon, Layers01Icon } from "@hugeicons/core-free-icons";
+import { Layers01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { DrawerClose } from "@sunlace/ui/components";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   Fragment,
   useCallback,
@@ -27,12 +27,6 @@ const navGroupIcons = {
 };
 
 export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
-  const { hash } = useRouterState({
-    select: (state) => state.location,
-  });
-  const activeGetStartedKey =
-    hash === "installation" || hash === "cli" ? hash : null;
-  const activeKey = activeGetStartedKey ?? activeSlug;
   const navRef = useRef<HTMLElement>(null);
   const linkRefs = useRef(new Map<string, HTMLAnchorElement>());
   const [indicatorTop, setIndicatorTop] = useState<number | null>(
@@ -70,7 +64,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
     }
 
     const updateIndicators = () => {
-      const nextIndicatorTop = getIndicatorTop(activeKey);
+      const nextIndicatorTop = getIndicatorTop(activeSlug);
 
       desktopIndicatorTop = nextIndicatorTop;
       setIndicatorTop(nextIndicatorTop);
@@ -82,7 +76,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
     return () => {
       window.removeEventListener("resize", updateIndicators);
     };
-  }, [activeKey, getIndicatorTop, mobile]);
+  }, [activeSlug, getIndicatorTop, mobile]);
 
   useLayoutEffect(() => {
     if (mobile) {
@@ -183,32 +177,6 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
         />
       ) : null}
       <div className={mobile ? "space-y-6" : "space-y-7"}>
-        <div className="space-y-2">
-          <p className={sectionLabelClass}>
-            <HugeiconsIcon
-              aria-hidden
-              icon={BookOpen01Icon}
-              size={14}
-              strokeWidth={2}
-            />
-            Get Started
-          </p>
-          <div>
-            {renderNavLink({
-              hash: "installation",
-              children: "Installation",
-              itemKey: "installation",
-              isActive: activeKey === "installation",
-            })}
-            {renderNavLink({
-              hash: "cli",
-              children: "CLI",
-              itemKey: "cli",
-              isActive: activeKey === "cli",
-            })}
-          </div>
-        </div>
-
         {componentNavGroups.map((group) => (
           <div className="space-y-2" key={group.label}>
             <p className={sectionLabelClass}>
@@ -227,7 +195,7 @@ export function ShowcaseNav({ activeSlug, mobile = false }: ShowcaseNavProps) {
                     children: item.label,
                     component: item.slug,
                     itemKey: item.slug,
-                    isActive: activeKey === item.slug,
+                    isActive: activeSlug === item.slug,
                   })}
                 </Fragment>
               ))}

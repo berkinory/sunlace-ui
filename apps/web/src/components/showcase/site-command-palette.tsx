@@ -1,9 +1,4 @@
-import {
-  BookOpen01Icon,
-  CommandLineIcon,
-  Home05Icon,
-  Layers01Icon,
-} from "@hugeicons/core-free-icons";
+import { Layers01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   CommandPalette,
@@ -18,57 +13,10 @@ import {
   type ReactNode,
 } from "react";
 
-import { componentItems, defaultComponentSlug } from "./component-registry";
+import { componentItems } from "./component-registry";
 
-export const siteCommandPaletteItems: CommandPaletteItem[] = [
-  {
-    id: "home",
-    group: "Navigation",
-    hint: "G H",
-    icon: <HugeiconsIcon icon={Home05Icon} strokeWidth={2} />,
-    label: "Home",
-    onSelect: () => {},
-  },
-  {
-    id: "installation",
-    group: "Get Started",
-    hint: "G I",
-    icon: <HugeiconsIcon icon={BookOpen01Icon} strokeWidth={2} />,
-    keywords: [
-      "react",
-      "nextjs",
-      "next.js",
-      "vite",
-      "npm",
-      "bun",
-      "pnpm",
-      "install",
-      "setup",
-    ],
-    label: "Installation",
-    onSelect: () => {},
-  },
-  {
-    id: "cli",
-    group: "Get Started",
-    hint: "G C",
-    icon: <HugeiconsIcon icon={CommandLineIcon} strokeWidth={2} />,
-    keywords: [
-      "react",
-      "nextjs",
-      "next.js",
-      "vite",
-      "npm",
-      "bun",
-      "pnpm",
-      "command",
-      "terminal",
-      "shadcn",
-    ],
-    label: "CLI",
-    onSelect: () => {},
-  },
-  ...componentItems.map((item) => ({
+export const siteCommandPaletteItems: CommandPaletteItem[] = componentItems.map(
+  (item) => ({
     id: item.slug,
     group: "Components",
     icon: <HugeiconsIcon icon={Layers01Icon} strokeWidth={2} />,
@@ -78,8 +26,8 @@ export const siteCommandPaletteItems: CommandPaletteItem[] = [
         : undefined,
     label: item.label,
     onSelect: () => {},
-  })),
-];
+  })
+);
 
 type SiteCommandPaletteContextValue = {
   open: boolean;
@@ -111,31 +59,11 @@ export function SiteCommandPaletteProvider({
 
   const items = useMemo<CommandPaletteItem[]>(() => {
     return siteCommandPaletteItems.map((item) => {
-      let onSelect = item.onSelect;
-
-      if (item.id === "home") {
-        onSelect = () => navigate({ to: "/" });
-      } else if (item.id === "installation") {
-        onSelect = () =>
-          navigate({
-            hash: "installation",
-            params: { component: defaultComponentSlug },
-            to: "/ui/$component",
-          });
-      } else if (item.id === "cli") {
-        onSelect = () =>
-          navigate({
-            hash: "cli",
-            params: { component: defaultComponentSlug },
-            to: "/ui/$component",
-          });
-      } else {
-        onSelect = () =>
-          navigate({
-            params: { component: item.id },
-            to: "/ui/$component",
-          });
-      }
+      const onSelect = () =>
+        navigate({
+          params: { component: item.id },
+          to: "/ui/$component",
+        });
 
       return { ...item, onSelect };
     });

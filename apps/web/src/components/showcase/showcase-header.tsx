@@ -1,4 +1,8 @@
-import { Menu11Icon, Search01Icon } from "@hugeicons/core-free-icons";
+import {
+  GithubIcon,
+  Menu11Icon,
+  Search01Icon,
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Button,
@@ -6,9 +10,9 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@sunlace/ui/components";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 
-import { defaultComponentSlug, type ComponentSlug } from "./component-registry";
+import { type ComponentSlug } from "./component-registry";
 import { ShowcaseNav } from "./showcase-nav";
 import { useSiteCommandPalette } from "./site-command-palette";
 import { ThemeToggle } from "./theme-toggle";
@@ -49,22 +53,7 @@ function CommandPaletteTrigger({
   );
 }
 
-function ShowcaseHeader({
-  activeSlug = defaultComponentSlug,
-}: ShowcaseHeaderProps) {
-  const { pathname, hash } = useRouterState({
-    select: (state) => state.location,
-  });
-  const isUiRoute = pathname.startsWith("/ui/");
-  const isGetStartedActive =
-    isUiRoute && (hash === "installation" || hash === "cli");
-  const isComponentsActive = isUiRoute && !isGetStartedActive;
-
-  const navLinkClass = (active: boolean) =>
-    active
-      ? "font-medium text-foreground"
-      : "font-medium text-muted-foreground transition-colors hover:text-foreground";
-
+function ShowcaseHeader({ activeSlug }: ShowcaseHeaderProps) {
   const actionsClass = "flex items-center gap-4";
 
   return (
@@ -73,23 +62,15 @@ function ShowcaseHeader({
         sunlace
       </Link>
       <nav className="hidden items-center gap-4 text-sm lg:flex">
-        <Link
-          className={navLinkClass(isGetStartedActive)}
-          hash="installation"
-          params={{ component: defaultComponentSlug }}
-          to="/ui/$component"
-        >
-          Get Started
-        </Link>
-        <Link
-          className={navLinkClass(isComponentsActive)}
-          params={{ component: defaultComponentSlug }}
-          to="/ui/$component"
-        >
-          Components
-        </Link>
-        <span className="text-muted-foreground">Changelog</span>
         <CommandPaletteTrigger className="hidden h-8 gap-2 text-muted-foreground lg:flex" />
+        <a
+          className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href="https://github.com/berkinory/sunlace"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <HugeiconsIcon icon={GithubIcon} size={18} strokeWidth={2} />
+        </a>
         <ThemeToggle />
       </nav>
       <div className={`${actionsClass} lg:hidden`}>
@@ -97,6 +78,14 @@ function ShowcaseHeader({
           className="size-8 shrink-0 px-0"
           showLabel={false}
         />
+        <a
+          className="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          href="https://github.com/berkinory/sunlace"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <HugeiconsIcon icon={GithubIcon} size={18} strokeWidth={2} />
+        </a>
         <ThemeToggle />
         <Drawer direction="right">
           <DrawerTrigger asChild>
@@ -106,7 +95,7 @@ function ShowcaseHeader({
             </Button>
           </DrawerTrigger>
           <DrawerContent className="flex h-full data-[vaul-drawer-direction=right]:w-[min(16rem,calc(100vw-4rem))] flex-col border-border/80 bg-sidebar p-0 shadow-xl">
-            <ShowcaseNav activeSlug={activeSlug} mobile />
+            <ShowcaseNav activeSlug={activeSlug ?? "accordion"} mobile />
           </DrawerContent>
         </Drawer>
       </div>
