@@ -24,7 +24,7 @@ services:
       NODE_ENV: development
       VITE_RYBBIT_SITE_ID: ${VITE_RYBBIT_SITE_ID:-}
     ports:
-      - "4002:4002"
+      - "4009:4009"
     volumes:
       - .:/app
       - sunlace-node-modules:/app/node_modules

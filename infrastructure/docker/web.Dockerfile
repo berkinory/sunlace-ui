@@ -41,10 +41,10 @@ COPY --from=builder --chown=vite:nodejs /app/apps/web/dist ./dist
 
 USER vite
 
-EXPOSE 4002
+EXPOSE 4009
 
 ENV NODE_ENV=production
-ENV PORT=4002
+ENV PORT=4009
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["bunx", "serve", "./dist", "-s", "-l", "4002"]
+CMD ["bunx", "serve", "./dist", "-s", "-l", "4009"]
