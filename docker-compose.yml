@@ -10,7 +10,7 @@ services:
       no_cache: true
     container_name: sunlace-web
     ports:
-      - "4009:4009"
+      - "5012:5012"
     environment:
       - NODE_ENV=production
     networks:
