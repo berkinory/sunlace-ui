@@ -7,6 +7,9 @@ services:
       dockerfile: infrastructure/docker/web.Dockerfile
       args:
         VITE_RYBBIT_SITE_ID: ${VITE_RYBBIT_SITE_ID:-}
+      cache_from:
+        - type=inline
+      no_cache: true
     container_name: sunlace-web
     ports:
       - "4002:4002"
